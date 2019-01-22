@@ -52,6 +52,36 @@ public class NavigationPresenter implements NavigationContract.Presenter {
                         }
                     });
                     break;
+                case Constants.DrawerMenu.ANC:
+                    mInteractor.getFamilyCount(new NavigationContract.InteractorCallback<Integer>() {
+                        @Override
+                        public void onResult(Integer result) {
+                            mModel.getNavigationItems().get(finalX).setRegisterCount(result);
+                            Log.d("NavigationPresenter", String.valueOf(result));
+                            getNavigationView().refreshCount();
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            getNavigationView().displayToast(activity, "Error retrieving count for " + Constants.DrawerMenu.ALL_FAMILIES);
+                        }
+                    });
+                    break;
+                case Constants.DrawerMenu.PNC:
+                    mInteractor.getFamilyCount(new NavigationContract.InteractorCallback<Integer>() {
+                        @Override
+                        public void onResult(Integer result) {
+                            mModel.getNavigationItems().get(finalX).setRegisterCount(result);
+                            Log.d("NavigationPresenter", String.valueOf(result));
+                            getNavigationView().refreshCount();
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            getNavigationView().displayToast(activity, "Error retrieving count for " + Constants.DrawerMenu.ALL_FAMILIES);
+                        }
+                    });
+                    break;
                 case Constants.DrawerMenu.CHILD_CLIENTS:
                     mInteractor.getChildrenCount(new NavigationContract.InteractorCallback<Integer>() {
                         @Override
@@ -63,6 +93,36 @@ public class NavigationPresenter implements NavigationContract.Presenter {
                         @Override
                         public void onError(Exception e) {
                             getNavigationView().displayToast(activity, "Error retrieving count for " + Constants.DrawerMenu.CHILD_CLIENTS);
+                        }
+                    });
+                    break;
+                case Constants.DrawerMenu.FAMILY_PLANNING:
+                    mInteractor.getFamilyCount(new NavigationContract.InteractorCallback<Integer>() {
+                        @Override
+                        public void onResult(Integer result) {
+                            mModel.getNavigationItems().get(finalX).setRegisterCount(result);
+                            Log.d("NavigationPresenter", String.valueOf(result));
+                            getNavigationView().refreshCount();
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            getNavigationView().displayToast(activity, "Error retrieving count for " + Constants.DrawerMenu.ALL_FAMILIES);
+                        }
+                    });
+                    break;
+                case Constants.DrawerMenu.MALARIA:
+                    mInteractor.getFamilyCount(new NavigationContract.InteractorCallback<Integer>() {
+                        @Override
+                        public void onResult(Integer result) {
+                            mModel.getNavigationItems().get(finalX).setRegisterCount(result);
+                            Log.d("NavigationPresenter", String.valueOf(result));
+                            getNavigationView().refreshCount();
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            getNavigationView().displayToast(activity, "Error retrieving count for " + Constants.DrawerMenu.ALL_FAMILIES);
                         }
                     });
                     break;
