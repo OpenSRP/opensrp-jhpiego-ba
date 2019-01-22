@@ -18,7 +18,7 @@
     <string name="action_sync_failed">Sync Failed</string>
 
     <!-- Navigation Strings -->
-    <string name="nav_logo">WCARO LOGO</string>
+    <string name="nav_logo">USAID Boresha Afya</string>
     <string name="nav_registers">Registers</string>
     <string name="nav_logout_as">Logout as</string>
     <string name="nav_sync">Sync</string>

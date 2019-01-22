@@ -19,12 +19,16 @@ public class NavigationModel implements NavigationContract.Model {
     List<NavigationOption> navigationOptions = new ArrayList<>();
     NavigationOption op1 = new NavigationOption(R.mipmap.sidemenu_families, R.mipmap.sidemenu_families_active, Constants.DrawerMenu.ALL_FAMILIES, 0);
     NavigationOption op2 = new NavigationOption(R.mipmap.sidemenu_children, R.mipmap.sidemenu_children_active, Constants.DrawerMenu.CHILD_CLIENTS, 0);
+    NavigationOption op3 = new NavigationOption(R.mipmap.sidemenu_children, R.mipmap.sidemenu_children_active, Constants.DrawerMenu.ANC, 0);
+    NavigationOption op4 = new NavigationOption(R.mipmap.sidemenu_children, R.mipmap.sidemenu_children_active, Constants.DrawerMenu.PNC, 0);
+    NavigationOption op5 = new NavigationOption(R.mipmap.sidemenu_children, R.mipmap.sidemenu_children_active, Constants.DrawerMenu.FAMILY_PLANNING, 0);
+    NavigationOption op6 = new NavigationOption(R.mipmap.sidemenu_children, R.mipmap.sidemenu_children_active, Constants.DrawerMenu.MALARIA, 0);
     private String TAG = NavigationModel.class.getCanonicalName();
     private Activity mActivity;
 
     private NavigationModel() {
         navigationOptions.clear();
-        navigationOptions.addAll(asList(op1, op2));
+        navigationOptions.addAll(asList(op1, op2, op3, op4, op5, op6));
     }
 
     public static NavigationModel getInstance() {
