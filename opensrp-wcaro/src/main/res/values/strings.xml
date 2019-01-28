@@ -86,5 +86,5 @@
     <string name="vitamin_a">Vitamin A</string>
     <string name="deworming">Deworming</string>
     <string name="record_immunizations">Record immunizations</string>
-    <string name="notification">Notifications</string>
+    <string name="notification">notification</string>
 </resources>
