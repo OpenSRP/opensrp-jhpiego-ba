@@ -54,8 +54,9 @@ public class AddMemberFragment extends DialogFragment implements View.OnClickLis
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.close).setOnClickListener(this);
-        view.findViewById(R.id.layout_add_child_under_five).setOnClickListener(this);
-        view.findViewById(R.id.layout_add_other_family_member).setOnClickListener(this);
+//        view.findViewById(R.id.layout_add_child_under_five).setOnClickListener(this);
+//        view.findViewById(R.id.layout_add_other_family_member).setOnClickListener(this);
+        //this.onClick(view.findViewById(R.id.layout_add_other_family_member));
     }
 
     @Override

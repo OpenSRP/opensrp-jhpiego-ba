@@ -33,10 +33,11 @@ public class FloatingMenuListener implements OnClickFloatingMenu {
 
                 break;
             case R.id.add_new_member_layout:
+                ((FamilyProfileActivity) context).startFormActivity(Constants.JSON_FORM.FAMILY_MEMBER_REGISTER, null, null);
 
-                AddMemberFragment addmemberFragment = AddMemberFragment.newInstance();
-                addmemberFragment.setContext(context);
-                addmemberFragment.show(context.getFragmentManager(), AddMemberFragment.DIALOG_TAG);
+//                AddMemberFragment addmemberFragment = AddMemberFragment.newInstance();
+//                addmemberFragment.setContext(context);
+//                addmemberFragment.show(context.getFragmentManager(), AddMemberFragment.DIALOG_TAG);
 
                 break;
 
