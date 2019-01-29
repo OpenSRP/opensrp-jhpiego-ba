@@ -557,7 +557,7 @@
         "openmrs_entity_id": "",
         "openmrs_data_type": "Any leadership role in the community?",
         "type": "spinner",
-        "hint": "Occupation",
+        "hint": "Any leadership role in the community?",
         "values": [
           "Religious leader",
           "Political leader",

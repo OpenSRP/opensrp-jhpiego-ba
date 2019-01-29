@@ -33,7 +33,7 @@ actions:
 name: step2_leader_other
 description: leader_other relevance
 priority: 1
-condition: "!step2_leader.contains('Other')"
+condition: "step2_leader.contains('Other')"
 actions:
 - "isRelevant = true"
 
