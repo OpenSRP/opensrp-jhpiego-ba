@@ -61,7 +61,12 @@ public class NavigationListener implements View.OnClickListener {
                         break;
 
                     case Constants.DrawerMenu.CHILDREN:
+                        Intent intent_children = new Intent(activity, ChildRegisterActivity.class);
+                        intent_children.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        activity.startActivity(intent_children);
+                        activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
                         break;
+
                     case Constants.DrawerMenu.FAMILY_PLANNING:
                         break;
                     case Constants.DrawerMenu.MALARIA:
