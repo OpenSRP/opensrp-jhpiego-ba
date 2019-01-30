@@ -17,18 +17,19 @@ public class NavigationModel implements NavigationContract.Model {
 
     private static NavigationModel instance;
     List<NavigationOption> navigationOptions = new ArrayList<>();
-    NavigationOption op1 = new NavigationOption(R.mipmap.sidemenu_families, R.mipmap.sidemenu_families_active, Constants.DrawerMenu.ALL_FAMILIES, 0);
-    NavigationOption op2 = new NavigationOption(R.mipmap.sidemenu_children, R.mipmap.sidemenu_children_active, Constants.DrawerMenu.CHILD_CLIENTS, 0);
-    NavigationOption op3 = new NavigationOption(R.mipmap.sidemenu_children, R.mipmap.sidemenu_children_active, Constants.DrawerMenu.ANC, 0);
-    NavigationOption op4 = new NavigationOption(R.mipmap.sidemenu_children, R.mipmap.sidemenu_children_active, Constants.DrawerMenu.PNC, 0);
-    NavigationOption op5 = new NavigationOption(R.mipmap.sidemenu_children, R.mipmap.sidemenu_children_active, Constants.DrawerMenu.FAMILY_PLANNING, 0);
-    NavigationOption op6 = new NavigationOption(R.mipmap.sidemenu_children, R.mipmap.sidemenu_children_active, Constants.DrawerMenu.MALARIA, 0);
+    NavigationOption op1 = new NavigationOption(R.mipmap.sidemenu_familiesxxhdpi, R.mipmap.sidemenu_families_activexxhdpi, Constants.DrawerMenu.ALL_FAMILIES, 0);
+    NavigationOption op2 = new NavigationOption(R.mipmap.sidemenu_ancxxhdpi, R.mipmap.sidemenu_anc_activexxhdpi, Constants.DrawerMenu.ANC, 0);
+    NavigationOption op3 = new NavigationOption(R.mipmap.sidemenu_landxxhdpi, R.mipmap.sidemenu_land_activexxhdpi, Constants.DrawerMenu.LD, 0);
+    NavigationOption op4 = new NavigationOption(R.mipmap.sidemenu_pncxxhdpi, R.mipmap.sidemenu_pnc_activexxhdpi, Constants.DrawerMenu.PNC, 0);
+    NavigationOption op5 = new NavigationOption(R.mipmap.sidemenu_childrenxxhdpi, R.mipmap.sidemenu_children_activexxhdpi, Constants.DrawerMenu.CHILDREN, 0);
+    NavigationOption op6 = new NavigationOption(R.mipmap.sidemenu_familiesxxhdpi, R.mipmap.sidemenu_families_activexxhdpi, Constants.DrawerMenu.FAMILY_PLANNING, 0);
+    NavigationOption op7 = new NavigationOption(R.mipmap.sidemenu_malariaxxhdpi, R.mipmap.sidemenu_malaria_activexxhdpi, Constants.DrawerMenu.MALARIA, 0);
     private String TAG = NavigationModel.class.getCanonicalName();
     private Activity mActivity;
 
     private NavigationModel() {
         navigationOptions.clear();
-        navigationOptions.addAll(asList(op1, op2, op3, op4, op5, op6));
+        navigationOptions.addAll(asList(op1, op2, op3, op4, op5, op6, op7));
     }
 
     public static NavigationModel getInstance() {

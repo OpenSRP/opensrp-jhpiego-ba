@@ -55,12 +55,12 @@
     "title": "Add Family Member",
     "fields": [
       {
-        "key": "photo",
+        "key": "image",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "choose_image",
-        "uploadButtonText": "Take a picture of the family"
+        "uploadButtonText": "Take a picture of the person"
       },
       {
         "key": "unique_id",
@@ -78,6 +78,20 @@
         "v_required": {
           "value": "true",
           "err": "Please enter the UNIQUE ID"
+        }
+      },
+      {
+        "key": "",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_identifier",
+        "openmrs_entity_id": "opensrp_id",
+        "type": "barcode",
+        "barcode_type": "qrcode",
+        "hint": "ID",
+        "scanButtonText": "Scan QR Code",
+        "v_numeric": {
+          "value": "true",
+          "err": "Please enter a valid ID"
         }
       },
       {
