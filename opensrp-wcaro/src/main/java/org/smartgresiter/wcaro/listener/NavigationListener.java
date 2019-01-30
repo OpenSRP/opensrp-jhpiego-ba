@@ -9,6 +9,7 @@ import org.smartgresiter.wcaro.R;
 import org.smartgresiter.wcaro.activity.AncActivity;
 import org.smartgresiter.wcaro.activity.ChildRegisterActivity;
 import org.smartgresiter.wcaro.activity.FamilyRegisterActivity;
+import org.smartgresiter.wcaro.activity.LandActivity;
 import org.smartgresiter.wcaro.adapter.NavigationAdapter;
 import org.smartgresiter.wcaro.util.Constants;
 
@@ -35,17 +36,22 @@ public class NavigationListener implements View.OnClickListener {
                         intent_fam.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         activity.startActivity(intent_fam);
                         activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
-
                         break;
+
                     case Constants.DrawerMenu.ANC:
                         Intent intent_anc = new Intent(activity, AncActivity.class);
                         intent_anc.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         activity.startActivity(intent_anc);
                         activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                        break;
 
-                        break;
                     case Constants.DrawerMenu.LD:
+                        Intent intent_land = new Intent(activity, LandActivity.class);
+                        intent_land.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        activity.startActivity(intent_land);
+                        activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
                         break;
+
                     case Constants.DrawerMenu.PNC:
                         break;
                     case Constants.DrawerMenu.CHILDREN:
