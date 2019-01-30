@@ -8,6 +8,7 @@ import android.view.View;
 import org.smartgresiter.wcaro.R;
 import org.smartgresiter.wcaro.activity.AncActivity;
 import org.smartgresiter.wcaro.activity.ChildRegisterActivity;
+import org.smartgresiter.wcaro.activity.FamilyPlanningActivity;
 import org.smartgresiter.wcaro.activity.FamilyRegisterActivity;
 import org.smartgresiter.wcaro.activity.LandActivity;
 import org.smartgresiter.wcaro.activity.PncActivity;
@@ -68,7 +69,12 @@ public class NavigationListener implements View.OnClickListener {
                         break;
 
                     case Constants.DrawerMenu.FAMILY_PLANNING:
+                        Intent intent_family_planning = new Intent(activity, FamilyPlanningActivity.class);
+                        intent_family_planning.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        activity.startActivity(intent_family_planning);
+                        activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
                         break;
+
                     case Constants.DrawerMenu.MALARIA:
                         break;
                     default:
