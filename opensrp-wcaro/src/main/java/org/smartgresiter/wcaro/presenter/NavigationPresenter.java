@@ -53,7 +53,7 @@ public class NavigationPresenter implements NavigationContract.Presenter {
                     });
                     break;
                 case Constants.DrawerMenu.ANC:
-                    mInteractor.getFamilyCount(new NavigationContract.InteractorCallback<Integer>() {
+                    mInteractor.getAncCount(new NavigationContract.InteractorCallback<Integer>() {
                         @Override
                         public void onResult(Integer result) {
                             mModel.getNavigationItems().get(finalX).setRegisterCount(result);
@@ -68,7 +68,7 @@ public class NavigationPresenter implements NavigationContract.Presenter {
                     });
                     break;
                 case Constants.DrawerMenu.LD:
-                    mInteractor.getFamilyCount(new NavigationContract.InteractorCallback<Integer>() {
+                    mInteractor.getLandCount(new NavigationContract.InteractorCallback<Integer>() {
                         @Override
                         public void onResult(Integer result) {
                             mModel.getNavigationItems().get(finalX).setRegisterCount(result);
@@ -83,7 +83,7 @@ public class NavigationPresenter implements NavigationContract.Presenter {
                     });
                     break;
                 case Constants.DrawerMenu.PNC:
-                    mInteractor.getFamilyCount(new NavigationContract.InteractorCallback<Integer>() {
+                    mInteractor.getPncCount(new NavigationContract.InteractorCallback<Integer>() {
                         @Override
                         public void onResult(Integer result) {
                             mModel.getNavigationItems().get(finalX).setRegisterCount(result);
@@ -112,7 +112,7 @@ public class NavigationPresenter implements NavigationContract.Presenter {
                     });
                     break;
                 case Constants.DrawerMenu.FAMILY_PLANNING:
-                    mInteractor.getFamilyCount(new NavigationContract.InteractorCallback<Integer>() {
+                    mInteractor.getFamilyPlanningCount(new NavigationContract.InteractorCallback<Integer>() {
                         @Override
                         public void onResult(Integer result) {
                             mModel.getNavigationItems().get(finalX).setRegisterCount(result);
@@ -127,7 +127,7 @@ public class NavigationPresenter implements NavigationContract.Presenter {
                     });
                     break;
                 case Constants.DrawerMenu.MALARIA:
-                    mInteractor.getFamilyCount(new NavigationContract.InteractorCallback<Integer>() {
+                    mInteractor.getMalariaCount(new NavigationContract.InteractorCallback<Integer>() {
                         @Override
                         public void onResult(Integer result) {
                             mModel.getNavigationItems().get(finalX).setRegisterCount(result);

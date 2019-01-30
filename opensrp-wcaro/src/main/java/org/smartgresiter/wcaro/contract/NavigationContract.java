@@ -56,6 +56,16 @@ public interface NavigationContract {
 
         void getFamilyCount(InteractorCallback<Integer> callback);
 
+        void getAncCount(InteractorCallback<Integer> callback);
+
+        void getLandCount(InteractorCallback<Integer> callback);
+
+        void getPncCount(InteractorCallback<Integer> callback);
+
+        void getFamilyPlanningCount(InteractorCallback<Integer> callback);
+
+        void getMalariaCount(InteractorCallback<Integer> callback);
+
         void getChildrenCount(InteractorCallback<Integer> callback);
 
         Date Sync();
