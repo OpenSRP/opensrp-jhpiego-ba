@@ -13,4 +13,12 @@
     <dimen name="immunization_status_circle_size">30dp</dimen>
     <dimen name="vaccine_text_top_margin">10dp</dimen>
     <dimen name="logo_height">250dp</dimen>
+    <dimen name="twenty_dp">20dp</dimen>
+    <dimen name="ten_dp">10dp</dimen>
+    <dimen name="fifteen_dp">15dp</dimen>
+    <dimen name="ten_dp">10dp</dimen>
+    <dimen name="three_dp">3dp</dimen>
+    <dimen name="fifteen_dp">15dp</dimen>
+    <dimen name="five_dp">5dp</dimen>
+    <dimen name="ten_dp">10dp</dimen>
 </resources>
