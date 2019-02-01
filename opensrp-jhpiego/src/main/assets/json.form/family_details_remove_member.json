@@ -175,6 +175,28 @@
             "ex": "equalTo(., \"Died\")"
           }
         }
+      },
+      {
+        "key": "age_at_death",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "label",
+        "value": "hey",
+        "text_size": "30px",
+        "relevance": {
+          "step1:remove_reason": {
+            "type": "string",
+            "ex": "equalTo(., \"Died\")"
+          }
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family-details-remove-member-calculation.yml"
+            }
+          }
+        }
       }
     ]
   }

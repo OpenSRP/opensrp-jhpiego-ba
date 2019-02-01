@@ -57,6 +57,7 @@ public class IndividualMemberFloatingMenu extends LinearLayout implements View.O
         (findViewById(R.id.call_layout)).setOnClickListener(this);
         (findViewById(R.id.registration_layout)).setOnClickListener(this);
         (findViewById(R.id.remove_member_layout)).setOnClickListener(this);
+        (findViewById(R.id.refer_to_facility)).setOnClickListener(this);
     }
 
     public void setClickListener(OnClickFloatingMenu onClickFloatingMenu) {
