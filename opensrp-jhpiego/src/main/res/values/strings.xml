@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">CFC</string>
+    <string name="app_name">Boresha Afya</string>
     <string name="title_family_detail">Family Detail</string>
-    <string name="login_title">CFC</string>
+    <string name="login_title">Boresha Afya</string>
     <string name="child_register_title">Child Clients</string>
     <string name="return_to_all_children">Return to all children</string>
     <string name="back_to_children">Back to %1$s</string>
@@ -87,4 +87,5 @@
     <string name="deworming">Deworming</string>
     <string name="record_immunizations">Record immunizations</string>
     <string name="notification">notification</string>
+    <string name="logo">logo</string>
 </resources>

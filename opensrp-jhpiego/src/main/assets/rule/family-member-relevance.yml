@@ -6,10 +6,10 @@ condition: "!step1_same_as_fam_name.contains('same_as_fam_name')"
 actions:
  - "isRelevant = true"
 ---
-name: step1_dob
-description: dob relevance
+name: step1_dob_entered
+description: dob_entered relevance
 priority: 1
-condition: "!step1_dob_unknown.contains('dob_unknown')"
+condition: "step1_dob_unknown != ''"
 actions:
   - "isRelevant = true"
 ---
@@ -38,5 +38,21 @@ name: step1_highest_edu_level
 description: highest edulevel relevance
 priority: 1
 condition: "step1_primary_caregiver == 'Yes'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_id_avail
+description: id_avail relevance
+priority: 1
+condition: "helper.formatDate(step1_dob_entered, 'y') >= '18' || step1_age >= '18'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_national_id
+desctription: national_id relevance
+priority: 1
+condition: "step1_id_avail == 'National ID'"
 actions:
   - "isRelevant = true"
