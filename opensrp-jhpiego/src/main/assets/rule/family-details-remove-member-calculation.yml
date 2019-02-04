@@ -1,0 +1,7 @@
+---
+name: step1_age_at_death
+description: age_at_death calculation
+priority: 1
+condition: "true"
+actions:
+- "calculation = '1233232323'"

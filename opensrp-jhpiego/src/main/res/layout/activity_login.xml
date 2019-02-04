@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1.0"
-        android:background="#0092D5"
+        android:background="#F6F6F6"
         android:paddingBottom="@dimen/login_bottom_margin">
 
 
@@ -42,9 +42,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="5dp"
+                android:fontFamily="@font/roboto_black"
                 android:gravity="center_horizontal"
                 android:text="@string/login_title"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="@dimen/login_title_text_size"
                 android:typeface="sans" />
 
@@ -134,7 +135,7 @@
                     android:layout_marginLeft="@dimen/ten_dp"
                     android:layout_toRightOf="@id/login_show_password_checkbox"
                     android:text="@string/show_password_text"
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/darker_gray"
                     android:textSize="@dimen/login_edit_text_textSize" />
             </RelativeLayout>
 
