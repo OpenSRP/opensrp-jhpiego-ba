@@ -24,7 +24,6 @@ import org.smartgresiter.jhpiego.contract.ChildProfileContract;
 import org.smartgresiter.jhpiego.contract.ChildRegisterContract;
 import org.smartgresiter.jhpiego.custom_view.IndividualMemberFloatingMenu;
 import org.smartgresiter.jhpiego.fragment.ChildHomeVisitFragment;
-import org.smartgresiter.jhpiego.fragment.ChildImmunizationFragment;
 import org.smartgresiter.jhpiego.fragment.FamilyCallDialogFragment;
 import org.smartgresiter.jhpiego.listener.OnClickFloatingMenu;
 import org.smartgresiter.jhpiego.model.ChildProfileModel;
@@ -33,11 +32,8 @@ import org.smartgresiter.jhpiego.util.ChildUtils;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.family.util.Constants;
 import org.smartregister.helper.ImageRenderHelper;
-import org.smartregister.immunization.domain.VaccineWrapper;
-import org.smartregister.immunization.listener.VaccinationActionListener;
 import org.smartregister.view.activity.BaseProfileActivity;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -45,7 +41,7 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class ChildProfileActivity extends BaseProfileActivity implements ChildProfileContract.View, ChildRegisterContract.InteractorCallBack, VaccinationActionListener {
+public class ChildProfileActivity extends BaseProfileActivity implements ChildProfileContract.View, ChildRegisterContract.InteractorCallBack {
     private boolean appBarTitleIsShown = true;
     private int appBarLayoutScrollRange = -1;
     private String childBaseEntityId;
@@ -66,7 +62,7 @@ public class ChildProfileActivity extends BaseProfileActivity implements ChildPr
         public void onClickMenu(int viewId) {
             switch (viewId) {
                 case R.id.call_layout:
-                    FamilyCallDialogFragment.showDialog(ChildProfileActivity.this, ((ChildProfilePresenter) presenter).getFamilyId());
+                    FamilyCallDialogFragment.launchDialog(ChildProfileActivity.this, ((ChildProfilePresenter) presenter).getFamilyId());
                     break;
                 case R.id.registration_layout:
                     break;
@@ -209,18 +205,24 @@ public class ChildProfileActivity extends BaseProfileActivity implements ChildPr
     private void openFamilyDueTab() {
         Intent intent = new Intent(this, FamilyProfileActivity.class);
 
-        intent.putExtra(org.smartregister.family.util.Constants.INTENT_KEY.BASE_ENTITY_ID, ((ChildProfilePresenter) presenter()).getFamilyId());
+        intent.putExtra(Constants.INTENT_KEY.FAMILY_BASE_ENTITY_ID, ((ChildProfilePresenter) presenter()).getFamilyId());
+        intent.putExtra(Constants.INTENT_KEY.FAMILY_HEAD, ((ChildProfilePresenter) presenter()).getFamilyHeadID());
+        intent.putExtra(Constants.INTENT_KEY.PRIMARY_CAREGIVER, ((ChildProfilePresenter) presenter()).getPrimaryCareGiverID());
+        intent.putExtra(Constants.INTENT_KEY.FAMILY_NAME, ((ChildProfilePresenter) presenter()).getFamilyName());
+
         intent.putExtra(org.smartgresiter.jhpiego.util.Constants.INTENT_KEY.SERVICE_DUE, true);
         startActivity(intent);
     }
 
     private void openUpcomingServicePage() {
+        UpcomingServicesActivity.startUpcomingServicesActivity(this, ((ChildProfilePresenter) presenter()).getChildClient());
     }
 
     private void openMedicalHistoryScreen() {
         Map<String, Date> vaccine = ((ChildProfilePresenter) presenter()).getVaccineList();
-        MedicalHistoryActivity.startMedicalHistoryActivity(this, childBaseEntityId, patientName, lastVisitDay,
+        MedicalHistoryActivity.startMedicalHistoryActivity(this, ((ChildProfilePresenter) presenter()).getChildClient(), patientName, lastVisitDay,
                 ((ChildProfilePresenter) presenter()).getDateOfBirth(), new LinkedHashMap<String, Date>(vaccine));
+
     }
 
 
@@ -281,6 +283,7 @@ public class ChildProfileActivity extends BaseProfileActivity implements ChildPr
     @Override
     public void setServiceDueDate(String date) {
         layoutMostDueOverdue.setVisibility(View.VISIBLE);
+        viewLastVisitRow.setVisibility(View.GONE);
         viewMostDueRow.setVisibility(View.VISIBLE);
         textViewDueDate.setText(date);
         textViewDueDate.setTextColor(getResources().getColor(R.color.black));
@@ -385,13 +388,17 @@ public class ChildProfileActivity extends BaseProfileActivity implements ChildPr
 
     }
 
-    //immunization data update from initialize the screen or close the home visit screen
+    /**
+     * update immunization data and commonpersonobject for child as data may be updated
+     * from childhomevisitfragment screen and need at medical history/upcoming service data.
+     */
     public void updateImmunizationData() {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 presenter().fetchVisitStatus(childBaseEntityId);
                 presenter().fetchFamilyMemberServiceDue(childBaseEntityId);
+                presenter().updateChildCommonPerson(childBaseEntityId);
             }
         }, 500);
     }
@@ -501,22 +508,6 @@ public class ChildProfileActivity extends BaseProfileActivity implements ChildPr
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
-    }
-
-
-    @Override
-    public void onVaccinateToday(ArrayList<VaccineWrapper> arrayList, View view) {
-        ((ChildImmunizationFragment) getFragmentManager().findFragmentByTag(ChildImmunizationFragment.TAG)).onVaccinateToday(arrayList, view);
-    }
-
-    @Override
-    public void onVaccinateEarlier(ArrayList<VaccineWrapper> arrayList, View view) {
-        ((ChildImmunizationFragment) getFragmentManager().findFragmentByTag(ChildImmunizationFragment.TAG)).onVaccinateEarlier(arrayList, view);
-    }
-
-    @Override
-    public void onUndoVaccination(VaccineWrapper vaccineWrapper, View view) {
-        ((ChildImmunizationFragment) getFragmentManager().findFragmentByTag(ChildImmunizationFragment.TAG)).onUndoVaccination(vaccineWrapper, view);
     }
 
     @Override

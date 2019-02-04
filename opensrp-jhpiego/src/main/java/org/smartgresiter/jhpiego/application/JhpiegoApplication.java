@@ -11,8 +11,11 @@ import org.smartgresiter.jhpiego.activity.FamilyProfileActivity;
 import org.smartgresiter.jhpiego.activity.LoginActivity;
 import org.smartgresiter.jhpiego.helper.RulesEngineHelper;
 import org.smartgresiter.jhpiego.job.JhpiegoJobCreator;
+import org.smartgresiter.jhpiego.job.VaccineRecurringServiceJob;
 import org.smartgresiter.jhpiego.repository.JhpiegoRepository;
+import org.smartgresiter.jhpiego.util.ChildDBConstants;
 import org.smartgresiter.jhpiego.util.Constants;
+import org.smartgresiter.jhpiego.util.Utils;
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
 import org.smartregister.commonregistry.AllCommonsRepository;
@@ -23,7 +26,6 @@ import org.smartregister.family.FamilyLibrary;
 import org.smartregister.family.activity.FamilyWizardFormActivity;
 import org.smartregister.family.domain.FamilyMetadata;
 import org.smartregister.family.util.DBConstants;
-import org.smartregister.family.util.Utils;
 import org.smartregister.immunization.ImmunizationLibrary;
 import org.smartregister.immunization.domain.VaccineSchedule;
 import org.smartregister.immunization.domain.jsonmapping.Vaccine;
@@ -37,14 +39,17 @@ import org.smartregister.sync.helper.ECSyncHelper;
 import org.smartregister.view.activity.DrishtiApplication;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class JhpiegoApplication extends DrishtiApplication {
 
     private static final String TAG = JhpiegoApplication.class.getCanonicalName();
-    private static JsonSpecHelper jsonSpecHelper;
-    private static ECSyncHelper ecSyncHelper;
-
+    private static final int MINIMUM_JOB_FLEX_VALUE = 1;
     private static CommonFtsObject commonFtsObject;
+
+    private JsonSpecHelper jsonSpecHelper;
+    private ECSyncHelper ecSyncHelper;
+    private String password;
 
     public static synchronized JhpiegoApplication getInstance() {
         return (JhpiegoApplication) mInstance;
@@ -83,8 +88,11 @@ public class JhpiegoApplication extends DrishtiApplication {
     private static String[] getFtsSortFields(String tableName) {
         if (tableName.equals(Constants.TABLE_NAME.FAMILY)) {
             return new String[]{DBConstants.KEY.LAST_INTERACTED_WITH, DBConstants.KEY.DATE_REMOVED};
-        } else if (tableName.equals(Constants.TABLE_NAME.FAMILY_MEMBER) || tableName.equals(Constants.TABLE_NAME.CHILD)) {
+        } else if (tableName.equals(Constants.TABLE_NAME.FAMILY_MEMBER)) {
             return new String[]{DBConstants.KEY.DOB, DBConstants.KEY.DOD, DBConstants.KEY
+                    .LAST_INTERACTED_WITH, DBConstants.KEY.DATE_REMOVED};
+        } else if (tableName.equals(Constants.TABLE_NAME.CHILD)) {
+            return new String[]{ChildDBConstants.KEY.LAST_HOME_VISIT, ChildDBConstants.KEY.VISIT_NOT_DONE, DBConstants.KEY
                     .LAST_INTERACTED_WITH, DBConstants.KEY.DATE_REMOVED};
         }
         return null;
@@ -109,7 +117,7 @@ public class JhpiegoApplication extends DrishtiApplication {
         FamilyLibrary.init(context, getRepository(), getMetadata(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
         SyncStatusBroadcastReceiver.init(this);
-        LocationHelper.init(Utils.ALLOWED_LEVELS, Utils.DEFAULT_LOCATION_LEVEL);
+        LocationHelper.init(Utils.ALLOWED_LEVELS, Utils.CHA);
 
         // init json helper
         this.jsonSpecHelper = new JsonSpecHelper(this);
@@ -118,6 +126,7 @@ public class JhpiegoApplication extends DrishtiApplication {
         JobManager.create(this).addJobCreator(new JhpiegoJobCreator());
 
         initOfflineSchedules();
+        scheduleJobs();
     }
 
     @Override
@@ -129,6 +138,14 @@ public class JhpiegoApplication extends DrishtiApplication {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         getApplicationContext().startActivity(intent);
         context.userService().logoutSession();
+    }
+
+    public String getPassword() {
+        if (password == null) {
+            String username = getContext().userService().getAllSharedPreferences().fetchRegisteredANM();
+            password = getContext().userService().getGroupId(username);
+        }
+        return password;
     }
 
     public Context getContext() {
@@ -151,8 +168,8 @@ public class JhpiegoApplication extends DrishtiApplication {
         FamilyMetadata metadata = new FamilyMetadata(FamilyWizardFormActivity.class, JsonWizardFormActivity.class, FamilyProfileActivity.class);
         metadata.updateFamilyRegister(Constants.JSON_FORM.FAMILY_REGISTER, Constants.TABLE_NAME.FAMILY, Constants.EventType.FAMILY_REGISTRATION, Constants.EventType.UPDATE_FAMILY_REGISTRATION, Constants.CONFIGURATION.FAMILY_REGISTER, Constants.RELATIONSHIP.FAMILY_HEAD, Constants.RELATIONSHIP.PRIMARY_CAREGIVER);
         metadata.updateFamilyMemberRegister(Constants.JSON_FORM.FAMILY_MEMBER_REGISTER, Constants.TABLE_NAME.FAMILY_MEMBER, Constants.EventType.FAMILY_MEMBER_REGISTRATION, Constants.EventType.UPDATE_FAMILY_MEMBER_REGISTRATION, Constants.CONFIGURATION.FAMILY_MEMBER_REGISTER, Constants.RELATIONSHIP.FAMILY);
-        metadata.updateFamilyDueRegister(Constants.TABLE_NAME.FAMILY_MEMBER, Integer.MAX_VALUE, false);
-        metadata.updateFamilyActivityRegister(Constants.TABLE_NAME.FAMILY_MEMBER, Integer.MAX_VALUE, false);
+        metadata.updateFamilyDueRegister(Constants.TABLE_NAME.CHILD, Integer.MAX_VALUE, false);
+        metadata.updateFamilyActivityRegister(Constants.TABLE_NAME.CHILD_ACTIVITY, Integer.MAX_VALUE, false);
         metadata.updateFamilyOtherMemberRegister(Constants.TABLE_NAME.FAMILY_MEMBER, Integer.MAX_VALUE, false);
         return metadata;
     }
@@ -176,6 +193,22 @@ public class JhpiegoApplication extends DrishtiApplication {
         } catch (Exception e) {
             Log.e(TAG, Log.getStackTraceString(e));
         }
+    }
+
+    private void scheduleJobs() {
+        VaccineRecurringServiceJob.scheduleJob(VaccineRecurringServiceJob.TAG, TimeUnit.MINUTES.toMillis(BuildConfig.VACCINE_SYNC_PROCESSING_MINUTES), getFlexValue(BuildConfig.VACCINE_SYNC_PROCESSING_MINUTES));
+
+    }
+
+    private long getFlexValue(int value) {
+        int minutes = MINIMUM_JOB_FLEX_VALUE;
+
+        if (value > MINIMUM_JOB_FLEX_VALUE) {
+
+            minutes = (int) Math.ceil(value / 3);
+        }
+
+        return TimeUnit.MINUTES.toMillis(minutes);
     }
 
     public ECSyncHelper getEcSyncHelper() {

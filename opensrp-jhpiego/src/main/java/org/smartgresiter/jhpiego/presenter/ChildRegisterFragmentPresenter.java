@@ -2,6 +2,7 @@ package org.smartgresiter.jhpiego.presenter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartgresiter.jhpiego.contract.ChildRegisterFragmentContract;
+import org.smartgresiter.jhpiego.util.ChildDBConstants;
 import org.smartgresiter.jhpiego.util.Constants;
 import org.smartregister.configurableviews.model.Field;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
@@ -104,5 +105,10 @@ public class ChildRegisterFragmentPresenter implements ChildRegisterFragmentCont
     @Override
     public String getDefaultSortQuery() {
         return DBConstants.KEY.LAST_INTERACTED_WITH + " DESC ";
+    }
+
+    @Override
+    public String getDueFilterCondition() {
+        return getMainCondition() + " AND " + ChildDBConstants.childDueFilter();
     }
 }

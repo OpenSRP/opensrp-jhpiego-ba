@@ -38,6 +38,7 @@ public class NavigationListener implements View.OnClickListener {
                         intent_fam.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         activity.startActivity(intent_fam);
                         activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                        activity.finish();
                         break;
 
                     case Constants.DrawerMenu.ANC:
@@ -45,6 +46,7 @@ public class NavigationListener implements View.OnClickListener {
                         intent_anc.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         activity.startActivity(intent_anc);
                         activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                        activity.finish();
                         break;
 
                     case Constants.DrawerMenu.LD:
@@ -52,6 +54,7 @@ public class NavigationListener implements View.OnClickListener {
                         intent_land.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         activity.startActivity(intent_land);
                         activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                        activity.finish();
                         break;
 
                     case Constants.DrawerMenu.PNC:
@@ -59,6 +62,7 @@ public class NavigationListener implements View.OnClickListener {
                         intent_pnc.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         activity.startActivity(intent_pnc);
                         activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                        activity.finish();
                         break;
 
                     case Constants.DrawerMenu.CHILDREN:
@@ -66,6 +70,7 @@ public class NavigationListener implements View.OnClickListener {
                         intent_children.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         activity.startActivity(intent_children);
                         activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                        activity.finish();
                         break;
 
                     case Constants.DrawerMenu.FAMILY_PLANNING:
@@ -73,6 +78,7 @@ public class NavigationListener implements View.OnClickListener {
                         intent_family_planning.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         activity.startActivity(intent_family_planning);
                         activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                        activity.finish();
                         break;
 
                     case Constants.DrawerMenu.MALARIA:
@@ -80,6 +86,7 @@ public class NavigationListener implements View.OnClickListener {
                         intent_malaria.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         activity.startActivity(intent_malaria);
                         activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                        activity.finish();
                         break;
 
                     default:

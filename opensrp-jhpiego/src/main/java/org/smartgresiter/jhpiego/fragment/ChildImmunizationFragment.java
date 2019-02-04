@@ -3,7 +3,6 @@ package org.smartgresiter.jhpiego.fragment;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,9 +22,11 @@ import org.apache.commons.lang3.tuple.Triple;
 import org.joda.time.DateTime;
 import org.smartgresiter.jhpiego.R;
 import org.smartgresiter.jhpiego.application.JhpiegoApplication;
+import org.smartgresiter.jhpiego.util.JsonFormUtils;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.domain.Alert;
 import org.smartregister.family.util.DBConstants;
+import org.smartregister.family.util.Utils;
 import org.smartregister.immunization.ImmunizationLibrary;
 import org.smartregister.immunization.domain.ServiceRecord;
 import org.smartregister.immunization.domain.ServiceSchedule;
@@ -41,8 +42,6 @@ import org.smartregister.immunization.fragment.VaccinationDialogFragment;
 import org.smartregister.immunization.repository.RecurringServiceRecordRepository;
 import org.smartregister.immunization.repository.RecurringServiceTypeRepository;
 import org.smartregister.immunization.repository.VaccineRepository;
-import org.smartregister.immunization.service.intent.RecurringIntentService;
-import org.smartregister.immunization.service.intent.VaccineIntentService;
 import org.smartregister.immunization.util.RecurringServiceUtils;
 import org.smartregister.immunization.util.VaccinateActionUtils;
 import org.smartregister.immunization.util.VaccinatorUtils;
@@ -468,7 +467,6 @@ public class ChildImmunizationFragment extends DialogFragment {
         vaccine.setBaseEntityId(childDetails.entityId());
         vaccine.setName(tag.getName());
         vaccine.setDate(tag.getUpdatedVaccineDate().toDate());
-        vaccine.setAnmId(ImmunizationLibrary.getInstance().context().allSharedPreferences().fetchRegisteredANM());
 
         String lastChar = vaccine.getName().substring(vaccine.getName().length() - 1);
         if (StringUtils.isNumeric(lastChar)) {
@@ -477,15 +475,13 @@ public class ChildImmunizationFragment extends DialogFragment {
             vaccine.setCalculation(-1);
         }
 
-        vaccine.setTeam("testTeam");
-        vaccine.setTeamId("testTeamId");
-        vaccine.setChildLocationId("testChildLocationId");
+        JsonFormUtils.tagSyncMetadata(Utils.context().allSharedPreferences(), vaccine);
         vaccineRepository.add(vaccine);
         tag.setDbKey(vaccine.getId());
     }
 
     private void updateVaccineGroupViews(View view, final ArrayList<VaccineWrapper> wrappers, List<Vaccine> vaccineList) {
-        updateVaccineGroupViews(view, wrappers, vaccineList, false);
+//        updateVaccineGroupViews(view, wrappers, vaccineList, false);
     }
 
     public void updateVaccineGroupViews(View view, final ArrayList<VaccineWrapper> wrappers, final List<Vaccine> vaccineList, final boolean undo) {
@@ -518,11 +514,11 @@ public class ChildImmunizationFragment extends DialogFragment {
     }
 
     public void startServices() {
-        Intent vaccineIntent = new Intent(getActivity(), VaccineIntentService.class);
-        getActivity().startService(vaccineIntent);
-
-        Intent serviceIntent = new Intent(getActivity(), RecurringIntentService.class);
-        getActivity().startService(serviceIntent);
+//        Intent vaccineIntent = new Intent(getActivity(), VaccineIntentService.class);
+//        getActivity().startService(vaccineIntent);
+//
+//        Intent serviceIntent = new Intent(getActivity(), RecurringIntentService.class);
+//        getActivity().startService(serviceIntent);
 
     }
 

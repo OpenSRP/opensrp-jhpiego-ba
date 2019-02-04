@@ -19,6 +19,8 @@ public interface HomeVisitGrowthNutritionContract {
 
         void statusImageViewUpdate(String type, boolean value);
 
+        void updateUpcomingService();
+
     }
 
     interface Presenter {
@@ -31,6 +33,8 @@ public interface HomeVisitGrowthNutritionContract {
         void resetAllSaveState();
 
         boolean isAllSelected();
+
+        boolean isSelected(String type);
 
         HomeVisitGrowthNutritionContract.View getView();
 
