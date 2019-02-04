@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
@@ -285,6 +286,9 @@ public class ChildHomeVisitFragment extends DialogFragment implements View.OnCli
             case R.id.layout_add_other_family_member:
                 ((BaseFamilyProfileActivity) context).startFormActivity(Constants.JSON_FORM.FAMILY_MEMBER_REGISTER, null, null);
                 break;
+
+            case R.id.refer_to_facility_group:
+                Toast.makeText(context, "This should open the referal form", Toast.LENGTH_SHORT).show();
         }
     }
 
