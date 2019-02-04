@@ -203,7 +203,7 @@
         }
       },
       {
-        "key": "dob",
+        "key": "dob_entered",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person",
         "openmrs_entity_id": "birthdate",
@@ -272,6 +272,106 @@
         "v_required": {
           "value": true,
           "err": "Please enter the age"
+        }
+      },
+      {
+        "key": "id_avail",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "openmrs_data_type": "",
+        "type": "spinner",
+        "hint": "Do you have any of the following IDs?",
+        "values": [
+          "National ID",
+          "Voter's registration ID",
+          "Driver's license",
+          "Passport",
+          "None"
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family-member-relevance.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "national_id",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "National ID number",
+        "edit_type": "name",
+        "v_required": {
+          "value": "true",
+          "err": "Please enter National ID number *"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family-member-relevance.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "voter_id",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "Voter's registration number",
+        "edit_type": "name",
+        "v_required": {
+          "value": "true",
+          "err": "Please enter Voter's registration number *"
+        },
+        "relevance": {
+          "step1:id_avail": {
+            "type": "string",
+            "ex": "equalTo(., \"Voter's registration ID\")"
+          }
+        }
+      },
+      {
+        "key": "driver_license",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "Driver's license number",
+        "edit_type": "name",
+        "v_required": {
+          "value": "true",
+          "err": "Please enter driver's license number *"
+        },
+        "relevance": {
+          "step1:id_avail": {
+            "type": "string",
+            "ex": "equalTo(., \"Driver's license\")"
+          }
+        }
+      },
+      {
+        "key": "passport",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "Passport number",
+        "edit_type": "name",
+        "v_required": {
+          "value": "true",
+          "err": "Please enter passport number *"
+        },
+        "relevance": {
+          "step1:id_avail": {
+            "type": "string",
+            "ex": "equalTo(., \"Passport\")"
+          }
         }
       },
       {

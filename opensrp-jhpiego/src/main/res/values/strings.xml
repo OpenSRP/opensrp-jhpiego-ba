@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Liberia CFC</string>
+
+    <string name="app_name">Boresha Afya</string>
     <string name="title_family_detail">Family Detail</string>
-    <string name="login_title">CFC</string>
+    <string name="login_title">Boresha Afya</string>
     <string name="child_register_title">Child Clients</string>
     <string name="return_to_all_children">Return to all children</string>
     <string name="back_to_children">Back to %1$s</string>
@@ -97,7 +98,6 @@
     <string name="birth_certification">Birth certification</string>
     <string name="observations_illness_episodes"><![CDATA[Observations & Illness Episodes]]></string>
 
-
     <string name="home_visit_suffix"> &#183; Home Visit</string>
     <string name="last_visit_prefix">Last visit %1$s ago</string>
 
@@ -115,5 +115,7 @@
     <string name="year">year</string>
     <string name="years">years</string>
 
->>>>>>> 921873b8c0cc831abf6c77b5c7d573e56ed6d11b:opensrp-jhpiego/src/main/res/values/strings.xml
+    <string name="logo">logo</string>
+    <string name="username">Username</string>
+  
 </resources>
