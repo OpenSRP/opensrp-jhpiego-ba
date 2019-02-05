@@ -9,12 +9,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.commons.lang3.tuple.Triple;
 import org.json.JSONObject;
@@ -26,6 +28,7 @@ import org.smartgresiter.jhpiego.custom_view.IndividualMemberFloatingMenu;
 import org.smartgresiter.jhpiego.fragment.ChildHomeVisitFragment;
 import org.smartgresiter.jhpiego.fragment.ChildImmunizationFragment;
 import org.smartgresiter.jhpiego.fragment.FamilyCallDialogFragment;
+import org.smartgresiter.jhpiego.listener.FloatingMenuListener;
 import org.smartgresiter.jhpiego.listener.OnClickFloatingMenu;
 import org.smartgresiter.jhpiego.model.ChildProfileModel;
 import org.smartgresiter.jhpiego.presenter.ChildProfilePresenter;
@@ -159,6 +162,16 @@ public class ChildProfileActivity extends BaseProfileActivity implements ChildPr
         layoutMostDueOverdue.setOnClickListener(this);
         layoutFamilyHasRow.setOnClickListener(this);
         layoutRecordButtonDone.setOnClickListener(this);
+
+        // add floating menu
+        IndividualMemberFloatingMenu individualMemberFloatingMenu = new IndividualMemberFloatingMenu(this);
+        LinearLayout.LayoutParams linearLayoutParams =
+                new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+        individualMemberFloatingMenu.setGravity(Gravity.BOTTOM | Gravity.RIGHT);
+        addContentView(individualMemberFloatingMenu, linearLayoutParams);
+        individualMemberFloatingMenu.setClickListener(new FloatingMenuListener(this));
 
     }
 
@@ -394,6 +407,10 @@ public class ChildProfileActivity extends BaseProfileActivity implements ChildPr
                 presenter().fetchFamilyMemberServiceDue(childBaseEntityId);
             }
         }, 500);
+    }
+
+    public void startFormForEdit() {
+        Toast.makeText(this, "Yeeeess", Toast.LENGTH_SHORT).show();
     }
 
     @Override

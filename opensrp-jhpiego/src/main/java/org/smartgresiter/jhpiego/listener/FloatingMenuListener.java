@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import org.smartgresiter.jhpiego.R;
+import org.smartgresiter.jhpiego.activity.ChildProfileActivity;
 import org.smartgresiter.jhpiego.activity.FamilyProfileActivity;
 import org.smartgresiter.jhpiego.activity.FamilyProfileMenuActivity;
 import org.smartgresiter.jhpiego.activity.FamilyRemoveMemberActivity;
@@ -65,6 +66,10 @@ public class FloatingMenuListener implements OnClickFloatingMenu {
                         ((FamilyProfileActivity) context).getFamilyBaseEntityId());
                 pc_intent.putExtra(FamilyProfileMenuActivity.MENU, FamilyProfileMenuActivity.MenuType.ChangePrimaryCare);
                 context.startActivityForResult(pc_intent, Constants.ProfileActivityResults.CHANGE_COMPLETED);
+
+                break;
+            case R.id.refer_to_facility_layout:
+                ((ChildProfileActivity) context).startFormForEdit();
 
                 break;
         }
