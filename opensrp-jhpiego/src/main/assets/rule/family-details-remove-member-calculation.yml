@@ -1,7 +1,7 @@
 ---
 name: step1_age_at_death
-description: age_at_death calculation
+description: calculate age at death
 priority: 1
-condition: "true"
+condition: "!step1_date_died.isEmpty()"
 actions:
-- "calculation = '1233232323'"
+- "calculation =  helper.getDuration(step1_date_died , step1_dob)"
