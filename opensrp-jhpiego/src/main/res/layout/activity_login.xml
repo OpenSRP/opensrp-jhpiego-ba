@@ -27,12 +27,12 @@
             <ImageView
                 android:id="@+id/login_logo"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/logo_height"
+                android:layout_height="250dp"
                 android:layout_alignParentTop="true"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:contentDescription="@string/logo"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 android:src="@drawable/boresha_afya_logo"
                 android:visibility="visible" />
 
@@ -119,8 +119,8 @@
 
                 <CheckBox
                     android:id="@+id/login_show_password_checkbox"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/three_dp"
                     android:layout_marginTop="@dimen/fifteen_dp"
