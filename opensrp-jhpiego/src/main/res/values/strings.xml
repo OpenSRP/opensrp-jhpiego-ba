@@ -89,5 +89,6 @@
     <string name="notification">notification</string>
     <string name="logo">logo</string>
     <string name="username">Username</string>
+    <string name="conselling">Conselling</string>
     <string name="refer_to_facility">Refer to facility</string>
 </resources>
