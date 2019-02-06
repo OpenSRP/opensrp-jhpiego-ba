@@ -121,7 +121,7 @@ public class ChildRegisterActivity extends BaseRegisterActivity implements Child
 
             bottomNavigationHelper.disableShiftMode(bottomNavigationView);
 
-            WCAROBottomNavigationListener childBottomNavigationListener = new WCAROBottomNavigationListener(this);
+            WCAROBottomNavigationListener childBottomNavigationListener = new WCAROBottomNavigationListener(this, bottomNavigationView);
             bottomNavigationView.setOnNavigationItemSelectedListener(childBottomNavigationListener);
 
         }
@@ -146,5 +146,12 @@ public class ChildRegisterActivity extends BaseRegisterActivity implements Child
     @Override
     public ChildRegisterContract.Presenter presenter() {
         return (ChildRegisterContract.Presenter) presenter;
+    }
+
+    @Override
+    protected void onResumption() {
+        super.onResumption();
+        NavigationMenu.getInstance(this, null, null).getNavigationAdapter()
+                .setSelectedView(org.smartgresiter.jhpiego.util.Constants.DrawerMenu.CHILD_CLIENTS);
     }
 }

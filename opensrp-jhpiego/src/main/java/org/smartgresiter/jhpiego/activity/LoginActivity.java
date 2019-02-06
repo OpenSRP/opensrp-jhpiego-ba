@@ -4,8 +4,8 @@ import android.content.Intent;
 
 import org.smartgresiter.jhpiego.R;
 import org.smartgresiter.jhpiego.presenter.LoginPresenter;
+import org.smartgresiter.jhpiego.util.Utils;
 import org.smartregister.family.util.Constants;
-import org.smartregister.family.util.Utils;
 import org.smartregister.task.SaveTeamLocationsTask;
 import org.smartregister.view.activity.BaseLoginActivity;
 import org.smartregister.view.contract.BaseLoginContract;

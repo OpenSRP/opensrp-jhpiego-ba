@@ -81,6 +81,8 @@ public interface ChildProfileContract {
 
         void fetchProfileData();
 
+        void updateChildCommonPerson(String baseEntityId);
+
         void refreshProfileView();
 
         void processFormDetailsSave(Intent data, AllSharedPreferences allSharedPreferences);
@@ -105,6 +107,8 @@ public interface ChildProfileContract {
         void refreshFamilyMemberServiceDue(String familyId, String baseEntityId, ChildProfileContract.InteractorCallBack callback);
 
         void onDestroy(boolean isChangingConfiguration);
+
+        void updateChildCommonPerson(String baseEntityId);
 
         void refreshProfileView(String baseEntityId, boolean isForEdit, ChildProfileContract.InteractorCallBack callback);
 
@@ -131,6 +135,13 @@ public interface ChildProfileContract {
 
         void onRegistrationSaved(boolean isEditMode);
 
+        void setFamilyID(String familyID);
+
+        void setFamilyName(String familyName);
+
+        void setFamilyHeadID(String familyHeadID);
+
+        void setPrimaryCareGiverID(String primaryCareGiverID);
     }
 
     interface Model {

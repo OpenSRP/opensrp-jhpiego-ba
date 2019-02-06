@@ -2,13 +2,20 @@ package org.smartgresiter.jhpiego.util;
 
 import android.annotation.SuppressLint;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Build;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jeasy.rules.api.Rules;
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
 import org.json.JSONObject;
 import org.smartgresiter.jhpiego.application.JhpiegoApplication;
 import org.smartgresiter.jhpiego.rule.HomeAlertRule;
@@ -17,20 +24,17 @@ import org.smartregister.clientandeventmodel.Obs;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.family.FamilyLibrary;
 import org.smartregister.family.util.DBConstants;
-import org.smartregister.family.util.Utils;
 import org.smartregister.repository.BaseRepository;
 import org.smartregister.sync.helper.ECSyncHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class ChildUtils {
-    private static final long MILLI_SEC = 24 * 60 * 60 * 1000;//24 hrs
-    private static final String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+
     private static final String[] firstSecondNumber = {"Zero", "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"};
     public static final String[] ONE_YR = {"bcg",
             "hepb", "opv1", "penta1", "pcv1", "rota1", "opv2", "penta2", "pcv2", "rota2", "opv3", "penta3", "pcv3", "rota3", "ipv", "mcv1",
@@ -40,7 +44,6 @@ public class ChildUtils {
             "hepb", "opv1", "penta1", "pcv1", "rota1", "opv2", "penta2", "pcv2", "rota2", "opv3", "penta3", "pcv3", "rota3", "ipv", "mcv1",
             "yf", "mcv2"
     };
-    public static final String[] test = {"pcv 1", "bcg"};
 
     //Fully immunized at age 2
     public static String isFullyImmunized(int age, List<String> vaccineGiven) {
@@ -93,22 +96,13 @@ public class ChildUtils {
 
     }
 
-    //need to add primary caregiver filter at query
-    //ec_family_member.is_primary_caregiver" is true
     public static String mainSelectRegisterWithoutGroupby(String tableName, String familyTableName, String familyMemberTableName, String mainCondition) {
         SmartRegisterQueryBuilder queryBUilder = new SmartRegisterQueryBuilder();
         queryBUilder.SelectInitiateMainTable(tableName, mainColumns(tableName, familyTableName, familyMemberTableName));
-        queryBUilder.customJoin("LEFT JOIN " + familyTableName + " ON  " + tableName + ".relational_id =  " + familyTableName + ".id");
-        queryBUilder.customJoin("LEFT JOIN " + familyMemberTableName + " ON  " + familyMemberTableName + ".base_entity_id =  " + familyTableName + ".primary_caregiver");
+        queryBUilder.customJoin("LEFT JOIN " + familyTableName + " ON  " + tableName + "." + DBConstants.KEY.RELATIONAL_ID + " = " + familyTableName + ".id");
+        queryBUilder.customJoin("LEFT JOIN " + familyMemberTableName + " ON  " + familyMemberTableName + "." + DBConstants.KEY.BASE_ENTITY_ID + " = " + familyTableName + ".primary_caregiver");
 
-        String query = queryBUilder.mainCondition(mainCondition);
-//      String query=" Select ec_child.id as _id , ec_child.relational_id as relationalid , \n" +
-//              "ec_child.last_interacted_with , ec_child.base_entity_id , ec_child.first_name , ec_family_member.first_name as family_first_name , ec_family_member.last_name as family_last_name , \n" +
-//              "ec_family.village_town as family_home_address , \n" +
-//              "ec_child.last_name , ec_child.unique_id , ec_child.gender , ec_child.dob FROM ec_child,ec_family_member,ec_family \n" +
-//              "where  ec_child.relational_id =  ec_family.id group by ec_child.base_entity_id ORDER BY ec_child.last_interacted_with DESC   LIMIT 0,20";
-
-        return query;
+        return queryBUilder.mainCondition(mainCondition);
     }
 
     public static String mainSelect(String tableName, String familyTableName, String familyMemberTableName, String mainCondition) {
@@ -134,7 +128,7 @@ public class ChildUtils {
         ChildHomeVisit childHomeVisit = new ChildHomeVisit();
         Cursor cursor = Utils.context().commonrepository(org.smartgresiter.jhpiego.util.Constants.TABLE_NAME.CHILD).queryTable(query);
         if (cursor != null && cursor.moveToFirst()) {
-            String lastVisitStr = cursor.getString(1);
+            String lastVisitStr = cursor.getString(cursor.getColumnIndex(ChildDBConstants.KEY.LAST_HOME_VISIT));
             if (!TextUtils.isEmpty(lastVisitStr)) {
                 try {
                     childHomeVisit.setLastHomeVisitDate(Long.parseLong(lastVisitStr));
@@ -142,7 +136,7 @@ public class ChildUtils {
 
                 }
             }
-            String visitNotDoneStr = cursor.getString(2);
+            String visitNotDoneStr = cursor.getString(cursor.getColumnIndex(ChildDBConstants.KEY.VISIT_NOT_DONE));
             if (!TextUtils.isEmpty(visitNotDoneStr)) {
                 try {
                     childHomeVisit.setVisitNotDoneDate(Long.parseLong(visitNotDoneStr));
@@ -171,84 +165,54 @@ public class ChildUtils {
                 tableName + "." + DBConstants.KEY.GENDER,
                 tableName + "." + DBConstants.KEY.DOB,
                 tableName + "." + ChildDBConstants.KEY.LAST_HOME_VISIT,
-                tableName + "." + ChildDBConstants.KEY.VISIT_NOT_DONE};
+                tableName + "." + ChildDBConstants.KEY.VISIT_NOT_DONE,
+                tableName + "." + ChildDBConstants.KEY.BIRTH_CERT,
+                tableName + "." + ChildDBConstants.KEY.BIRTH_CERT_ISSUE_DATE,
+                tableName + "." + ChildDBConstants.KEY.BIRTH_CERT_NUMBER,
+                tableName + "." + ChildDBConstants.KEY.BIRTH_CERT_NOTIFIICATION,
+                tableName + "." + ChildDBConstants.KEY.ILLNESS_DATE,
+                tableName + "." + ChildDBConstants.KEY.ILLNESS_DESCRIPTION,
+                tableName + "." + ChildDBConstants.KEY.ILLNESS_ACTION};
         return columns;
     }
 
-    public static ChildVisit getChildVisitStatus(String dateOfBirth, long lastVisitDate, long visitNotDate) {
+    /**
+     * Same thread to retrive rules and also save in fts
+     *
+     * @param yearOfBirth
+     * @param lastVisitDate
+     * @param visitNotDate
+     * @return
+     */
+    public static ChildVisit getChildVisitStatus(String yearOfBirth, long lastVisitDate, long visitNotDate) {
+        HomeAlertRule homeAlertRule = new HomeAlertRule(yearOfBirth, lastVisitDate, visitNotDate);
+        JhpiegoApplication.getInstance().getRulesEngineHelper().getButtonAlertStatus(homeAlertRule, Constants.RULE_FILE.HOME_VISIT);
+        return getChildVisitStatus(homeAlertRule, lastVisitDate);
+    }
+
+    /**
+     * Rules can be retrieved separately so that the background thread is used here
+     *
+     * @param rules
+     * @param yearOfBirth
+     * @param lastVisitDate
+     * @param visitNotDate
+     * @return
+     */
+    public static ChildVisit getChildVisitStatus(Rules rules, String yearOfBirth, long lastVisitDate, long visitNotDate) {
+        HomeAlertRule homeAlertRule = new HomeAlertRule(yearOfBirth, lastVisitDate, visitNotDate);
+        JhpiegoApplication.getInstance().getRulesEngineHelper().getButtonAlertStatus(homeAlertRule, rules);
+        return getChildVisitStatus(homeAlertRule, lastVisitDate);
+    }
+
+    public static ChildVisit getChildVisitStatus(HomeAlertRule homeAlertRule, long lastVisitDate) {
         ChildVisit childVisit = new ChildVisit();
-//        childVisit.setLastVisitTime(lastVisitDate);
-//        long diff=System.currentTimeMillis()-childVisit.getLastVisitTime();
-//        if(diff<MILLI_SEC){
-//            childVisit.setLastVisitDays("less than 24 hrs");
-//            childVisit.setLastVisitMonthName(theMonth(Calendar.getInstance().get(Calendar.MONTH)));
-//        }else{
-//            childVisit.setLastVisitDays(diff/MILLI_SEC+" days");
-//        }
-        HomeAlertRule homeAlertRule = new HomeAlertRule(dateOfBirth, lastVisitDate, visitNotDate);
-        String visitStatus = JhpiegoApplication.getInstance().getRulesEngineHelper().getButtonAlertStatus(homeAlertRule, Constants.RULE_FILE.HOME_VISIT);
-        childVisit.setVisitStatus(visitStatus);
+        childVisit.setVisitStatus(homeAlertRule.buttonStatus);
         childVisit.setNoOfMonthDue(homeAlertRule.noOfMonthDue);
         childVisit.setLastVisitDays(homeAlertRule.noOfDayDue);
         childVisit.setLastVisitMonthName(homeAlertRule.visitMonthName);
         childVisit.setLastVisitTime(lastVisitDate);
         return childVisit;
-
-//        if(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == 1){
-//            childVisit.setVisitStatus(ChildProfileInteractor.VisitType.DUE.name());
-//            if(childVisit.getLastVisitTime()!=0){
-//                if(diff<MILLI_SEC){
-//                    childVisit.setLastVisitDays("less than 24 hrs");
-//                }else{
-//                    childVisit.setLastVisitDays(diff/MILLI_SEC+" days");
-//                }
-//            }
-//            return childVisit;
-//        }
-//        if(!isSameMonth(childVisit.getLastVisitTime()) && !childVisit.isVisitNotDone()){
-//            if(childVisit.getLastVisitTime()==0){
-//                childVisit.setVisitStatus(ChildProfileInteractor.VisitType.DUE.name());
-//            }else{
-//                childVisit.setVisitStatus(ChildProfileInteractor.VisitType.OVERDUE.name());
-//            }
-//
-//            return childVisit;
-//        }
-//
-//        if(diff<MILLI_SEC){
-//            childVisit.setLastVisitDays("less than 24 hrs");
-//            childVisit.setVisitStatus(ChildProfileInteractor.VisitType.LESS_TWENTY_FOUR.name());
-//            childVisit.setLastVisitMonth(theMonth(Calendar.getInstance().get(Calendar.MONTH)));
-//            return childVisit;
-//        }
-//        if(isVisitNotDone){
-//            childVisit.setVisitStatus(ChildProfileInteractor.VisitType.NOT_VISIT_THIS_MONTH.name());
-//            return childVisit;
-//        }
-//        else {
-//            childVisit.setLastVisitDays(diff/MILLI_SEC+" days");
-//            childVisit.setVisitStatus(ChildProfileInteractor.VisitType.VISIT_THIS_MONTH.name());
-//            return childVisit;
-//        }
-    }
-
-    public static boolean isSameMonth(long time) {
-        if (time == 0) return false;
-        int runningMonth = Calendar.getInstance().get(Calendar.MONTH);
-        int runningYear = Calendar.getInstance().get(Calendar.YEAR);
-        Date date = new Date(time);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int visitMonth = cal.get(Calendar.MONTH);
-        int visitYear = cal.get(Calendar.YEAR);
-        if (runningMonth == visitMonth && runningYear == visitYear) {
-            return true;
-        }
-        return false;
-    }
-
-    public static String theMonth(int month) {
-        return monthNames[month];
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -279,13 +243,11 @@ public class ChildUtils {
                     .withBaseEntityId(entityId)
                     .withEventDate(new Date())
                     .withEventType(eventType)
-                    .withLocationId(JhpiegoApplication.getInstance().getContext().allSharedPreferences().fetchCurrentLocality())
-                    .withProviderId(JhpiegoApplication.getInstance().getContext().allSharedPreferences().fetchRegisteredANM())
                     .withEntityType(entityType)
                     .withFormSubmissionId(JsonFormUtils.generateRandomUUIDString())
                     .withDateCreated(new Date());
             event.addObs((new Obs()).withFormSubmissionField(attributeName).withValue(attributeValue).withFieldCode(attributeName).withFieldType("formsubmissionField").withFieldDataType("text").withParentCode("").withHumanReadableValues(new ArrayList<Object>()));
-
+            JsonFormUtils.tagSyncMetadata(JhpiegoApplication.getInstance().getContext().allSharedPreferences(), event);
             JSONObject eventJson = new JSONObject(JsonFormUtils.gson.toJson(event));
             syncHelper.addEvent(entityId, eventJson);
             long lastSyncTimeStamp = JhpiegoApplication.getInstance().getContext().allSharedPreferences().fetchLastUpdatedAtDate(0);
@@ -298,6 +260,24 @@ public class ChildUtils {
 
         } catch (Exception e) {
             Log.e("Error in adding event", e.getMessage());
+        }
+    }
+
+    public static SpannableString daysAway(String dueDate) {
+        SpannableString spannableString;
+        LocalDate date1 = new LocalDate(dueDate);
+        LocalDate date2 = new LocalDate();
+        int diff = Days.daysBetween(date1, date2).getDays();
+        if (diff < 0) {
+            String str = diff + " days away";
+            spannableString = new SpannableString(str);
+            spannableString.setSpan(new ForegroundColorSpan(Color.GRAY), 0, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return spannableString;
+        } else {
+            String str = diff + " days overdue";
+            spannableString = new SpannableString(str);
+            spannableString.setSpan(new ForegroundColorSpan(Color.RED), 0, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return spannableString;
         }
     }
 }

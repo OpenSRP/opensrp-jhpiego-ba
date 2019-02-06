@@ -17,6 +17,7 @@ import org.smartgresiter.jhpiego.util.ChildHomeVisit;
 import org.smartgresiter.jhpiego.util.ChildService;
 import org.smartgresiter.jhpiego.util.ChildUtils;
 import org.smartgresiter.jhpiego.util.ChildVisit;
+import org.smartgresiter.jhpiego.util.Constants;
 import org.smartgresiter.jhpiego.util.ImmunizationState;
 import org.smartregister.clientandeventmodel.Client;
 import org.smartregister.clientandeventmodel.Event;
@@ -26,7 +27,6 @@ import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.domain.UniqueId;
 import org.smartregister.family.FamilyLibrary;
 import org.smartregister.family.util.AppExecutors;
-import org.smartregister.family.util.Constants;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.family.util.JsonFormUtils;
 import org.smartregister.family.util.Utils;
@@ -39,6 +39,7 @@ import org.smartregister.sync.helper.ECSyncHelper;
 import org.smartregister.util.DateUtil;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.smartgresiter.jhpiego.util.Constants.IMMUNIZATION_CONSTANT.DATE;
@@ -49,9 +50,8 @@ public class ChildProfileInteractor implements ChildProfileContract.Interactor {
     public static final String TAG = ChildProfileInteractor.class.getName();
     private AppExecutors appExecutors;
     private CommonPersonObjectClient pClient;
-    private String familyId;
     private FamilyMemberVaccinationAsyncTask familyMemberVaccinationAsyncTask;
-    private Map<String, Date> vaccineList;
+    private Map<String, Date> vaccineList = new LinkedHashMap<>();
     private String serviceDueStatus = FamilyServiceType.NOTHING.name();
 
     @VisibleForTesting
@@ -65,10 +65,6 @@ public class ChildProfileInteractor implements ChildProfileContract.Interactor {
 
     public CommonPersonObjectClient getpClient() {
         return pClient;
-    }
-
-    public String getFamilyId() {
-        return familyId;
     }
 
     public Map<String, Date> getVaccineList() {
@@ -137,7 +133,7 @@ public class ChildProfileInteractor implements ChildProfileContract.Interactor {
             }
 
             if (baseClient != null || baseEvent != null) {
-                String imageLocation = JsonFormUtils.getFieldValue(jsonString, Constants.KEY.PHOTO);
+                String imageLocation = JsonFormUtils.getFieldValue(jsonString, org.smartregister.family.util.Constants.KEY.PHOTO);
                 JsonFormUtils.saveImage(baseEvent.getProviderId(), baseClient.getBaseEntityId(), imageLocation);
             }
 
@@ -152,8 +148,7 @@ public class ChildProfileInteractor implements ChildProfileContract.Interactor {
 
     @Override
     public void updateVisitNotDone(long value) {
-        ChildUtils.updateClientStatusAsEvent(getpClient().entityId(), "Visit not done", "visit_not_done", "" + value, "ec_child");
-
+        ChildUtils.updateClientStatusAsEvent(getpClient().entityId(), Constants.EventType.CHILD_VISIT_NOT_DONE, ChildDBConstants.KEY.VISIT_NOT_DONE, value + "", Constants.TABLE_NAME.CHILD);
     }
 
     @Override
@@ -213,31 +208,33 @@ public class ChildProfileInteractor implements ChildProfileContract.Interactor {
             @Override
             public void onSelfStatus(Map<String, Date> vaccines, Map<String, Object> nv, ImmunizationState state) {
                 vaccineList = vaccines;
-                VaccineRepo.Vaccine vaccine = (VaccineRepo.Vaccine) nv.get(VACCINE);
-                final ChildService childService = new ChildService();
-                childService.setServiceName(vaccine.display());
-                DateTime dueDate = (DateTime) nv.get(DATE);
-                String duedateString = DateUtil.formatDate(dueDate.toLocalDate(), "dd MMM yyyy");
-                childService.setServiceDate(duedateString);
-                if (state.equals(ImmunizationState.DUE)) {
-                    childService.setServiceStatus(ServiceType.DUE.name());
-                } else if (state.equals(ImmunizationState.OVERDUE)) {
-                    childService.setServiceStatus(ServiceType.OVERDUE.name());
-                } else {
-                    childService.setServiceStatus(ServiceType.UPCOMING.name());
-                }
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        appExecutors.mainThread().execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                callback.updateChildService(childService);
-                            }
-                        });
+                if (nv != null) {
+                    VaccineRepo.Vaccine vaccine = (VaccineRepo.Vaccine) nv.get(VACCINE);
+                    final ChildService childService = new ChildService();
+                    childService.setServiceName(vaccine.display());
+                    DateTime dueDate = (DateTime) nv.get(DATE);
+                    String duedateString = DateUtil.formatDate(dueDate.toLocalDate(), "dd MMM yyyy");
+                    childService.setServiceDate(duedateString);
+                    if (state.equals(ImmunizationState.DUE)) {
+                        childService.setServiceStatus(ServiceType.DUE.name());
+                    } else if (state.equals(ImmunizationState.OVERDUE)) {
+                        childService.setServiceStatus(ServiceType.OVERDUE.name());
+                    } else {
+                        childService.setServiceStatus(ServiceType.UPCOMING.name());
                     }
-                };
-                appExecutors.diskIO().execute(runnable);
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            appExecutors.mainThread().execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    callback.updateChildService(childService);
+                                }
+                            });
+                        }
+                    };
+                    appExecutors.diskIO().execute(runnable);
+                }
             }
 
 
@@ -247,6 +244,27 @@ public class ChildProfileInteractor implements ChildProfileContract.Interactor {
 
     }
 
+    @Override
+    public void updateChildCommonPerson(String baseEntityId) {
+        String query = ChildUtils.mainSelect(org.smartgresiter.jhpiego.util.Constants.TABLE_NAME.CHILD, org.smartgresiter.jhpiego.util.Constants.TABLE_NAME.FAMILY, org.smartgresiter.jhpiego.util.Constants.TABLE_NAME.FAMILY_MEMBER, baseEntityId);
+
+        Cursor cursor = getCommonRepository(org.smartgresiter.jhpiego.util.Constants.TABLE_NAME.CHILD).rawCustomQueryForAdapter(query);
+        if (cursor != null && cursor.moveToFirst()) {
+            CommonPersonObject personObject = getCommonRepository(org.smartgresiter.jhpiego.util.Constants.TABLE_NAME.CHILD).readAllcommonforCursorAdapter(cursor);
+            pClient = new CommonPersonObjectClient(personObject.getCaseId(),
+                    personObject.getDetails(), "");
+            pClient.setColumnmaps(personObject.getColumnmaps());
+            cursor.close();
+        }
+    }
+
+    /**
+     * Refreshes family view based on the child id
+     *
+     * @param baseEntityId
+     * @param isForEdit
+     * @param callback
+     */
     @Override
     public void refreshProfileView(final String baseEntityId, final boolean isForEdit, final ChildProfileContract.InteractorCallBack callback) {
         Runnable runnable = new Runnable() {
@@ -260,10 +278,26 @@ public class ChildProfileInteractor implements ChildProfileContract.Interactor {
                     pClient = new CommonPersonObjectClient(personObject.getCaseId(),
                             personObject.getDetails(), "");
                     pClient.setColumnmaps(personObject.getColumnmaps());
-                    familyId = Utils.getValue(pClient.getColumnmaps(), ChildDBConstants.KEY.RELATIONAL_ID, false);
+                    final String familyId = Utils.getValue(pClient.getColumnmaps(), ChildDBConstants.KEY.RELATIONAL_ID, false);
+
+                    final CommonPersonObject familyPersonObject = getCommonRepository(Utils.metadata().familyRegister.tableName).findByBaseEntityId(familyId);
+                    final CommonPersonObjectClient client = new CommonPersonObjectClient(familyPersonObject.getCaseId(), familyPersonObject.getDetails(), "");
+                    client.setColumnmaps(familyPersonObject.getColumnmaps());
+
+                    final String primaryCaregiverID = Utils.getValue(client.getColumnmaps(), DBConstants.KEY.PRIMARY_CAREGIVER, false);
+                    final String familyHeadID = Utils.getValue(client.getColumnmaps(), DBConstants.KEY.FAMILY_HEAD, false);
+                    final String familyName = Utils.getValue(client.getColumnmaps(), DBConstants.KEY.FIRST_NAME, false);
+
+
                     appExecutors.mainThread().execute(new Runnable() {
                         @Override
                         public void run() {
+
+                            callback.setFamilyHeadID(familyHeadID);
+                            callback.setFamilyID(familyId);
+                            callback.setPrimaryCareGiverID(primaryCaregiverID);
+                            callback.setFamilyName(familyName);
+
                             if (isForEdit) {
                                 callback.startFormForEdit(pClient);
                             } else {
