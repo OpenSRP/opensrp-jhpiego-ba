@@ -405,6 +405,7 @@ public class ChildProfileActivity extends BaseProfileActivity implements ChildPr
      * update immunization data and commonpersonobject for child as data may be updated
      * from childhomevisitfragment screen and need at medical history/upcoming service data.
      */
+
     public void updateImmunizationData() {
         handler.postDelayed(new Runnable() {
             @Override

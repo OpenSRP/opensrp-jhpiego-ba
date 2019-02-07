@@ -81,7 +81,6 @@
         }
       },
       {
-<<<<<<< HEAD:opensrp-jhpiego/src/main/assets/json.form/family_member_register.json
         "key": "",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person_identifier",
@@ -94,16 +93,6 @@
           "value": "true",
           "err": "Please enter a valid ID"
         }
-=======
-        "key": "national_id",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "163084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "label_info_text": "What is their national identity number or their voter registration number?",
-        "label_info_title": "National ID number",
-        "type": "edit_text",
-        "hint": "National ID number"
->>>>>>> 921873b8c0cc831abf6c77b5c7d573e56ed6d11b:opensrp-jhpiego/src/main/assets/json.form/family_member_register.json
       },
       {
         "key": "surname",
@@ -275,6 +264,22 @@
         }
       },
       {
+        "key": "sex",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "gender",
+        "type": "spinner",
+        "hint": "Sex *",
+        "values": [
+          "Male",
+          "Female"
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please enter the sex"
+        }
+      },
+      {
         "key": "id_avail",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
@@ -372,22 +377,6 @@
             "type": "string",
             "ex": "equalTo(., \"Passport\")"
           }
-        }
-      },
-      {
-        "key": "sex",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person",
-        "openmrs_entity_id": "gender",
-        "type": "spinner",
-        "hint": "Sex *",
-        "values": [
-          "Male",
-          "Female"
-        ],
-        "v_required": {
-          "value": "true",
-          "err": "Please enter the sex"
         }
       },
       {
