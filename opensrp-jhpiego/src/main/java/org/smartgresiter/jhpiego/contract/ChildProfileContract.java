@@ -119,6 +119,7 @@ public interface ChildProfileContract {
     }
 
     interface InteractorCallBack {
+
         void updateChildVisit(ChildVisit childVisit);
 
         void updateChildService(ChildService childService);
@@ -147,7 +148,6 @@ public interface ChildProfileContract {
     interface Model {
 
         JSONObject getFormAsJson(String formName, String entityId, String currentLocationId, String familyID) throws Exception;
-
         Pair<Client, Event> processMemberRegistration(String jsonString, String familyBaseEntityId);
 
     }

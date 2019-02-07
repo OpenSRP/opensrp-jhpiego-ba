@@ -352,6 +352,42 @@
         }
       },
       {
+        "key": "sex",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "gender",
+        "type": "spinner",
+        "hint": "Sex *",
+        "values": [
+          "Male",
+          "Female"
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please enter the sex"
+        }
+      },
+      {
+        "key": "preg_1yr",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "openmrs_data_type": "",
+        "type": "spinner",
+        "hint": "Has the woman delivered in the last 1 year?",
+        "values": [
+          "Yes",
+          "No"
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family-register-relevance.yml"
+            }
+          }
+        }
+      },
+      {
         "key": "id_avail",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
@@ -440,42 +476,6 @@
           "step2:id_avail": {
             "type": "string",
             "ex": "equalTo(., \"Passport\")"
-          }
-        }
-      },
-      {
-        "key": "sex",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person",
-        "openmrs_entity_id": "gender",
-        "type": "spinner",
-        "hint": "Sex *",
-        "values": [
-          "Male",
-          "Female"
-        ],
-        "v_required": {
-          "value": "true",
-          "err": "Please enter the sex"
-        }
-      },
-      {
-        "key": "preg_1yr",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "openmrs_data_type": "",
-        "type": "spinner",
-        "hint": "Has the woman delivered in the last 1 year?",
-        "values": [
-          "Yes",
-          "No"
-        ],
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "family-register-relevance.yml"
-            }
           }
         }
       },
