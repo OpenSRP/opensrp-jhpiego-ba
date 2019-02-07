@@ -117,7 +117,7 @@ public class ChildRegisterActivity extends BaseRegisterActivity implements Child
             bottomNavigationView.getMenu().removeItem(R.id.action_search);
             bottomNavigationView.getMenu().removeItem(R.id.action_library);
 
-            bottomNavigationView.inflateMenu(R.menu.bottom_nav_family_menu);
+            bottomNavigationView.inflateMenu(R.menu.bottom_nav_menu);
 
             bottomNavigationHelper.disableShiftMode(bottomNavigationView);
 
