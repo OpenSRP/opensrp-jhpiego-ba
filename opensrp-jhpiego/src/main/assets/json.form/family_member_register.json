@@ -264,6 +264,22 @@
         }
       },
       {
+        "key": "sex",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "gender",
+        "type": "spinner",
+        "hint": "Sex *",
+        "values": [
+          "Male",
+          "Female"
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please enter the sex"
+        }
+      },
+      {
         "key": "id_avail",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
@@ -362,34 +378,6 @@
             "ex": "equalTo(., \"Passport\")"
           }
         }
-      },
-      {
-        "key": "sex",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person",
-        "openmrs_entity_id": "gender",
-        "type": "spinner",
-        "hint": "Sex *",
-        "values": [
-          "Male",
-          "Female"
-        ],
-        "v_required": {
-          "value": "true",
-          "err": "Please enter the sex"
-        }
-      },
-      {
-        "key": "primary_caregiver",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "spinner",
-        "hint": "Is primary caregiver?",
-        "values": [
-          "Yes",
-          "No"
-        ]
       },
       {
         "key": "phone_number",
