@@ -23,6 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/JhpiegoTheme"
+        android:usesCleartextTraffic="true"
         tools:replace="android:theme">
         <activity android:name="org.smartgresiter.jhpiego.activity.MalariaActivity"></activity>
         <activity android:name="org.smartgresiter.jhpiego.activity.FamilyPlanningActivity" />

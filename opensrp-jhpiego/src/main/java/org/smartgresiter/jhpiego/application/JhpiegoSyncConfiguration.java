@@ -26,15 +26,7 @@ public class JhpiegoSyncConfiguration extends SyncConfiguration {
     @Override
     public String getSyncFilterValue() {
         String providerId = Utils.context().allSharedPreferences().fetchRegisteredANM();
-        String userLocationId = Utils.context().allSharedPreferences().fetchUserLocalityId(providerId);
-
-        List<String> locationIds = LocationHelper.getInstance().locationsFromHierarchy(true, null);
-        if (!Utils.isEmptyCollection(locationIds)) {
-            int index = locationIds.indexOf(userLocationId);
-            List<String> subLocationIds = locationIds.subList(index, locationIds.size());
-            return StringUtils.join(subLocationIds, ",");
-        }
-        return "";
+        return Utils.context().allSharedPreferences().fetchDefaultLocalityId(providerId);
     }
 
     @Override

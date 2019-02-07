@@ -57,7 +57,7 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
                 android:text="@string/app_version"
-                android:textColor="#90c4dc"
+                android:textColor="#999999"
                 android:textSize="@dimen/login_build_text_view_textSize" />
 
         </LinearLayout>
