@@ -2,7 +2,9 @@ package org.smartgresiter.jhpiego.listener;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
 import android.view.View;
+import android.widget.Toast;
 
 import org.smartgresiter.jhpiego.R;
 import org.smartgresiter.jhpiego.activity.AncActivity;
@@ -19,6 +21,7 @@ public class NavigationListener implements View.OnClickListener {
 
     private Activity activity;
     private NavigationAdapter navigationAdapter;
+    DrawerLayout drawer;
 
     public NavigationListener(Activity activity, NavigationAdapter adapter) {
         this.activity = activity;
@@ -31,55 +34,46 @@ public class NavigationListener implements View.OnClickListener {
             if (v.getTag() instanceof String) {
                 String tag = (String) v.getTag();
 
+
+                drawer = activity.findViewById(R.id.drawer_layout);
+
                 switch (tag) {
                     case Constants.DrawerMenu.ALL_FAMILIES:
-
-                        Intent intent_fam = new Intent(activity, FamilyRegisterActivity.class);
-                        intent_fam.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        activity.startActivity(intent_fam);
-                        activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                        startRegisterActivity(FamilyRegisterActivity.class);
                         break;
 
                     case Constants.DrawerMenu.ANC:
-                        Intent intent_anc = new Intent(activity, AncActivity.class);
-                        intent_anc.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        activity.startActivity(intent_anc);
-                        activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                        Toast.makeText(activity,"Start ANC Register", Toast.LENGTH_LONG).show();
+                        drawer.closeDrawers();
+                        // startRegisterActivity(AncActivity.class);
                         break;
 
                     case Constants.DrawerMenu.LD:
-                        Intent intent_land = new Intent(activity, LandActivity.class);
-                        intent_land.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        activity.startActivity(intent_land);
-                        activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                        Toast.makeText(activity,"Start Land Register", Toast.LENGTH_LONG).show();
+                        drawer.closeDrawers();
+                        // startRegisterActivity(LandActivity.class);
                         break;
 
                     case Constants.DrawerMenu.PNC:
-                        Intent intent_pnc = new Intent(activity, PncActivity.class);
-                        intent_pnc.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        activity.startActivity(intent_pnc);
-                        activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                        Toast.makeText(activity,"Start PNC Register", Toast.LENGTH_LONG).show();
+                        drawer.closeDrawers();
+                        // startRegisterActivity(PncActivity.class);
                         break;
 
                     case Constants.DrawerMenu.CHILDREN:
-                        Intent intent_children = new Intent(activity, ChildRegisterActivity.class);
-                        intent_children.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        activity.startActivity(intent_children);
-                        activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                        startRegisterActivity(ChildRegisterActivity.class);
                         break;
 
                     case Constants.DrawerMenu.FAMILY_PLANNING:
-                        Intent intent_family_planning = new Intent(activity, FamilyPlanningActivity.class);
-                        intent_family_planning.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        activity.startActivity(intent_family_planning);
-                        activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                        Toast.makeText(activity,"Start Family Planning Register", Toast.LENGTH_LONG).show();
+                        drawer.closeDrawers();
+                        // startRegisterActivity(FamilyPlanningActivity.class);
                         break;
 
                     case Constants.DrawerMenu.MALARIA:
-                        Intent intent_malaria = new Intent(activity, MalariaActivity.class);
-                        intent_malaria.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        activity.startActivity(intent_malaria);
-                        activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                        Toast.makeText(activity,"Start Malaria Register", Toast.LENGTH_LONG).show();
+                        drawer.closeDrawers();
+                        // startRegisterActivity(MalariaActivity.class);
                         break;
 
                     default:
@@ -90,5 +84,15 @@ public class NavigationListener implements View.OnClickListener {
                 navigationAdapter.setSelectedView(tag);
             }
         }
+    }
+
+    private void startRegisterActivity(Class registerClass){
+        drawer.closeDrawers();
+
+        Intent intent = new Intent(activity, registerClass);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+        activity.finish();
     }
 }

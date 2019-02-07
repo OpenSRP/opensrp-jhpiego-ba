@@ -81,6 +81,8 @@ public interface ChildProfileContract {
 
         void fetchProfileData();
 
+        void updateChildCommonPerson(String baseEntityId);
+
         void refreshProfileView();
 
         void processFormDetailsSave(Intent data, AllSharedPreferences allSharedPreferences);
@@ -106,6 +108,8 @@ public interface ChildProfileContract {
 
         void onDestroy(boolean isChangingConfiguration);
 
+        void updateChildCommonPerson(String baseEntityId);
+
         void refreshProfileView(String baseEntityId, boolean isForEdit, ChildProfileContract.InteractorCallBack callback);
 
         void getNextUniqueId(Triple<String, String, String> triple, ChildProfileContract.InteractorCallBack callBack);
@@ -115,6 +119,7 @@ public interface ChildProfileContract {
     }
 
     interface InteractorCallBack {
+
         void updateChildVisit(ChildVisit childVisit);
 
         void updateChildService(ChildService childService);
@@ -131,12 +136,18 @@ public interface ChildProfileContract {
 
         void onRegistrationSaved(boolean isEditMode);
 
+        void setFamilyID(String familyID);
+
+        void setFamilyName(String familyName);
+
+        void setFamilyHeadID(String familyHeadID);
+
+        void setPrimaryCareGiverID(String primaryCareGiverID);
     }
 
     interface Model {
 
         JSONObject getFormAsJson(String formName, String entityId, String currentLocationId, String familyID) throws Exception;
-
         Pair<Client, Event> processMemberRegistration(String jsonString, String familyBaseEntityId);
 
     }

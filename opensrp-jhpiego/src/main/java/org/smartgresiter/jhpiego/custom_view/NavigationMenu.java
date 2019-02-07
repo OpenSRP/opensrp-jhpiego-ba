@@ -19,9 +19,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.smartgresiter.jhpiego.application.JhpiegoApplication;
 import org.smartgresiter.jhpiego.R;
 import org.smartgresiter.jhpiego.adapter.NavigationAdapter;
+import org.smartgresiter.jhpiego.application.JhpiegoApplication;
 import org.smartgresiter.jhpiego.contract.NavigationContract;
 import org.smartgresiter.jhpiego.presenter.NavigationPresenter;
 
@@ -62,6 +62,10 @@ public class NavigationMenu implements NavigationContract.View {
         } else {
             return null;
         }
+    }
+
+    public NavigationAdapter getNavigationAdapter() {
+        return navigationAdapter;
     }
 
     private void init(Activity activity, View parentView, Toolbar myToolbar) {
@@ -110,7 +114,7 @@ public class NavigationMenu implements NavigationContract.View {
                     rl.addView(current);
                 }
             } else {
-                rootView = activity.findViewById(R.id.nav_view);
+                rootView = current;
             }
         }
         //
@@ -187,7 +191,7 @@ public class NavigationMenu implements NavigationContract.View {
             @Override
             public void onClick(View v) {
                 Toast.makeText(parentActivity, parentActivity.getResources().getText(R.string.action_start_sync), Toast.LENGTH_SHORT).show();
-                mPresenter.refreshLastSync();
+                mPresenter.Sync(parentActivity);
             }
         };
 

@@ -93,12 +93,12 @@ public class JhpiegoRepository extends Repository {
 
     @Override
     public SQLiteDatabase getReadableDatabase() {
-        return getReadableDatabase(password);
+        return getReadableDatabase(JhpiegoApplication.getInstance().getPassword());
     }
 
     @Override
     public SQLiteDatabase getWritableDatabase() {
-        return getWritableDatabase(password);
+        return getWritableDatabase(JhpiegoApplication.getInstance().getPassword());
     }
 
     @Override

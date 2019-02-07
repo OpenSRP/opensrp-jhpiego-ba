@@ -1,7 +1,6 @@
 package org.smartgresiter.jhpiego.fragment;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -36,7 +35,7 @@ public class ChildRegisterFragment extends BaseRegisterFragment implements Child
     private static final String TAG = ChildRegisterFragment.class.getCanonicalName();
     public static final String CLICK_VIEW_NORMAL = "click_view_normal";
     public static final String CLICK_VIEW_DOSAGE_STATUS = "click_view_dosage_status";
-    private View dueOnlyLayout;
+    View view;
 
     @Override
     protected void initializePresenter() {
@@ -49,17 +48,12 @@ public class ChildRegisterFragment extends BaseRegisterFragment implements Child
 
     }
 
-    @Override
-    public void filter(String filterString, String joinTableString, String mainConditionString, boolean qrCode) {
-        this.joinTables = new String[]{Constants.TABLE_NAME.FAMILY, Constants.TABLE_NAME.FAMILY_MEMBER};
-        super.filter(filterString, joinTableString, mainConditionString, qrCode);
+    protected void filter(String filterString, String joinTableString, String mainConditionString) {
+        filters = filterString;
+        joinTable = joinTableString;
+        mainCondition = mainConditionString;
+        filterandSortExecute(countBundle());
     }
-
-    //    @Override
-//    public void filter(String filterString, String joinTableString, String mainConditionString, boolean qrCode) {
-//        String query=ChildUtils.mainSelectRegisterWithoutGroupby(Constants.TABLE_NAME.CHILD,Constants.TABLE_NAME.FAMILY,Constants.TABLE_NAME.FAMILY_MEMBER,"");
-//        super.filter(filterString, "", query, false);
-//    }
 
     @Override
     public void initializeAdapter(Set<org.smartregister.configurableviews.model.View> visibleColumns) {
@@ -72,6 +66,8 @@ public class ChildRegisterFragment extends BaseRegisterFragment implements Child
     @Override
     public void setupViews(View view) {
         super.setupViews(view);
+        this.view = view;
+
         Toolbar toolbar = view.findViewById(org.smartregister.R.id.register_toolbar);
         toolbar.setContentInsetsAbsolute(0, 0);
         toolbar.setContentInsetsRelative(0, 0);
@@ -126,7 +122,7 @@ public class ChildRegisterFragment extends BaseRegisterFragment implements Child
         View filterSortLayout = view.findViewById(R.id.filter_sort_layout);
         filterSortLayout.setVisibility(View.GONE);
 
-        dueOnlyLayout = view.findViewById(R.id.due_only_layout);
+        View dueOnlyLayout = view.findViewById(R.id.due_only_layout);
         dueOnlyLayout.setVisibility(View.VISIBLE);
         dueOnlyLayout.setOnClickListener(registerActionHandler);
     }
@@ -188,20 +184,35 @@ public class ChildRegisterFragment extends BaseRegisterFragment implements Child
                 ChildHomeVisitFragment childHomeVisitFragment = ChildHomeVisitFragment.newInstance();
                 childHomeVisitFragment.setContext(getActivity());
                 childHomeVisitFragment.setChildClient(pc);
-//                childHomeVisitFragment.setFamilyBaseEntityId(getFamilyBaseEntityId());
                 childHomeVisitFragment.show(getActivity().getFragmentManager(), ChildHomeVisitFragment.DIALOG_TAG);
             }
         } else if (view.getId() == R.id.due_only_layout) {
-            TextView dueOnlyTextView = dueOnlyLayout.findViewById(R.id.due_only_text_view);
-            Drawable[] drawables = dueOnlyTextView.getCompoundDrawables();
-            Drawable rightDrawable = drawables[2];
-            if (rightDrawable != null) {
-                if (org.smartgresiter.jhpiego.util.Utils.areDrawablesIdentical(rightDrawable, getResources().getDrawable(R.drawable.ic_due_filter_off))) {
-                    dueOnlyTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_due_filter_on, 0);
-                } else {
-                    dueOnlyTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_due_filter_off, 0);
-                }
+            toggleFilterSelection(view);
+        }
+    }
+
+    private void toggleFilterSelection(View dueOnlyLayout) {
+        if (dueOnlyLayout != null) {
+            String tagString = "PRESSED";
+            if (dueOnlyLayout.getTag() == null) {
+                filter("", "", presenter().getDueFilterCondition());
+                dueOnlyLayout.setTag(tagString);
+                switchViews(dueOnlyLayout, true);
+            } else if (dueOnlyLayout.getTag().toString().equals(tagString)) {
+                filter("", "", presenter().getMainCondition());
+                dueOnlyLayout.setTag(null);
+                switchViews(dueOnlyLayout, false);
             }
+        }
+    }
+
+    private void switchViews(View dueOnlyLayout, boolean isPress) {
+        TextView dueOnlyTextView = dueOnlyLayout.findViewById(R.id.due_only_text_view);
+        if (isPress) {
+            dueOnlyTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_due_filter_on, 0);
+        } else {
+            dueOnlyTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_due_filter_off, 0);
+
         }
     }
 
@@ -221,4 +232,14 @@ public class ChildRegisterFragment extends BaseRegisterFragment implements Child
         return (ChildRegisterFragmentContract.Presenter) presenter;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Toolbar toolbar = view.findViewById(org.smartregister.R.id.register_toolbar);
+        toolbar.setContentInsetsAbsolute(0, 0);
+        toolbar.setContentInsetsRelative(0, 0);
+        toolbar.setContentInsetStartWithNavigation(0);
+        NavigationMenu.getInstance(getActivity(), null, toolbar);
+    }
 }

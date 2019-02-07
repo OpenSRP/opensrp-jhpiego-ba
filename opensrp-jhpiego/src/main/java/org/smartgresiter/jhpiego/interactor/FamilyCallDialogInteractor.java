@@ -2,6 +2,7 @@ package org.smartgresiter.jhpiego.interactor;
 
 import android.support.annotation.VisibleForTesting;
 
+import org.apache.commons.lang3.StringUtils;
 import org.smartgresiter.jhpiego.contract.FamilyCallDialogContract;
 import org.smartgresiter.jhpiego.model.FamilyCallDialogModel;
 import org.smartregister.commonregistry.CommonPersonObject;
@@ -79,8 +80,15 @@ public class FamilyCallDialogInteractor implements FamilyCallDialogContract.Inte
 
         String baseID = (isHead) ? familyHeadID : primaryCaregiverID;
 
+        if(StringUtils.isBlank(baseID)){
+            return null;
+        }
 
         final CommonPersonObject personObject = getCommonRepository(Utils.metadata().familyMemberRegister.tableName).findByBaseEntityId(baseID);
+        if(personObject == null){
+            return null;
+        }
+
         final CommonPersonObjectClient client = new CommonPersonObjectClient(personObject.getCaseId(), personObject.getDetails(), "");
         client.setColumnmaps(personObject.getColumnmaps());
 
@@ -98,7 +106,7 @@ public class FamilyCallDialogInteractor implements FamilyCallDialogContract.Inte
                 )
         );
 
-        model.setRole((primaryCaregiverID.toLowerCase().equals(familyHeadID.toLowerCase())) ? "Head of Family , Caregiver" : (isHead ? "Head of Family" : "Caregiver"));
+        model.setRole((primaryCaregiverID.toLowerCase().equals(familyHeadID.toLowerCase())) ? "Head of family, Caregiver" : (isHead ? "Head of family" : "Caregiver"));
 
         return model;
     }

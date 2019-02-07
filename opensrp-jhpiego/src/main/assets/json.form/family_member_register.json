@@ -380,18 +380,6 @@
         }
       },
       {
-        "key": "primary_caregiver",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "spinner",
-        "hint": "Is primary caregiver?",
-        "values": [
-          "Yes",
-          "No"
-        ]
-      },
-      {
         "key": "phone_number",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",

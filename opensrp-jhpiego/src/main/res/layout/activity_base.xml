@@ -93,12 +93,13 @@
                     android:id="@+id/rvOptions"
                     android:layout_margin="15dp"
                     android:layout_below="@+id/tvRegisters"
+                    android:layout_above="@+id/vDiv2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <View
                     android:id="@+id/vDiv2"
-                    android:layout_below="@+id/rvOptions"
+                    android:layout_above="@+id/tvLogout"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="#000000" />
@@ -108,11 +109,11 @@
                     android:fontFamily="sans-serif"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/vDiv2"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginRight="15dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginTop="35dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginTop="25dp"
                     android:text="Logout as"
                     android:textSize="16sp" />
 

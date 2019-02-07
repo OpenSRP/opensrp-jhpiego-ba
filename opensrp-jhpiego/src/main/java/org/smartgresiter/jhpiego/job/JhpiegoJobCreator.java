@@ -29,6 +29,8 @@ public class JhpiegoJobCreator implements JobCreator {
                 return new PullUniqueIdsServiceJob();
             case ValidateSyncDataServiceJob.TAG:
                 return new ValidateSyncDataServiceJob();
+            case VaccineRecurringServiceJob.TAG:
+                return new VaccineRecurringServiceJob();
             default:
                 Log.d(JhpiegoJobCreator.class.getCanonicalName(), "Looks like you tried to create a job " + tag + " that is not declared in the Anc Job Creator");
                 return null;

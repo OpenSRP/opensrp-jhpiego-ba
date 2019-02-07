@@ -10,9 +10,14 @@ public class Constants {
     }
 
     public static final class EventType {
+        public static final String BIRTH_CERTIFICATION = "Birth Certification";
+        public static final String OBS_ILLNESS = "Observations Illness";
         public static final String FAMILY_REGISTRATION = "Family Registration";
         public static final String FAMILY_MEMBER_REGISTRATION = "Family Member Registration";
+
         public static final String CHILD_REGISTRATION = "Child Registration";
+        public static final String CHILD_HOME_VISIT = "Child Home Visit";
+        public static final String CHILD_VISIT_NOT_DONE = "Visit not done";
 
         public static final String UPDATE_FAMILY_REGISTRATION = "Update Family Registration";
         public static final String UPDATE_FAMILY_MEMBER_REGISTRATION = "Update Family Member Registration";
@@ -23,6 +28,8 @@ public class Constants {
     }
 
     public static class JSON_FORM {
+        public static final String BIRTH_CERTIFICATION = "birth_certification";
+        public static final String OBS_ILLNESS = "observation_illness";
         public static final String FAMILY_REGISTER = "family_register";
         public static final String FAMILY_MEMBER_REGISTER = "family_member_register";
         public static final String CHILD_REGISTER = "child_enrollment";
@@ -42,6 +49,7 @@ public class Constants {
         public static final String FAMILY = "ec_family";
         public static final String FAMILY_MEMBER = "ec_family_member";
         public static final String CHILD = "ec_child";
+        public static final String CHILD_ACTIVITY = "ec_child_activity";
     }
 
     public static final class INTENT_KEY {
@@ -124,6 +132,14 @@ public class Constants {
                 public static final String CODE = "1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
             }
         }
+
+        public static class ILLNESS_ACTION_TAKEN_LEVEL {
+            public static final String CODE = "164378AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        }
     }
 
+    public static class GLOBAL {
+        public static final String NAME = "name";
+        public static final String MESSAGE = "message";
+    }
 }

@@ -1,9 +1,13 @@
 package org.smartgresiter.jhpiego.application;
 
+import org.apache.commons.lang3.StringUtils;
 import org.smartgresiter.jhpiego.BuildConfig;
 import org.smartgresiter.jhpiego.util.Constants;
+import org.smartgresiter.jhpiego.util.Utils;
 import org.smartregister.SyncConfiguration;
 import org.smartregister.location.helper.LocationHelper;
+
+import java.util.List;
 
 /**
  * Created by samuelgithengi on 10/19/18.
@@ -21,7 +25,8 @@ public class JhpiegoSyncConfiguration extends SyncConfiguration {
 
     @Override
     public String getSyncFilterValue() {
-        return LocationHelper.getInstance().locationIdsFromHierarchy();
+        String providerId = Utils.context().allSharedPreferences().fetchRegisteredANM();
+        return Utils.context().allSharedPreferences().fetchDefaultLocalityId(providerId);
     }
 
     @Override

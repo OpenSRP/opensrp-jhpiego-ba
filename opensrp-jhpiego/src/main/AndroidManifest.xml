@@ -23,6 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/JhpiegoTheme"
+        android:usesCleartextTraffic="true"
         tools:replace="android:theme">
         <activity android:name="org.smartgresiter.jhpiego.activity.MalariaActivity"></activity>
         <activity android:name="org.smartgresiter.jhpiego.activity.FamilyPlanningActivity" />
@@ -30,7 +31,7 @@
         <activity android:name="org.smartgresiter.jhpiego.activity.LandActivity" />
         <activity android:name="org.smartgresiter.jhpiego.activity.AncActivity" />
         <activity
-            android:name="org.smartgresiter.jhpiego.activity.FamilyRemoveMemberActivity"
+            android:name=".activity.FamilyRemoveMemberActivity"
             android:theme="@style/JhpiegoTheme.NoActionBar" />
         <activity
             android:name="org.smartgresiter.jhpiego.activity.FamilyProfileMenuActivity"
@@ -117,6 +118,13 @@
             android:label="@string/medical_history"
             android:theme="@style/JhpiegoTheme.NoActionBar" />
 
+        <activity
+            android:name="org.smartgresiter.jhpiego.activity.UpcomingServicesActivity"
+            android:label="@string/upcoming_services"
+            android:theme="@style/JhpiegoTheme.NoActionBar" />
+
+        <service android:name="org.smartregister.immunization.service.intent.VaccineIntentService" />
+        <service android:name="org.smartregister.immunization.service.intent.RecurringIntentService" />
         <service android:name="org.smartregister.sync.intent.PullUniqueIdsIntentService" />
         <service android:name="org.smartregister.sync.intent.SyncIntentService" />
         <service android:name="org.smartregister.sync.intent.ExtendedSyncIntentService" />

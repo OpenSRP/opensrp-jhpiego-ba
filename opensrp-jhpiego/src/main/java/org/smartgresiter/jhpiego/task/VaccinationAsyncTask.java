@@ -37,6 +37,7 @@ public class VaccinationAsyncTask extends AsyncTask {
     private ImmunizationStateChangeListener immunizationStateChangeListener;
     private Map<String, String> getColumnMaps;
     public ArrayList<VaccineWrapper> notDoneVaccines = new ArrayList<>();
+    private List<Map<String, Object>> sch;
 
     public VaccinationAsyncTask(String entityId, Map<String, String> getColumnMaps, ImmunizationStateChangeListener immunizationStateChangeListener) {
         this.entityId = entityId;
@@ -57,8 +58,14 @@ public class VaccinationAsyncTask extends AsyncTask {
         vaccines = JhpiegoApplication.getInstance().vaccineRepository().findByEntityId(entityId);
         Map<String, Date> recievedVaccines = receivedVaccines(vaccines);
         recievedVaccines = addNotDoneVaccinesToReceivedVaccines(notDoneVaccines, recievedVaccines);
-        List<Map<String, Object>> sch = generateScheduleList("child",
-                new DateTime(org.smartregister.family.util.Utils.getValue(getColumnMaps, DBConstants.KEY.DOB, false)), recievedVaccines, alerts);
+
+        DateTime dob = new DateTime();
+        try {
+            dob = new DateTime(org.smartregister.family.util.Utils.getValue(getColumnMaps, DBConstants.KEY.DOB, false));
+        } catch (Exception e) {
+        }
+        sch = generateScheduleList("child",
+                dob, recievedVaccines, alerts);
 
         List<VaccineRepo.Vaccine> vList = Arrays.asList(VaccineRepo.Vaccine.values());
         nv = nextVaccineDue(sch, vList);
@@ -108,7 +115,7 @@ public class VaccinationAsyncTask extends AsyncTask {
     @Override
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
-        immunizationStateChangeListener.onImmunicationStateChange(alerts, vaccines, stateKey, nv, state);
+        immunizationStateChangeListener.onImmunicationStateChange(alerts, vaccines, stateKey, sch, state);
         //ImmunizationState(vaccines,stateKey,nv,state);
 
     }

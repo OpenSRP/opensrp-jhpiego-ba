@@ -22,13 +22,15 @@ import org.joda.time.DateTime;
 import org.smartgresiter.jhpiego.R;
 import org.smartgresiter.jhpiego.custom_view.HomeVisitGrowthAndNutrition;
 import org.smartgresiter.jhpiego.util.Constants;
+import org.smartgresiter.jhpiego.util.JsonFormUtils;
+import org.smartgresiter.jhpiego.util.Utils;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.immunization.ImmunizationLibrary;
+import org.smartregister.immunization.domain.ServiceRecord;
 import org.smartregister.immunization.domain.ServiceSchedule;
 import org.smartregister.immunization.domain.ServiceWrapper;
-import org.smartregister.immunization.util.RecurringServiceUtils;
+import org.smartregister.immunization.repository.RecurringServiceRecordRepository;
 import org.smartregister.util.DatePickerUtils;
-import org.smartregister.util.Utils;
 
 import java.util.Calendar;
 
@@ -162,9 +164,7 @@ public class GrowthNutritionInputFragment extends DialogFragment implements Radi
         }
         Calendar calendar = Calendar.getInstance();
         DateTime dateTime = new DateTime(calendar.getTime());
-        String value = isFeeding + "_" + serviceWrapper.getName();
-        value = value.replace(" ", "_");
-        serviceWrapper.setValue(value);
+        serviceWrapper.setValue(isFeeding);
         serviceWrapper.setUpdatedVaccineDate(dateTime, true);
 
         ServiceWrapper[] arrayTags = {serviceWrapper};
@@ -255,7 +255,7 @@ public class GrowthNutritionInputFragment extends DialogFragment implements Radi
             ServiceWrapper serviceWrapper = null;
 
             for (ServiceWrapper tag : params) {
-                RecurringServiceUtils.saveService(tag, commonPersonObjectClient.entityId(), providerId, null);
+                saveService(tag, commonPersonObjectClient.entityId(), providerId, null);
                 //list.add(tag);
                 //serviceId=tag.getServiceType().getId()+"";
                 //tag.getDbKey();
@@ -287,5 +287,32 @@ public class GrowthNutritionInputFragment extends DialogFragment implements Radi
             homeVisitGrowthAndNutrition.setState(type, saveService);
 
         }
+    }
+
+    public static void saveService(ServiceWrapper tag, String baseEntityId, String providerId, String locationId) {
+        if (tag.getUpdatedVaccineDate() == null) {
+            return;
+        }
+
+        RecurringServiceRecordRepository recurringServiceRecordRepository = ImmunizationLibrary.getInstance().recurringServiceRecordRepository();
+
+        ServiceRecord serviceRecord = new ServiceRecord();
+        if (tag.getDbKey() != null) {
+            serviceRecord = recurringServiceRecordRepository.find(tag.getDbKey());
+            serviceRecord.setDate(tag.getUpdatedVaccineDate().toDate());
+        } else {
+            serviceRecord.setDate(tag.getUpdatedVaccineDate().toDate());
+
+            serviceRecord.setBaseEntityId(baseEntityId);
+            serviceRecord.setRecurringServiceId(tag.getTypeId());
+            serviceRecord.setDate(tag.getUpdatedVaccineDate().toDate());
+            serviceRecord.setValue(tag.getValue());
+
+            JsonFormUtils.tagSyncMetadata(Utils.context().allSharedPreferences(), serviceRecord);
+
+        }
+
+        recurringServiceRecordRepository.add(serviceRecord);
+        tag.setDbKey(serviceRecord.getId());
     }
 }

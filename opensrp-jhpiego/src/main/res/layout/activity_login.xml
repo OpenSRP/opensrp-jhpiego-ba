@@ -27,12 +27,13 @@
             <ImageView
                 android:id="@+id/login_logo"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/logo_height"
+                android:layout_height="250dp"
                 android:layout_alignParentTop="true"
                 android:layout_gravity="center"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:contentDescription="@string/logo"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 android:src="@drawable/boresha_afya_logo"
                 android:visibility="visible" />
 
@@ -56,7 +57,7 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
                 android:text="@string/app_version"
-                android:textColor="#90c4dc"
+                android:textColor="#999999"
                 android:textSize="@dimen/login_build_text_view_textSize" />
 
         </LinearLayout>
@@ -119,12 +120,12 @@
 
                 <CheckBox
                     android:id="@+id/login_show_password_checkbox"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/three_dp"
-                    android:layout_marginTop="@dimen/fifteen_dp"
-                    android:layout_marginRight="@dimen/five_dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="5dp"
                     android:button="@drawable/white_checkbox_bg_selector" />
 
                 <TextView
@@ -142,11 +143,11 @@
             <Button
                 android:id="@+id/login_login_btn"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/login_view_component_height"
+                android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/twenty_dp"
+                android:layout_marginTop="20dp"
                 android:layout_weight="8"
-                android:background="@drawable/login_button"
+                android:background="@drawable/login_button_bg"
                 android:ems="10"
                 android:shadowColor="#ffffff"
                 android:shadowDx="0"
@@ -154,8 +155,9 @@
                 android:shadowRadius="0.5"
                 android:text="@string/login_text"
                 android:textAllCaps="true"
-                android:textColor="#666666"
+                android:textColor="@color/white"
                 android:textSize="18sp" />
+
         </LinearLayout>
         <!-- Bottom section -->
 
@@ -164,8 +166,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_below="@+id/middle_section"
             android:orientation="vertical"
-            android:paddingTop="150dp">
+            android:paddingTop="10dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -179,12 +182,13 @@
 
             <ImageView
                 android:id="@+id/opensrp_logo_image_view"
-                android:layout_width="@dimen/login_opensrp_logo_width"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/login_opensrp_logo_height"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
                 android:adjustViewBounds="false"
                 android:cropToPadding="false"
-                android:scaleType="centerCrop"
+                android:scaleType="centerInside"
                 android:src="@drawable/ic_opensrp_logo" />
         </LinearLayout>
     </RelativeLayout>
