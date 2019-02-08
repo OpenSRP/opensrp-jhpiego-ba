@@ -369,7 +369,7 @@
         "hint": "Has the woman delivered in the last 1 year?",
         "v_required": {
           "value": true,
-          "err": "Please specify the phone number"
+          "err": "Please select one"
         },
         "values": [
           "Yes",
