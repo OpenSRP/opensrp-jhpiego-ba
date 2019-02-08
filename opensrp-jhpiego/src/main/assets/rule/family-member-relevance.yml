@@ -56,3 +56,12 @@ priority: 1
 condition: "step1_id_avail == 'National ID'"
 actions:
   - "isRelevant = true"
+
+
+---
+name: step1_preg_1yr
+description: preg_1yr calculation
+priority: 1
+condition: "step1_wra == '1'"
+actions:
+- "isRelevant = true"
