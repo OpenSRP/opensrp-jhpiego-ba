@@ -286,6 +286,7 @@
         "openmrs_entity_id": "",
         "type": "edit_text",
         "hint": "Less than 1 month",
+        "hidden": "true",
         "value": "less1month",
         "calculation": {
           "rules-engine": {
@@ -302,6 +303,7 @@
         "openmrs_entity_id": "",
         "type": "edit_text",
         "hint": "1 month to 1 year",
+        "hidden": "true",
         "value": "less1month",
         "calculation": {
           "rules-engine": {
@@ -319,6 +321,7 @@
         "type": "edit_text",
         "hint": "1 year to 5 years",
         "value": "1yr_5yrs",
+        "hidden": "true",
         "calculation": {
           "rules-engine": {
             "ex-rules": {
@@ -335,6 +338,7 @@
         "type": "edit_text",
         "hint": "Women Reproductive Age",
         "value": "wra",
+        "hidden": "true",
         "calculation": {
           "rules-engine": {
             "ex-rules": {
@@ -351,6 +355,7 @@
         "type": "edit_text",
         "hint": "Men Reproductive Age",
         "value": "mra",
+        "hidden": "true",
         "calculation": {
           "rules-engine": {
             "ex-rules": {
