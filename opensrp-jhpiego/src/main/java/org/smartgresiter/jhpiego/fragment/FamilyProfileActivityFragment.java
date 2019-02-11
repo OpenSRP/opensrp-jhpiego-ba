@@ -11,6 +11,7 @@ import org.smartregister.family.fragment.BaseFamilyProfileActivityFragment;
 import org.smartregister.family.util.Constants;
 import org.smartregister.family.util.Utils;
 
+import java.util.HashMap;
 import java.util.Set;
 
 public class FamilyProfileActivityFragment extends BaseFamilyProfileActivityFragment {
@@ -36,5 +37,10 @@ public class FamilyProfileActivityFragment extends BaseFamilyProfileActivityFrag
     protected void initializePresenter() {
         String familyBaseEntityId = getArguments().getString(Constants.INTENT_KEY.FAMILY_BASE_ENTITY_ID);
         presenter = new FamilyProfileActivityPresenter(this, new FamilyProfileActivityModel(), null, familyBaseEntityId);
+    }
+
+    @Override
+    public void setAdvancedSearchFormData(HashMap<String, String> hashMap) {
+
     }
 }

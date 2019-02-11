@@ -26,6 +26,7 @@ import org.smartregister.family.fragment.BaseFamilyRegisterFragment;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -285,5 +286,10 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         toolbar.setContentInsetsRelative(0, 0);
         toolbar.setContentInsetStartWithNavigation(0);
         NavigationMenu.getInstance(getActivity(), null, toolbar);
+    }
+
+    @Override
+    public void setAdvancedSearchFormData(HashMap<String, String> hashMap) {
+
     }
 }
