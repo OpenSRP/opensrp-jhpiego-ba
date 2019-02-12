@@ -146,14 +146,6 @@
     "title": "Family Head",
     "fields": [
       {
-        "key": "opensrp_id",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person_identifier",
-        "openmrs_entity_id": "opensrp_id",
-        "hidden": "true",
-        "type": "edit_text"
-      },
-      {
         "key": "image",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
@@ -172,8 +164,8 @@
       {
         "key": "first_name",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "first_name",
         "type": "edit_text",
         "hint": "First name *",
         "edit_type": "name",
@@ -189,8 +181,8 @@
       {
         "key": "middle_name",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "middle_name",
         "type": "edit_text",
         "hint": "Middle name *",
         "edit_type": "name",
@@ -200,7 +192,7 @@
         },
         "v_regex": {
           "value": "[A-Za-z\\s\\.\\-]*",
-          "err": "Please enter a valid middle name"
+          "err": "Please enter a valid name"
         }
       },
       {
@@ -215,7 +207,7 @@
         "calculation": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "new-family-register-calculation.yml"
+              "rules-file": "family-register-calculation.yml"
             }
           }
         }
@@ -223,8 +215,8 @@
       {
         "key": "dob_entered",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "birthdate",
         "type": "date_picker",
         "hint": "Date of birth (DOB) *",
         "expanded": false,
@@ -240,7 +232,7 @@
         "relevance": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "new-family-register-relevance.yml"
+              "rules-file": "family-register-relevance.yml"
             }
           }
         }
@@ -248,8 +240,8 @@
       {
         "key": "dob_unknown",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "birthdateApprox",
         "type": "check_box",
         "label": "",
         "options": [
@@ -264,13 +256,13 @@
       {
         "key": "age",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "age",
         "type": "edit_text",
         "hint": "Age *",
         "v_numeric": {
           "value": "true",
-          "err": "Age must be a number"
+          "err": "Number must begin with 0 and must be a total of 10 digits in length"
         },
         "v_max": {
           "value": "120",
@@ -279,94 +271,67 @@
         "relevance": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "new-family-register-relevance.yml"
+              "rules-file": "family-register-relevance.yml"
             }
           }
         },
         "v_required": {
-          "value": "true",
+          "value": true,
           "err": "Please enter the age"
         }
       },
       {
-        "key": "age_calculated",
+        "key": "sex",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "spinner",
+        "hint": "Sex *",
+        "values": [
+          "Male",
+          "Female"
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please enter the sex"
+        }
+      },
+      {
+        "key": "wra",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "edit_text",
-        "hint": "AGE Calculated - this is hidden",
+        "hint": "Women Reproductive Age",
         "value": "",
-        "hidden": "false",
+        "hidden": "true",
         "calculation": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "new-family-register-calculation.yml"
+              "rules-file": "family-register-calculation.yml"
             }
           }
         }
       },
       {
-        "key": "dob_calculated",
+        "key": "preg_1yr",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
         "openmrs_entity_id": "",
-        "type": "edit_text",
-        "hint": "DOB Calculated - this is hidden, this is wrong",
-        "value": "",
-        "hidden": "false",
-        "calculation": {
+        "type": "spinner",
+        "hint": "Has the woman delivered in the last 1 year?",
+        "v_required": {
+          "value": true,
+          "err": "Can not be empty"
+        },
+        "values": [
+          "Yes",
+          "No"
+        ],
+        "relevance": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "new-family-register-calculation.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "check_box",
-        "options": [
-          {
-            "key": "",
-            "text": "DOB Estimated?",
-            "text_size": "18px",
-            "value": "false"
-          }
-        ]
-      },
-      {
-        "key": "dob",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "edit_text",
-        "hint": "DOB calc to make life easier - this is hidden",
-        "value": "",
-        "hidden": "false",
-        "calculation": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "new-family-register-calculation.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "age",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "edit_text",
-        "hint": "AGE calc to make life easier - this is hidden",
-        "value": "",
-        "hidden": "false",
-        "calculation": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "new-family-register-calculation.yml"
+              "rules-file": "family-register-relevance.yml"
             }
           }
         }
@@ -498,7 +463,7 @@
         "type": "edit_text",
         "hint": "Other health insurance provider *",
         "v_required": {
-          "value": "true",
+          "value": true,
           "err": "Please specify the phone number"
         },
         "relevance": {
@@ -516,86 +481,13 @@
         "type": "edit_text",
         "hint": "Health insurance provider number *",
         "v_required": {
-          "value": "true",
+          "value": true,
           "err": "Please add the health insurance provider iD Number"
         },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "new-family-register-relevance.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "sex",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "spinner",
-        "hint": "Sex *",
-        "values": [
-          "Male",
-          "Female"
-        ],
-        "v_required": {
-          "value": "true",
-          "err": "Please select sex"
-        }
-      },
-      {
-        "key": "wra",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "edit_text",
-        "hint": "WRA Calculation - this is hidden",
-        "value": "",
-        "hidden": "false",
-        "calculation": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "new-family-register-calculation.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "mra",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "edit_text",
-        "hint": "MRA Calculation - this is hidden",
-        "value": "",
-        "hidden": "false",
-        "calculation": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "new-family-register-calculation.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "preg_1yr",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "spinner",
-        "hint": "Has the woman delivered in the last 1 year?",
-        "v_required": {
-          "value": "true",
-          "err": "Can not be empty"
-        },
-        "values": [
-          "Yes",
-          "No"
-        ],
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "new-family-register-relevance.yml"
+              "rules-file": "family-register-relevance.yml"
             }
           }
         }
@@ -606,21 +498,21 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "spinner",
-        "hint": "Physical disabilities *",
+        "hint": "Physical disabilities",
         "values": [
           "Yes",
           "No"
         ],
         "v_required": {
-          "value": "true",
-          "err": "Please select one"
+          "value": true,
+          "err": "Cannot be empty"
         }
       },
       {
         "key": "phone_number",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "edit_text",
         "hint": "Phone number *",
         "v_numeric": {
@@ -630,13 +522,24 @@
         "v_regex": {
           "value": "(0[0-9]{9})|\\s*",
           "err": "Number must be 10 digits and must start with 0."
+        },
+        "v_required": {
+          "value": true,
+          "err": "Please specify the phone number"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family-register-relevance.yml"
+            }
+          }
         }
       },
       {
         "key": "other_phone_number",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity_parent": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "edit_text",
         "hint": "Other phone number",
         "v_numeric": {
@@ -646,6 +549,13 @@
         "v_regex": {
           "value": "(0[0-9]{9})|\\s*",
           "err": "Number must be 10 digits and must start with 0."
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family-register-relevance.yml"
+            }
+          }
         }
       },
       {
@@ -654,11 +564,11 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "check_box",
-        "label": "",
+        "label": "Family Head",
         "options": [
           {
             "key": "family_head",
-            "text": "Family Head",
+            "text": "Yes",
             "text_size": "18px",
             "value": "false"
           }
@@ -670,11 +580,11 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "check_box",
-        "label": "",
+        "label": "Primary Caregiver",
         "options": [
           {
             "key": "primary_caregiver",
-            "text": "Primary Caregiver",
+            "text": "Yes",
             "text_size": "18px",
             "value": "false"
           }
@@ -703,6 +613,13 @@
           "Other",
           "None"
         ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family-register-relevance.yml"
+            }
+          }
+        },
         "v_required": {
           "value": "true",
           "err": "Please select one"
@@ -725,8 +642,15 @@
           "None"
         ],
         "v_required": {
-          "value": "true",
+          "value": true,
           "err": "Please select one"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family-register-relevance.yml"
+            }
+          }
         }
       },
       {
@@ -744,13 +668,11 @@
         "relevance": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "new-family-register-relevance.yml"
+              "rules-file": "family-register-relevance.yml"
             }
           }
         }
       }
-
-
     ]
   }
 }
