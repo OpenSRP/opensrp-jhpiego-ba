@@ -1,6 +1,6 @@
 {
   "count": "2",
-  "encounter_type": "Family Details",
+  "encounter_type": "Family Registration",
   "entity_id": "",
   "relational_id": "",
   "metadata": {
@@ -122,8 +122,8 @@
       {
         "key": "nearest_facility",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "fam_source_income",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
         "openmrs_data_type": "",
         "type": "spinner",
         "hint": "Nearest health facility",
@@ -146,14 +146,6 @@
     "title": "Family Head",
     "fields": [
       {
-        "key": "opensrp_id",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person_identifier",
-        "openmrs_entity_id": "opensrp_id",
-        "hidden": "true",
-        "type": "edit_text"
-      },
-      {
         "key": "image",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
@@ -162,12 +154,14 @@
         "uploadButtonText": "Take a picture of the person"
       },
       {
-        "key": "opensrp_id",
+        "key": "unique_id",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "person_identifier",
-        "openmrs_entity_id": "opensrp_id",
-        "hidden": "true",
-        "type": "edit_text"
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "hint": "ID *",
+        "hidden": "false",
+        "type": "edit_text",
+        "read_only": "true"
       },
       {
         "key": "first_name",
@@ -200,7 +194,7 @@
         },
         "v_regex": {
           "value": "[A-Za-z\\s\\.\\-]*",
-          "err": "Please enter a valid middle name"
+          "err": "Please enter a valid name"
         }
       },
       {
@@ -208,14 +202,23 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
         "openmrs_entity_id": "",
+        "hidden": "false",
         "type": "edit_text",
-        "hint": "surname",
-        "value": "",
-        "hidden": "true",
+        "hint": "Surname name *",
+        "edit_type": "name",
+        "read_only": "true",
+        "v_required": {
+          "value": "true",
+          "err": "Please enter the surname name"
+        },
+        "v_regex": {
+          "value": "[A-Za-z\\s\\.\\-]*",
+          "err": "Please enter a valid name"
+        },
         "calculation": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "new-family-register-calculation.yml"
+              "rules-file": "family_register_calculation.yml"
             }
           }
         }
@@ -240,7 +243,7 @@
         "relevance": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "new-family-register-relevance.yml"
+              "rules-file": "family_register_relevance.yml"
             }
           }
         }
@@ -264,13 +267,17 @@
       {
         "key": "age",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "age",
         "type": "edit_text",
         "hint": "Age *",
         "v_numeric": {
           "value": "true",
-          "err": "Age must be a number"
+          "err": "Number must begin with 0 and must be a total of 10 digits in length"
+        },
+        "v_min": {
+          "value": "5",
+          "err": "Age must be equal or greater than 5"
         },
         "v_max": {
           "value": "120",
@@ -279,96 +286,13 @@
         "relevance": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "new-family-register-relevance.yml"
+              "rules-file": "family_register_relevance.yml"
             }
           }
         },
         "v_required": {
-          "value": "true",
+          "value": true,
           "err": "Please enter the age"
-        }
-      },
-      {
-        "key": "age_calculated",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "edit_text",
-        "hint": "AGE Calculated - this is hidden",
-        "value": "",
-        "hidden": "false",
-        "calculation": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "new-family-register-calculation.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "dob_calculated",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "edit_text",
-        "hint": "DOB Calculated - this is hidden, this is wrong",
-        "value": "",
-        "hidden": "false",
-        "calculation": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "new-family-register-calculation.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "check_box",
-        "options": [
-          {
-            "key": "",
-            "text": "DOB Estimated?",
-            "text_size": "18px",
-            "value": "false"
-          }
-        ]
-      },
-      {
-        "key": "dob",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "edit_text",
-        "hint": "DOB calc to make life easier - this is hidden",
-        "value": "",
-        "hidden": "false",
-        "calculation": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "new-family-register-calculation.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "age",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "edit_text",
-        "hint": "AGE calc to make life easier - this is hidden",
-        "value": "",
-        "hidden": "false",
-        "calculation": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "new-family-register-calculation.yml"
-            }
-          }
         }
       },
       {
@@ -400,9 +324,10 @@
           "err": "Please enter National ID number *"
         },
         "relevance": {
-          "step2:id_avail": {
-            "type": "string",
-            "ex": "equalTo(., \"National ID\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family_register_relevance.yml"
+            }
           }
         }
       },
@@ -419,9 +344,10 @@
           "err": "Please enter Voter's registration number *"
         },
         "relevance": {
-          "step2:id_avail": {
-            "type": "string",
-            "ex": "equalTo(., \"Voter's registration ID\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family_register_relevance.yml"
+            }
           }
         }
       },
@@ -438,9 +364,10 @@
           "err": "Please enter driver's license number *"
         },
         "relevance": {
-          "step2:id_avail": {
-            "type": "string",
-            "ex": "equalTo(., \"Driver's license\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family_register_relevance.yml"
+            }
           }
         }
       },
@@ -457,9 +384,10 @@
           "err": "Please enter passport number *"
         },
         "relevance": {
-          "step2:id_avail": {
-            "type": "string",
-            "ex": "equalTo(., \"Passport\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family_register_relevance.yml"
+            }
           }
         }
       },
@@ -499,12 +427,13 @@
         "hint": "Other health insurance provider *",
         "v_required": {
           "value": "true",
-          "err": "Please specify the phone number"
+          "err": "Please specify the insurance provider"
         },
         "relevance": {
-          "step1:insurance_provider": {
-            "type": "string",
-            "ex": "equalTo(., \"Other\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family_register_relevance.yml"
+            }
           }
         }
       },
@@ -522,7 +451,7 @@
         "relevance": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "new-family-register-relevance.yml"
+              "rules-file": "family_register_relevance.yml"
             }
           }
         }
@@ -544,40 +473,6 @@
         }
       },
       {
-        "key": "wra",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "edit_text",
-        "hint": "WRA Calculation - this is hidden",
-        "value": "",
-        "hidden": "false",
-        "calculation": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "new-family-register-calculation.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "mra",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "edit_text",
-        "hint": "MRA Calculation - this is hidden",
-        "value": "",
-        "hidden": "false",
-        "calculation": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "new-family-register-calculation.yml"
-            }
-          }
-        }
-      },
-      {
         "key": "preg_1yr",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
@@ -593,10 +488,9 @@
           "No"
         ],
         "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "new-family-register-relevance.yml"
-            }
+          "step2:sex": {
+            "type": "string",
+            "ex": "equalTo(., \"Female\")"
           }
         }
       },
@@ -614,6 +508,25 @@
         "v_required": {
           "value": "true",
           "err": "Please select one"
+        }
+      },
+      {
+        "key": "type_of_disability",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "Type of disability *",
+        "v_required": {
+          "value": "true",
+          "err": "Please enter type of disability"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family_register_relevance.yml"
+            }
+          }
         }
       },
       {
@@ -647,38 +560,6 @@
           "value": "(0[0-9]{9})|\\s*",
           "err": "Number must be 10 digits and must start with 0."
         }
-      },
-      {
-        "key": "family_head",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "check_box",
-        "label": "",
-        "options": [
-          {
-            "key": "family_head",
-            "text": "Family Head",
-            "text_size": "18px",
-            "value": "false"
-          }
-        ]
-      },
-      {
-        "key": "primary_caregiver",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "check_box",
-        "label": "",
-        "options": [
-          {
-            "key": "primary_caregiver",
-            "text": "Primary Caregiver",
-            "text_size": "18px",
-            "value": "false"
-          }
-        ]
       },
       {
         "key": "service_provider",
@@ -744,13 +625,11 @@
         "relevance": {
           "rules-engine": {
             "ex-rules": {
-              "rules-file": "new-family-register-relevance.yml"
+              "rules-file": "family_register_relevance.yml"
             }
           }
         }
       }
-
-
     ]
   }
 }
