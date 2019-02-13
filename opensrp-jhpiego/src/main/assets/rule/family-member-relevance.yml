@@ -23,21 +23,21 @@ actions:
 name: step1_phone_number
 description: phone number relevance
 priority: 1
-condition: "step1_primary_caregiver == 'Yes'"
+condition: "step1_primary_caregiver.contains('Yes')"
 actions:
   - "isRelevant = true"
 ---
 name: step1_other_phone_number
 description: other phone number relevance
 priority: 1
-condition: "step1_primary_caregiver == 'Yes'"
+condition: "step1_primary_caregiver.contains('Yes')"
 actions:
   - "isRelevant = true"
 ---
 name: step1_highest_edu_level
 description: highest edulevel relevance
 priority: 1
-condition: "step1_primary_caregiver == 'Yes'"
+condition: "step1_primary_caregiver.contains('Yes')"
 actions:
   - "isRelevant = true"
 
