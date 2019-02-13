@@ -73,21 +73,6 @@
         }
       },
       {
-        "key": "unique_id",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person_identifier",
-        "openmrs_entity_id": "opensrp_id",
-        "hidden": "true",
-        "type": "barcode",
-        "barcode_type": "qrcode",
-        "hint": "ID *",
-        "scanButtonText": "Scan QR Code",
-        "v_numeric": {
-          "value": "true",
-          "err": "Please enter a valid ID"
-        }
-      },
-      {
         "key": "fam_village",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person_address",
@@ -156,8 +141,8 @@
       {
         "key": "unique_id",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "person_identifier",
+        "openmrs_entity_id": "opensrp_id",
         "hint": "ID *",
         "hidden": "false",
         "type": "edit_text",
@@ -166,8 +151,8 @@
       {
         "key": "first_name",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "first_name",
         "type": "edit_text",
         "hint": "First name *",
         "edit_type": "name",
@@ -183,8 +168,8 @@
       {
         "key": "middle_name",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "middle_name",
         "type": "edit_text",
         "hint": "Middle name *",
         "edit_type": "name",
@@ -200,8 +185,8 @@
       {
         "key": "surname",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "last_name",
         "hidden": "false",
         "type": "edit_text",
         "hint": "Surname name *",
@@ -226,8 +211,8 @@
       {
         "key": "dob_entered",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "birthdate",
         "type": "date_picker",
         "hint": "Date of birth (DOB) *",
         "expanded": false,
@@ -251,8 +236,8 @@
       {
         "key": "dob_unknown",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "birthdateApprox",
         "type": "check_box",
         "label": "",
         "options": [
@@ -268,7 +253,7 @@
         "key": "age",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "age",
+        "openmrs_entity_id": "age_entered",
         "type": "edit_text",
         "hint": "Age *",
         "v_numeric": {
@@ -314,8 +299,8 @@
       {
         "key": "national_id",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "163084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "edit_text",
         "hint": "National ID number",
         "edit_type": "name",
@@ -459,8 +444,8 @@
       {
         "key": "sex",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "gender",
         "type": "spinner",
         "hint": "Sex *",
         "values": [
@@ -532,8 +517,8 @@
       {
         "key": "phone_number",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "edit_text",
         "hint": "Phone number *",
         "v_numeric": {
@@ -547,9 +532,9 @@
       },
       {
         "key": "other_phone_number",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
+        "openmrs_entity_parent": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "edit_text",
         "hint": "Other phone number",
         "v_numeric": {
