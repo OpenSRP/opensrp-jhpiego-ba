@@ -81,20 +81,6 @@
         }
       },
       {
-        "key": "",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person_identifier",
-        "openmrs_entity_id": "opensrp_id",
-        "type": "barcode",
-        "barcode_type": "qrcode",
-        "hint": "ID",
-        "scanButtonText": "Scan QR Code",
-        "v_numeric": {
-          "value": "true",
-          "err": "Please enter a valid ID"
-        }
-      },
-      {
         "key": "surname",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
@@ -485,8 +471,8 @@
       {
         "key": "insurance_provider",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "person",
-        "openmrs_entity_id": "gender",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
         "type": "spinner",
         "hint": "Health insurance provider",
         "values": [
@@ -528,7 +514,7 @@
         }
       },
       {
-        "key": "",
+        "key": "insurance_provider_number",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
         "openmrs_entity_id": "",
