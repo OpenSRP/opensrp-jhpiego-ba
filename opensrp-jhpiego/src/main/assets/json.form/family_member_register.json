@@ -353,10 +353,6 @@
         "openmrs_entity_id": "",
         "type": "spinner",
         "hint": "Has the woman delivered in the last 1 year?",
-        "v_required": {
-          "value": true,
-          "err": "Please select one"
-        },
         "values": [
           "Yes",
           "No"
@@ -617,10 +613,6 @@
           "Grey",
           "Red"
         ],
-        "v_required": {
-          "value": true,
-          "err": "Please select nutrition status"
-        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -725,10 +717,6 @@
               "rules-file": "family-member-relevance.yml"
             }
           }
-        },
-        "v_required": {
-          "value": "true",
-          "err": "Please select one"
         }
       },
       {
@@ -747,10 +735,6 @@
           "Other",
           "None"
         ],
-        "v_required": {
-          "value": true,
-          "err": "Please select one"
-        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
