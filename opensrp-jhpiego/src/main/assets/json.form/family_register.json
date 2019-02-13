@@ -379,8 +379,8 @@
       {
         "key": "insurance_provider",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "person",
-        "openmrs_entity_id": "gender",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
         "type": "spinner",
         "hint": "Health insurance provider",
         "values": [
