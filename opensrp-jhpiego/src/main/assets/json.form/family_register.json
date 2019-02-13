@@ -464,18 +464,15 @@
         "openmrs_entity_id": "",
         "type": "spinner",
         "hint": "Has the woman delivered in the last 1 year?",
-        "v_required": {
-          "value": "true",
-          "err": "Can not be empty"
-        },
         "values": [
           "Yes",
           "No"
         ],
         "relevance": {
-          "step2:sex": {
-            "type": "string",
-            "ex": "equalTo(., \"Female\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family_register_relevance.yml"
+            }
           }
         }
       },

@@ -77,3 +77,11 @@ priority: 1
 condition: "step2_leader.equals('Other')"
 actions:
 - "isRelevant = true"
+
+---
+name: step2_preg_1yr
+description: preg_1yr relevance
+priority: 1
+condition: "step2_sex.equals('Female')"
+actions:
+- "isRelevant = true"
