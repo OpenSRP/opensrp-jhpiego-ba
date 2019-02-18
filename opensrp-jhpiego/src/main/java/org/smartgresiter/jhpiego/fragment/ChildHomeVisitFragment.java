@@ -174,7 +174,7 @@ public class ChildHomeVisitFragment extends DialogFragment implements View.OnCli
                 break;
 
             case R.id.conselling_group:
-                Toast.makeText(context, "Conselling ", Toast.LENGTH_SHORT).show();
+                presenter.startConsellingForm();
                 break;
 
             case R.id.refer_to_facility_group:

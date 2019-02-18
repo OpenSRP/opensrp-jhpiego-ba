@@ -2,6 +2,12 @@ package org.smartgresiter.jhpiego.presenter;
 
 import android.util.Log;
 
+import org.joda.time.Days;
+import org.joda.time.Interval;
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.json.JSONObject;
 import org.smartgresiter.jhpiego.contract.ChildHomeVisitContract;
 import org.smartgresiter.jhpiego.interactor.ChildHomeVisitInteractor;
@@ -13,6 +19,8 @@ import org.smartregister.family.util.DBConstants;
 import org.smartregister.util.FormUtils;
 
 import java.lang.ref.WeakReference;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class ChildHomeVisitPresenter implements ChildHomeVisitContract.Presenter, ChildHomeVisitContract.InteractorCallback {
     private WeakReference<ChildHomeVisitContract.View> view;
@@ -44,9 +52,27 @@ public class ChildHomeVisitPresenter implements ChildHomeVisitContract.Presenter
             JSONObject revForm = JsonFormUtils.getBirthCertFormAsJson(form, childClient.getCaseId(), "", dobString);
             getView().startFormActivity(revForm);
         } catch (Exception e) {
-
+            Log.e("BIRTH CERT FORM", e.getMessage());
         }
 
+    }
+
+    @Override
+    public void startConsellingForm() {
+        try {
+            //TODO check if the child is either less than a month's old or btn 1month and 5years and act accordingly
+            if(childClient.ageInDays() < 31) {
+                JSONObject form = getFormUtils().getFormJson(Constants.JSON_FORM.HOME_VISIT_LESS_THAN_1_MONTH);
+                JSONObject revForm = JsonFormUtils.getHomeVisitLessThanOneMonthFormAsJson(form, childClient.getCaseId(),"");
+                getView().startFormActivity(revForm);
+            } else if(childClient.ageInDays() >= 14 && childClient.ageInDays() <= 1825) {
+                JSONObject form = getFormUtils().getFormJson(Constants.JSON_FORM.HOME_VISIT_1MONTH_5YEARS);
+                JSONObject revForm = JsonFormUtils.getHomeVisit1Month5YearsFormAsJson(form, childClient.getCaseId(), "");
+                getView().startFormActivity(revForm);
+            }
+        } catch (Exception e) {
+            Log.e("COUNSELLING FORM", e.getMessage());
+        }
     }
 
     @Override
@@ -60,7 +86,7 @@ public class ChildHomeVisitPresenter implements ChildHomeVisitContract.Presenter
             JSONObject revForm = JsonFormUtils.getOnsIllnessFormAsJson(form, childClient.getCaseId(), "", dobString);
             getView().startFormActivity(revForm);
         } catch (Exception e) {
-
+            Log.e("OBS ILLNESS", e.getMessage());
         }
 
     }

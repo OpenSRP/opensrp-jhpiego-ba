@@ -18,6 +18,8 @@ public interface ChildHomeVisitContract {
 
         void startBirthCertForm();
 
+        void startConsellingForm();
+
         void startObsIllnessCertForm();
 
         void generateBirthIllnessForm(String jsonString);
