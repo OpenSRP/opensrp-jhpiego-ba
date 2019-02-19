@@ -183,7 +183,7 @@
         "openmrs_entity_id": "",
         "type": "edit_text",
         "hint": "Age at Death",
-        "value": "hey",
+        "hidden": "true",
         "expanded": false,
         "calculation": {
           "rules-engine": {
