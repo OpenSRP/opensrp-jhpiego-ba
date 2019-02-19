@@ -60,12 +60,16 @@ public class ChildHomeVisitPresenter implements ChildHomeVisitContract.Presenter
     @Override
     public void startConsellingForm() {
         try {
+
             //TODO check if the child is either less than a month's old or btn 1month and 5years and act accordingly
-            if(childClient.ageInDays() < 31) {
+            String dobString = org.smartregister.family.util.Utils.getDob(childClient.age());
+            Period diff = new Period(DateTimeFormat.forPattern("dd-MM-yy").parseLocalDate(dobString), LocalDate.now());
+//            Log.e("DOBSTRING", "DOBSTRING" + dobString + "Date NOW" + LocalDate.now() + "diff" + diff.getDays());
+            if(diff.getDays() < 31) {
                 JSONObject form = getFormUtils().getFormJson(Constants.JSON_FORM.HOME_VISIT_LESS_THAN_1_MONTH);
                 JSONObject revForm = JsonFormUtils.getHomeVisitLessThanOneMonthFormAsJson(form, childClient.getCaseId(),"");
                 getView().startFormActivity(revForm);
-            } else if(childClient.ageInDays() >= 14 && childClient.ageInDays() <= 1825) {
+            } else if(diff.getDays() >= 31 && diff.getDays() <= 1825) {
                 JSONObject form = getFormUtils().getFormJson(Constants.JSON_FORM.HOME_VISIT_1MONTH_5YEARS);
                 JSONObject revForm = JsonFormUtils.getHomeVisit1Month5YearsFormAsJson(form, childClient.getCaseId(), "");
                 getView().startFormActivity(revForm);
