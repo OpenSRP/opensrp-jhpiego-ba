@@ -2,14 +2,15 @@ package org.smartgresiter.jhpiego.presenter;
 
 import android.util.Log;
 
+import com.vijay.jsonwizard.rules.RulesEngineDateUtil;
+
 import org.joda.time.Days;
-import org.joda.time.Interval;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
 import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.json.JSONObject;
 import org.smartgresiter.jhpiego.contract.ChildHomeVisitContract;
+import org.smartgresiter.jhpiego.helper.RulesEngineHelper;
 import org.smartgresiter.jhpiego.interactor.ChildHomeVisitInteractor;
 import org.smartgresiter.jhpiego.model.ChildRegisterModel;
 import org.smartgresiter.jhpiego.util.Constants;
@@ -19,8 +20,6 @@ import org.smartregister.family.util.DBConstants;
 import org.smartregister.util.FormUtils;
 
 import java.lang.ref.WeakReference;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 public class ChildHomeVisitPresenter implements ChildHomeVisitContract.Presenter, ChildHomeVisitContract.InteractorCallback {
     private WeakReference<ChildHomeVisitContract.View> view;
@@ -60,16 +59,19 @@ public class ChildHomeVisitPresenter implements ChildHomeVisitContract.Presenter
     @Override
     public void startConsellingForm() {
         try {
-
             //TODO check if the child is either less than a month's old or btn 1month and 5years and act accordingly
-            String dobString = org.smartregister.family.util.Utils.getDob(childClient.age());
-            Period diff = new Period(DateTimeFormat.forPattern("dd-MM-yy").parseLocalDate(dobString), LocalDate.now());
-//            Log.e("DOBSTRING", "DOBSTRING" + dobString + "Date NOW" + LocalDate.now() + "diff" + diff.getDays());
-            if(diff.getDays() < 31) {
+            String  dobString = org.smartregister.family.util.Utils.getDob(childClient.age());
+//            Period diff = new Period(DateTimeFormat.forPattern("dd-MM-yy").parseLocalDate(dobString), LocalDate.now());
+//            RulesEngineDateUtil rulesEngineDateUtil = new RulesEngineDateUtil();
+//            Log.e("DOBSTRING", "DOBSTRING" + dobString + "Date NOW" + LocalDate.now() + "diff1 -" + rulesEngineDateUtil.getDifferenceDays(dobString, LocalDate.now().toString()) +  "diff2 -" + rulesEngineDateUtil.getDifferenceDays(LocalDate.now().toString()));
+
+            int diff = Days.daysBetween(DateTimeFormat.forPattern("dd-MM-yy").parseLocalDate(dobString), LocalDate.now()).getDays();
+            Log.e("DOB-DIFF", String.valueOf(diff));
+            if(diff < Days.days(31).getDays()) {
                 JSONObject form = getFormUtils().getFormJson(Constants.JSON_FORM.HOME_VISIT_LESS_THAN_1_MONTH);
                 JSONObject revForm = JsonFormUtils.getHomeVisitLessThanOneMonthFormAsJson(form, childClient.getCaseId(),"");
                 getView().startFormActivity(revForm);
-            } else if(diff.getDays() >= 31 && diff.getDays() <= 1825) {
+            } else if(diff >= Days.days(31).getDays() && diff <= Days.days(1825).getDays()) {
                 JSONObject form = getFormUtils().getFormJson(Constants.JSON_FORM.HOME_VISIT_1MONTH_5YEARS);
                 JSONObject revForm = JsonFormUtils.getHomeVisit1Month5YearsFormAsJson(form, childClient.getCaseId(), "");
                 getView().startFormActivity(revForm);
