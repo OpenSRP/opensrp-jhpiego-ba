@@ -1,5 +1,7 @@
 package org.smartgresiter.jhpiego.presenter;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 import org.smartgresiter.jhpiego.contract.FamilyRemoveMemberContract;
 import org.smartgresiter.jhpiego.interactor.FamilyRemoveMemberInteractor;

@@ -71,6 +71,10 @@ public class FloatingMenuListener implements OnClickFloatingMenu {
                 ((ChildProfileActivity) context).startFormForEdit();
 
                 break;
+            case R.id.refer_to_facility_layout_family:
+                ((FamilyProfileActivity) context).referToFacilty();
+
+                break;
         }
     }
 }

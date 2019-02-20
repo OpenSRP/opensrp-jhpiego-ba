@@ -148,6 +148,10 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
         }
     }
 
+    public void referToFacilty() {
+        Toast.makeText(this, "Refer to facility", Toast.LENGTH_SHORT).show();
+    }
+
     // Child Form
 
     @Override

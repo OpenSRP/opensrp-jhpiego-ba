@@ -183,13 +183,18 @@
         "openmrs_entity_id": "",
         "type": "edit_text",
         "hint": "Age at Death",
-        "hidden": "true",
         "expanded": false,
         "calculation": {
           "rules-engine": {
             "ex-rules": {
               "rules-file": "family-details-remove-member-calculation.yml"
             }
+          }
+        },
+        "relevance": {
+          "step1:remove_reason": {
+            "type": "string",
+            "ex": "equalTo(., \"Died\")"
           }
         }
       }
