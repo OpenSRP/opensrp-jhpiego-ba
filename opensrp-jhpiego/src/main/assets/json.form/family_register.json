@@ -338,6 +338,10 @@
               "rules-file": "family_register_relevance.yml"
             }
           }
+        },
+        "v_regex": {
+          "value": "\\d+",
+          "err": "National ID accepts numbers only."
         }
       },
       {
@@ -358,6 +362,10 @@
               "rules-file": "family_register_relevance.yml"
             }
           }
+        },
+        "v_regex": {
+          "value": "[a-zA-Z0-9]+",
+          "err": "Voter's ID accepts either numbers or letters."
         }
       },
       {
@@ -378,6 +386,10 @@
               "rules-file": "family_register_relevance.yml"
             }
           }
+        },
+        "v_regex": {
+          "value": "\\d+",
+          "err": "Driver's licence accepts numbers only."
         }
       },
       {
@@ -398,6 +410,10 @@
               "rules-file": "family_register_relevance.yml"
             }
           }
+        },
+        "v_regex": {
+          "value": "\\d+",
+          "err": "Passport accepts numbers only."
         }
       },
       {
@@ -406,7 +422,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "spinner",
-        "hint": "Health insurance provider",
+        "hint": "Health insurance provider *",
         "values": [
           "Community Health Fund (CHF)",
           "iCHF",
