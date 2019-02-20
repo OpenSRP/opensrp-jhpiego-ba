@@ -63,6 +63,9 @@ public class Constants {
         public static final String CHILD_VACCINE_LIST = "child_vaccine_list";
         public static final String GROWTH_TITLE = "growth_title";
         public static final String GROWTH_IMMUNIZATION_TYPE = "growth_type";
+        public static final String VITAMIN_A_TITLE = "vitamin_a";
+        public static final String VITAMIN_A = "vitamin_a";
+        public static final String VITAMIN_A_SERVICE = "vitamin_a_service";
         public static final String GROWTH_SERVICE_WRAPPER = "growth_service";
         public static final String CHILD_COMMON_PERSON = "child_common_peron";
     }

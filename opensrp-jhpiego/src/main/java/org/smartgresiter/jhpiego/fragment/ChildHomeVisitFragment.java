@@ -61,7 +61,7 @@ public class ChildHomeVisitFragment extends DialogFragment implements View.OnCli
     public boolean allVaccineStateFullfilled = false;
     private TextView submit;
     private HomeVisitImmunizationView homeVisitImmunizationView;
-    private LinearLayout layoutBirthCertGroup, layoutIllnessGroup, layoutVitaminAGroup, layoutDewormingGroup, layoutConsellingGroup, layoutReferGroup;
+    private LinearLayout layoutBirthCertGroup, layoutIllnessGroup, layoutConsellingGroup, layoutReferGroup;
     private ChildHomeVisitContract.Presenter presenter;
     private CircleImageView circleImageViewBirthStatus, circleImageViewIllnessStatus, circleImageViewVitaminA, circleImageViewDeworming, circleImageViewConselling, circleImageViewRefer;
 
@@ -96,8 +96,6 @@ public class ChildHomeVisitFragment extends DialogFragment implements View.OnCli
         circleImageViewDeworming = view.findViewById(R.id.deworming_status_circle);
         circleImageViewConselling = view.findViewById(R.id.conselling_status_circle);
         circleImageViewRefer = view.findViewById(R.id.refer_to_facilty_status_circle);
-        layoutVitaminAGroup = view.findViewById(R.id.vitamin_a_group);
-        layoutDewormingGroup = view.findViewById(R.id.deworming_group);
         layoutConsellingGroup = view.findViewById(R.id.conselling_group);
         layoutReferGroup = view.findViewById(R.id.refer_to_facility_group);
 //        circleImageViewBirthStatus = view.findViewById(R.id.birth_status_circle);
@@ -105,8 +103,6 @@ public class ChildHomeVisitFragment extends DialogFragment implements View.OnCli
 //        layoutBirthCertGroup = view.findViewById(R.id.birth_cert_group);
 //        layoutIllnessGroup = view.findViewById(R.id.obs_illness_prevention_group);
         view.findViewById(R.id.textview_submit).setOnClickListener(this);
-        layoutVitaminAGroup.setOnClickListener(this);
-        layoutDewormingGroup.setOnClickListener(this);
         layoutConsellingGroup.setOnClickListener(this);
         layoutReferGroup.setOnClickListener(this);
 //        layoutBirthCertGroup.setOnClickListener(this);
@@ -165,14 +161,6 @@ public class ChildHomeVisitFragment extends DialogFragment implements View.OnCli
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.vitamin_a_group:
-                Toast.makeText(context, "Vitamin A", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.deworming_group:
-                Toast.makeText(context, "Deworming", Toast.LENGTH_SHORT).show();
-                break;
-
             case R.id.conselling_group:
                 presenter.startConsellingForm();
                 break;

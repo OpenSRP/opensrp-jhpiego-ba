@@ -120,5 +120,9 @@
     <string name="conselling">Counselling</string>
     <string name="refer_to_facility">Refer to facility</string>
     <string name="notifications">Notifications</string>
+    <string name="vitamin_a_question">Did the child receive any vitamins?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="save">Save</string>
 
 </resources>

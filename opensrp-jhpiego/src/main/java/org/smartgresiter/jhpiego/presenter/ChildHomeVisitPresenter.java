@@ -2,15 +2,11 @@ package org.smartgresiter.jhpiego.presenter;
 
 import android.util.Log;
 
-import com.vijay.jsonwizard.rules.RulesEngineDateUtil;
-
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
-import org.joda.time.Period;
 import org.joda.time.format.DateTimeFormat;
 import org.json.JSONObject;
 import org.smartgresiter.jhpiego.contract.ChildHomeVisitContract;
-import org.smartgresiter.jhpiego.helper.RulesEngineHelper;
 import org.smartgresiter.jhpiego.interactor.ChildHomeVisitInteractor;
 import org.smartgresiter.jhpiego.model.ChildRegisterModel;
 import org.smartgresiter.jhpiego.util.Constants;
@@ -39,6 +35,11 @@ public class ChildHomeVisitPresenter implements ChildHomeVisitContract.Presenter
 
     public int getSaveSize() {
         return ((ChildHomeVisitInteractor) interactor).getSaveSize();
+    }
+
+    public void displayVitaminAFragmment() {
+//        VitaminAFragment vitaminAFragment = VitaminAFragment.newInstance();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
     }
 
     @Override
