@@ -18,7 +18,7 @@ actions:
 name: step2_national_id
 description: national_id relevance
 priority: 1
-condition: "step2_id_avail.equals('National ID')"
+condition: "step2_id_avail.contains('National ID')"
 actions:
 - "isRelevant = true"
 
@@ -26,7 +26,7 @@ actions:
 name: step2_voter_id
 description: voter_id relevance
 priority: 1
-condition: "step2_id_avail.equals('Voter\\'s registration ID')"
+condition: "step2_id_avail.contains('Voter\\'s registration ID')"
 actions:
 - "isRelevant = true"
 
@@ -34,7 +34,7 @@ actions:
 name: step2_driver_license
 description: driver_license relevance
 priority: 1
-condition: "step2_id_avail.equals('Driver\\'s license')"
+condition: "step2_id_avail.contains('Driver\\'s license')"
 actions:
 - "isRelevant = true"
 
@@ -42,7 +42,7 @@ actions:
 name: step2_passport
 description: passport relevance
 priority: 1
-condition: "step2_id_avail.equals('Passport')"
+condition: "step2_id_avail.contains('Passport')"
 actions:
 - "isRelevant = true"
 

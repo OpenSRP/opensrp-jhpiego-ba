@@ -123,7 +123,11 @@
           "Sisi kwa sisi",
           "Prinmat Clinic",
           "These will be loaded from the server"
-        ]
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please select one"
+        }
       }
     ]
   },
@@ -286,14 +290,34 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "openmrs_data_type": "",
-        "type": "spinner",
-        "hint": "Do you have any of the following IDs?",
-        "values": [
-          "National ID",
-          "Voter's registration ID",
-          "Driver's license",
-          "Passport",
-          "None"
+        "type": "check_box",
+        "label": "Do you have any of the following IDs?",
+        "options": [
+          {
+            "key": "National ID",
+            "text": "National ID",
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "Voter's registration ID",
+            "text": "Voter's registration ID",
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "Driver's license",
+            "text": "Driver's license",
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "Passport",
+            "text": "Passport",
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "None",
+            "text": "None",
+            "openmrs_choice_id": ""
+          }
         ]
       },
       {
@@ -302,7 +326,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "163084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "edit_text",
-        "hint": "National ID number",
+        "hint": "National ID number *",
         "edit_type": "name",
         "v_required": {
           "value": "true",
@@ -322,7 +346,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "edit_text",
-        "hint": "Voter's registration number",
+        "hint": "Voter's registration number *",
         "edit_type": "name",
         "v_required": {
           "value": "true",
@@ -342,7 +366,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "edit_text",
-        "hint": "Driver's license number",
+        "hint": "Driver's license number *",
         "edit_type": "name",
         "v_required": {
           "value": "true",
@@ -362,7 +386,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "edit_text",
-        "hint": "Passport number",
+        "hint": "Passport number *",
         "edit_type": "name",
         "v_required": {
           "value": "true",
