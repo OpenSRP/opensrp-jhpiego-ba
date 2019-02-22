@@ -62,10 +62,6 @@ public class ChildHomeVisitPresenter implements ChildHomeVisitContract.Presenter
         try {
             //TODO check if the child is either less than a month's old or btn 1month and 5years and act accordingly
             String  dobString = org.smartregister.family.util.Utils.getDob(childClient.age());
-//            Period diff = new Period(DateTimeFormat.forPattern("dd-MM-yy").parseLocalDate(dobString), LocalDate.now());
-//            RulesEngineDateUtil rulesEngineDateUtil = new RulesEngineDateUtil();
-//            Log.e("DOBSTRING", "DOBSTRING" + dobString + "Date NOW" + LocalDate.now() + "diff1 -" + rulesEngineDateUtil.getDifferenceDays(dobString, LocalDate.now().toString()) +  "diff2 -" + rulesEngineDateUtil.getDifferenceDays(LocalDate.now().toString()));
-
             int diff = Days.daysBetween(DateTimeFormat.forPattern("dd-MM-yy").parseLocalDate(dobString), LocalDate.now()).getDays();
             Log.e("DOB-DIFF", String.valueOf(diff));
             if(diff < Days.days(31).getDays()) {

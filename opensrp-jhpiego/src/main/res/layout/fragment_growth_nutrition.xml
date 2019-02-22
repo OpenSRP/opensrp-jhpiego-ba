@@ -103,23 +103,48 @@
             android:visibility="visible" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/save_btn"
-        style="?android:attr/borderlessButtonStyle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="@dimen/btn_margin_left"
-        android:layout_marginRight="@dimen/btn_margin_right"
-        android:layout_marginBottom="@dimen/btn_margin_bottom"
-        android:background="@drawable/vaccination_today_bg"
-        android:paddingTop="@dimen/btn_padding_top"
-        android:paddingBottom="@dimen/btn_padding_bottom"
-        android:text="Save"
         android:layout_alignParentBottom="true"
-        android:textAllCaps="true"
-        android:textAppearance="?android:textAppearanceSmall"
-        android:textColor="@color/white"
-        android:textSize="@dimen/btn_text_size" />
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/save_btn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/btn_margin_left"
+            android:layout_marginEnd="@dimen/btn_margin_right"
+            android:layout_marginBottom="@dimen/btn_margin_bottom"
+            android:background="@drawable/vaccination_today_bg"
+            android:paddingTop="@dimen/btn_padding_top"
+            android:paddingBottom="@dimen/btn_padding_bottom"
+            android:text="Save"
+            android:textAllCaps="true"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@color/white"
+            android:textSize="@dimen/btn_text_size" />
+
+
+        <Button
+            android:id="@+id/cancel"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/btn_margin_left"
+            android:layout_marginEnd="@dimen/btn_margin_right"
+            android:background="@drawable/vaccination_earlier_bg"
+            android:paddingTop="@dimen/btn_padding_top"
+            android:paddingBottom="@dimen/btn_padding_bottom"
+            android:text="sdas@string/placeholder"
+            android:textAllCaps="false"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@color/client_list_grey"
+            android:textSize="@dimen/btn_text_size" />
+
+    </LinearLayout>
 
 </RelativeLayout>

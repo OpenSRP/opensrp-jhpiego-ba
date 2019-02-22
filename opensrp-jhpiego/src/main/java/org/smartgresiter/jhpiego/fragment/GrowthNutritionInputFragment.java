@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
@@ -49,7 +51,7 @@ public class GrowthNutritionInputFragment extends DialogFragment implements Radi
     }
 
     private TextView textViewTitle;
-    private Button buttonSave;
+    private Button buttonSave, buttonCancel;
     private String type, title;
     private LinearLayout layoutExclusiveFeeding, layoutVitaminBar;
     private TextView textViewVitamin;
@@ -90,6 +92,7 @@ public class GrowthNutritionInputFragment extends DialogFragment implements Radi
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         textViewTitle = view.findViewById(R.id.textview_vaccine_title);
         buttonSave = view.findViewById(R.id.save_btn);
+        buttonCancel = view.findViewById(R.id.cancel);
         layoutExclusiveFeeding = view.findViewById(R.id.exclusive_feeding_bar);
         layoutVitaminBar = view.findViewById(R.id.vitamin_a_bar);
         textViewVitamin = view.findViewById(R.id.textview_vitamin);
@@ -97,6 +100,7 @@ public class GrowthNutritionInputFragment extends DialogFragment implements Radi
         DatePickerUtils.themeDatePicker(datePicker, new char[]{'d', 'm', 'y'});
         (view.findViewById(R.id.close)).setOnClickListener(this);
         buttonSave.setOnClickListener(this);
+        buttonCancel.setOnClickListener(this);
         ((RadioGroup) view.findViewById(R.id.radio_group_exclusive)).setOnCheckedChangeListener(this);
         parseBundleAndSetData();
 
@@ -119,9 +123,22 @@ public class GrowthNutritionInputFragment extends DialogFragment implements Radi
         title = getArguments().getString(Constants.INTENT_KEY.GROWTH_TITLE, getString(R.string.growth_and_nutrition));
         title = StringUtils.capitalize(title);
         textViewTitle.setText(title);
+        buttonCancel.setText(getString(R.string.placeholder, "NOT DONE"));
         if (type.equalsIgnoreCase(GROWTH_TYPE.EXCLUSIVE.getValue())) {
             visibleExclusiveBar();
-        } else {
+            buttonCancel.setVisibility(View.GONE);
+        } else if (type.equalsIgnoreCase(GROWTH_TYPE.VITAMIN.getValue())) {
+            textViewTitle.setText(getString(R.string.record_vitamin_a));
+            textViewVitamin.setText(getString(R.string.vitamin_given, title));
+            buttonCancel.setText(getString(R.string.placeholder, "VITAMIN A NOT DONE"));
+            visibleVitaminBar();
+        } else if (type.equalsIgnoreCase(GROWTH_TYPE.DEWORMING.getValue())) {
+            textViewTitle.setText(getString(R.string.record_deworming));
+            textViewVitamin.setText(getString(R.string.vitamin_given, title));
+            buttonCancel.setText(getString(R.string.placeholder, "DEWORMING NOT DONE"));
+            visibleVitaminBar();
+        }
+        else {
             textViewVitamin.setText(getString(R.string.vitamin_given, title));
             visibleVitaminBar();
         }
@@ -206,6 +223,9 @@ public class GrowthNutritionInputFragment extends DialogFragment implements Radi
                     saveVitaminAData();
                 }
 
+                break;
+            case R.id.cancel:
+                Toast.makeText(getActivity().getApplicationContext(),"Not Done", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.close:
                 if (context instanceof HomeVisitGrowthAndNutrition && serviceWrapper != null) {

@@ -85,6 +85,9 @@
     <string name="health_child_milestone">Health child milestone</string>
     <string name="exclusive_feeding">Did the child receive any liquid or food other than breastmilk yesterday and last night?</string>
     <string name="vitamin_given">When was %1$s given?</string>
+    <string name="record_vitamin_a">Record Vitamin A</string>
+    <string name="record_deworming">Record Deworming</string>
+    <string name="placeholder">%1$s</string>
     <string name="exclusive_breastfeeding">Exclusive breastfeeding</string>
     <string name="vitamin_a">Vitamin A</string>
     <string name="deworming">Deworming</string>
