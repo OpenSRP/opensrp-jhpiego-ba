@@ -179,6 +179,7 @@ public class ChildHomeVisitFragment extends DialogFragment implements View.OnCli
 
             case R.id.refer_to_facility_group:
                 Toast.makeText(context, "Refer to facility ", Toast.LENGTH_SHORT).show();
+//                ((ChildProfileActivity) context).startFormActivity(Constants.JSON_FORM.FAMILY_MEMBER_REGISTER, null, null);
                 break;
 //            case R.id.birth_cert_group:
 
