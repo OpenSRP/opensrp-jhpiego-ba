@@ -1,0 +1,261 @@
+{
+  "count": "1",
+  "encounter_type": "Child Registration",
+  "entity_id": "",
+  "relational_id": "",
+  "metadata": {
+    "start": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "start",
+      "openmrs_entity_id": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "end": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "end",
+      "openmrs_entity_id": "163138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "today": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "encounter",
+      "openmrs_entity_id": "encounter_date"
+    },
+    "deviceid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "deviceid",
+      "openmrs_entity_id": "163149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "subscriberid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "subscriberid",
+      "openmrs_entity_id": "163150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "simserial": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "simserial",
+      "openmrs_entity_id": "163151AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "phonenumber": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "phonenumber",
+      "openmrs_entity_id": "163152AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "encounter_location": "",
+    "look_up": {
+      "entity_id": "",
+      "value": ""
+    }
+  },
+  "step1": {
+    "title": "Referral for a sick child",
+    "fields": [
+      {
+        "key": "chw_referral_hf",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "spinner",
+        "hint": "Referred to (name of the health facility) *",
+        "v_required": {
+          "value": "true",
+          "err": "Please select facility"
+        },
+        "values": [
+          "Lulembela Wazazi",
+          "Lulembela",
+          "Bulugala",
+          "TMRC Katoro",
+          "Nyakafulu",
+          "To be loaded from the server"
+        ]
+      },
+      {
+        "key": "referral_problem_child",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "check_box",
+        "label": "Health problem / condition",
+        "options": [
+          {
+            "key": "",
+            "text": "Fast breathing and difficulty with breathing",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Umbilical cord/navel bleeding",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Excessive crying",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Convulsions",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Unable to breastfeed or swallow",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Neck stiffness",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Fever",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Bloating",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Redness around the umbilical cord, foul-smelling discharge from the umbilical cord",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Bacterial conjunctivitis",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Severe anaemia",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Severe abdominal pain",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Pale or jaundiced",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Cyanosis (blueness of lips)",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Skin rash / pustules",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Diarrhea / vomiting",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Disabilities ",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Premature baby",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Failure to pass urine or stool within 24 hours after birth",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Care of HIV-exposed infant",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Immunisation",
+            "value": false,
+            "openmrs_choice_id": ""
+          }
+        ]
+      },
+      {
+        "key": "service_before_child",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "check_box",
+        "label": "Pre-referral management given *",
+        "options": [
+          {
+            "key": "",
+            "text": "Exclussive feeding",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "ORS",
+            "value": false,
+            "openmrs_choice_id": ""
+          },
+          {
+            "key": "",
+            "text": "Panadol",
+            "value": false,
+            "openmrs_choice_id": ""
+          }
+        ]
+      },
+      {
+        "key": "referral_date_child",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "Referral Date Child",
+        "hidden": "true"
+      },
+      {
+        "key": "referral_time_child",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "Referral Time Child",
+        "hidden": "true"
+      }
+    ]
+  }
+}
