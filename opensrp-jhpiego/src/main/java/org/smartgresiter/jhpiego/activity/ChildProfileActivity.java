@@ -418,7 +418,7 @@ public class ChildProfileActivity extends BaseProfileActivity implements ChildPr
     }
 
     public void startFormForEdit() {
-        Toast.makeText(this, "Yeeeess", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "start form", Toast.LENGTH_SHORT).show();
     }
 
     @Override

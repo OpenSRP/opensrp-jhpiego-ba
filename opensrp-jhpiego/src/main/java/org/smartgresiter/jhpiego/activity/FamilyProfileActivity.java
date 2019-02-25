@@ -28,6 +28,8 @@ import org.smartgresiter.jhpiego.fragment.FamilyProfileMemberFragment;
 import org.smartgresiter.jhpiego.listener.FloatingMenuListener;
 import org.smartgresiter.jhpiego.model.FamilyProfileModel;
 import org.smartgresiter.jhpiego.presenter.FamilyProfilePresenter;
+import org.smartgresiter.jhpiego.util.JsonFormUtils;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.family.activity.BaseFamilyProfileActivity;
 import org.smartregister.family.adapter.ViewPagerAdapter;
@@ -35,6 +37,8 @@ import org.smartregister.family.fragment.BaseFamilyProfileActivityFragment;
 import org.smartregister.family.fragment.BaseFamilyProfileDueFragment;
 import org.smartregister.family.fragment.BaseFamilyProfileMemberFragment;
 import org.smartregister.family.util.Constants;
+import org.smartregister.family.util.DBConstants;
+import org.smartregister.util.FormUtils;
 import org.smartregister.util.PermissionUtils;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
@@ -49,6 +53,8 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
     BaseFamilyProfileMemberFragment profileMemberFragment;
     BaseFamilyProfileDueFragment profileDueFragment;
     BaseFamilyProfileActivityFragment profileActivityFragment;
+    private CommonPersonObjectClient childClient;
+    private FormUtils formUtils;
 
     @Override
     protected void initializePresenter() {
@@ -103,6 +109,18 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
 
     public Bundle getProfileExtras() {
         return getIntent().getExtras();
+    }
+
+
+    private FormUtils getFormUtils() {
+        if (formUtils == null) {
+            try {
+                formUtils = FormUtils.getInstance(org.smartregister.family.util.Utils.context().applicationContext());
+            } catch (Exception e) {
+                Log.e(FamilyProfileActivity.class.getCanonicalName(), e.getMessage(), e);
+            }
+        }
+        return formUtils;
     }
 
     @Override

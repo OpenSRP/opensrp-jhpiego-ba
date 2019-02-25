@@ -42,6 +42,20 @@ public class ChildHomeVisitPresenter implements ChildHomeVisitContract.Presenter
     }
 
     @Override
+    public void startReferralForm() {
+        try {
+            JSONObject form = getFormUtils().getFormJson(Constants.JSON_FORM.CHILD_REFERRAL_FORM);
+//            String dobString = org.smartregister.family.util.Utils.getDuration(org.smartregister.family.util.Utils.getValue
+//                    (childClient.getColumnmaps(), DBConstants.KEY.DOB, false));
+//
+//            JSONObject revForm = JsonFormUtils.getBirthCertFormAsJson(form, childClient.getCaseId(), "", dobString);
+            getView().startFormActivity(form);
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
     public void startBirthCertForm() {
         try {
             JSONObject form = getFormUtils().getFormJson(Constants.JSON_FORM.BIRTH_CERTIFICATION);
