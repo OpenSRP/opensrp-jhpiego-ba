@@ -183,7 +183,8 @@ public class HomeVisitGrowthAndNutrition extends LinearLayout implements View.On
             String str = (String) displayName[0];
             String no = (String) displayName[1];
             name = str + " " + ChildUtils.getFirstSecondAsNumber(no) + " dose";
-            textViewDewormingName.setText(name);
+//            textViewDewormingName.setText(name);
+            textViewDewormingName.setText(getContext().getString(R.string.record_deworming));
         }
     }
 
