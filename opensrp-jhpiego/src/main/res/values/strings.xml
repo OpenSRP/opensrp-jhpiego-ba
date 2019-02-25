@@ -123,5 +123,6 @@
     <string name="notifications">Notifications</string>
     <string name="not_done">NOT DONE</string>
     <string name="record_deworming">Record Deworming</string>
+    <string name="record_vitamin_a">Record Vitamin A</string>
 
 </resources>
