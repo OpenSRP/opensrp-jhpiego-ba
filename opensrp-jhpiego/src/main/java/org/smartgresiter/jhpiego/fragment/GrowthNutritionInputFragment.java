@@ -121,7 +121,11 @@ public class GrowthNutritionInputFragment extends DialogFragment implements Radi
         textViewTitle.setText(title);
         if (type.equalsIgnoreCase(GROWTH_TYPE.EXCLUSIVE.getValue())) {
             visibleExclusiveBar();
-        } else {
+        } else if (type.equalsIgnoreCase(GROWTH_TYPE.DEWORMING.getValue())) {
+            textViewVitamin.setText(getString(R.string.placeholder, "When was deworming done?"));
+            visibleVitaminBar();
+        }
+        else {
             textViewVitamin.setText(getString(R.string.vitamin_given, title));
             visibleVitaminBar();
         }
@@ -251,7 +255,7 @@ public class GrowthNutritionInputFragment extends DialogFragment implements Radi
         @Override
         protected ServiceWrapper doInBackground(ServiceWrapper... params) {
 
-            //ArrayList<ServiceWrapper> list = new ArrayList<>();
+//            ArrayList<ServiceWrapper> list = new ArrayList<>();
             ServiceWrapper serviceWrapper = null;
 
             for (ServiceWrapper tag : params) {
