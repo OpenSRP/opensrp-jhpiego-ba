@@ -4,13 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
 
+import org.json.JSONObject;
 import org.smartgresiter.jhpiego.R;
 import org.smartgresiter.jhpiego.activity.ChildProfileActivity;
 import org.smartgresiter.jhpiego.activity.FamilyProfileActivity;
 import org.smartgresiter.jhpiego.activity.FamilyProfileMenuActivity;
 import org.smartgresiter.jhpiego.activity.FamilyRemoveMemberActivity;
+import org.smartgresiter.jhpiego.contract.ChildHomeVisitContract;
 import org.smartgresiter.jhpiego.fragment.AddMemberFragment;
+import org.smartgresiter.jhpiego.fragment.ChildHomeVisitFragment;
 import org.smartgresiter.jhpiego.fragment.FamilyCallDialogFragment;
+import org.smartgresiter.jhpiego.presenter.ChildHomeVisitPresenter;
 import org.smartgresiter.jhpiego.util.Constants;
 import org.smartregister.family.activity.BaseFamilyRegisterActivity;
 
@@ -71,7 +75,10 @@ public class FloatingMenuListener implements OnClickFloatingMenu {
                 break;
             case R.id.refer_to_facility:
                 ((FamilyProfileActivity) context).startFormActivity(Constants.JSON_FORM.CHILD_REFERRAL_FORM, null, null);
+                break;
 
+            case R.id.refer_to_facility_layout:
+                ((ChildProfileActivity) context).startForm(Constants.JSON_FORM.CHILD_REFERRAL_FORM);
                 break;
         }
     }
