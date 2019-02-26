@@ -1,5 +1,6 @@
 package org.smartgresiter.jhpiego.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -9,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -17,6 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.vijay.jsonwizard.constants.JsonFormConstants;
+import com.vijay.jsonwizard.domain.Form;
 
 import org.apache.commons.lang3.tuple.Triple;
 import org.json.JSONObject;
@@ -30,13 +35,17 @@ import org.smartgresiter.jhpiego.fragment.FamilyCallDialogFragment;
 import org.smartgresiter.jhpiego.listener.FloatingMenuListener;
 import org.smartgresiter.jhpiego.listener.OnClickFloatingMenu;
 import org.smartgresiter.jhpiego.model.ChildProfileModel;
+import org.smartgresiter.jhpiego.model.ChildRegisterModel;
 import org.smartgresiter.jhpiego.presenter.ChildProfilePresenter;
 import org.smartgresiter.jhpiego.util.ChildUtils;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.family.util.Constants;
+import org.smartregister.family.util.JsonFormUtils;
 import org.smartregister.helper.ImageRenderHelper;
+import org.smartregister.util.FormUtils;
 import org.smartregister.view.activity.BaseProfileActivity;
 
+import java.lang.ref.WeakReference;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -48,6 +57,8 @@ public class ChildProfileActivity extends BaseProfileActivity implements ChildPr
     private boolean appBarTitleIsShown = true;
     private int appBarLayoutScrollRange = -1;
     private String childBaseEntityId;
+    private FormUtils formUtils = null;
+    private WeakReference<ChildProfileContract.View> view;
 
     private TextView textViewTitle, textViewParentName, textViewChildName, textViewGender, textViewAddress, textViewId, textViewRecord, textViewVisitNot;
     private CircleImageView imageViewProfile;
@@ -417,12 +428,46 @@ public class ChildProfileActivity extends BaseProfileActivity implements ChildPr
         }, 500);
     }
 
-    public void startFormForEdit() {
-        Toast.makeText(this, "Yeeeess", Toast.LENGTH_SHORT).show();
+
+    public ChildProfileContract.View getView() {
+        if (view != null) {
+            return view.get();
+        } else {
+            return null;
+        }
+    }
+
+    private FormUtils getFormUtils() {
+        if (formUtils == null) {
+            try {
+                formUtils = FormUtils.getInstance(org.smartregister.family.util.Utils.context().applicationContext());
+            } catch (Exception e) {
+                Log.e(ChildProfileActivity.class.getCanonicalName(), e.getMessage(), e);
+            }
+        }
+        return formUtils;
+    }
+    public void startForm(String formName) {
+        try {
+            JSONObject form = getFormUtils().getFormJson(formName);
+            startFormActivity(form);
+        } catch (Exception e) {
+            Log.e(getApplication().getClass().getCanonicalName(), e.getMessage());
+        }
     }
 
     @Override
-    public void startFormActivity(JSONObject form) {
+    public void startFormActivity(JSONObject jsonForm) {
+        Intent intent = new Intent(getApplicationContext(), org.smartregister.family.util.Utils.metadata().familyMemberFormActivity);
+        intent.putExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
+
+        Form form = new Form();
+        form.setWizard(false);
+        form.setActionBarBackground(org.smartregister.family.R.color.customAppThemeBlue);
+
+        intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
+
+        startActivityForResult(intent, org.smartregister.family.util.JsonFormUtils.REQUEST_CODE_GET_JSON);
 
     }
 
@@ -532,5 +577,27 @@ public class ChildProfileActivity extends BaseProfileActivity implements ChildPr
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == JsonFormUtils.REQUEST_CODE_GET_JSON && resultCode == Activity.RESULT_OK) {
+            try {
+                String jsonString = data.getStringExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON);
+                Log.d("JSONResult", jsonString);
+
+                JSONObject form = new JSONObject(jsonString);
+                if (form.getString(org.smartregister.family.util.JsonFormUtils.ENCOUNTER_TYPE).equals(org.smartgresiter.jhpiego.util.Constants.EventType.BIRTH_CERTIFICATION)
+                        || form.getString(org.smartregister.family.util.JsonFormUtils.ENCOUNTER_TYPE).equals(org.smartgresiter.jhpiego.util.Constants.EventType.OBS_ILLNESS)
+                ) {
+                    startFormActivity(org.smartgresiter.jhpiego.util.Constants.JSON_FORM.CHILD_REFERRAL_FORM, "", "");
+                }
+            } catch (Exception e) {
+                Log.e("DIALOG_TAG", Log.getStackTraceString(e));
+            }
+
+        } else {
+            Toast.makeText(getApplicationContext(), "THis shit is killing me", Toast.LENGTH_SHORT).show();
+        }
     }
 }

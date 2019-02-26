@@ -20,7 +20,7 @@ public class FamilyFloatingMenu extends LinearLayout implements View.OnClickList
     private boolean isFabMenuOpen = false;
     private OnClickFloatingMenu onClickFloatingMenu;
 
-    private View callLayout, familyDetail, addNewMember, removeMember, changeHead, changePrimary;
+    private View callLayout, familyDetail, addNewMember, removeMember, changeHead, changePrimary, referToFacility;
 
     public FamilyFloatingMenu(Context context) {
         super(context);
@@ -73,12 +73,16 @@ public class FamilyFloatingMenu extends LinearLayout implements View.OnClickList
         changePrimary = findViewById(R.id.change_primary_layout);
         changePrimary.setOnClickListener(this);
 
+        referToFacility = findViewById(R.id.refer_to_facility);
+        referToFacility.setOnClickListener(this);
+
         callLayout.setClickable(false);
         familyDetail.setClickable(false);
         addNewMember.setClickable(false);
         removeMember.setClickable(false);
         changeHead.setClickable(false);
         changePrimary.setClickable(false);
+        referToFacility.setClickable(false);
 
         menuBar.setVisibility(GONE);
 
@@ -105,6 +109,7 @@ public class FamilyFloatingMenu extends LinearLayout implements View.OnClickList
             removeMember.startAnimation(fabClose);
             changeHead.startAnimation(fabClose);
             changePrimary.startAnimation(fabClose);
+            referToFacility.startAnimation(fabClose);
 
             callLayout.setClickable(false);
             familyDetail.setClickable(false);
@@ -112,6 +117,7 @@ public class FamilyFloatingMenu extends LinearLayout implements View.OnClickList
             removeMember.setClickable(false);
             changeHead.setClickable(false);
             changePrimary.setClickable(false);
+            referToFacility.setClickable(false);
 
             isFabMenuOpen = false;
 
@@ -127,6 +133,7 @@ public class FamilyFloatingMenu extends LinearLayout implements View.OnClickList
             removeMember.startAnimation(fabOpen);
             changeHead.startAnimation(fabOpen);
             changePrimary.startAnimation(fabOpen);
+            referToFacility.startAnimation(fabOpen);
 
             callLayout.setClickable(true);
             familyDetail.setClickable(true);
@@ -134,6 +141,7 @@ public class FamilyFloatingMenu extends LinearLayout implements View.OnClickList
             removeMember.setClickable(true);
             changeHead.setClickable(true);
             changePrimary.setClickable(true);
+            referToFacility.setClickable(true);
 
             isFabMenuOpen = true;
         }
