@@ -71,7 +71,7 @@ public class ChildHomeVisitPresenter implements ChildHomeVisitContract.Presenter
     }
 
     @Override
-    public void startConsellingForm() {
+    public void startCounsellingForm() {
         try {
             //TODO check if the child is either less than a month's old or btn 1month and 5years and act accordingly
             String  dobString = org.smartregister.family.util.Utils.getDob(childClient.age());
