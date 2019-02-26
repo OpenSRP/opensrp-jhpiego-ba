@@ -188,7 +188,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/llHighestEduLevel"
+            android:id="@+id/llOccupation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -199,16 +199,131 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="5"
-                android:text="Higest Level of Education"
+                android:text="Occupation"
                 android:textColor="@color/black"
                 android:textSize="@dimen/change_member_list_main" />
 
             <Spinner
-                android:id="@+id/spEducationLevel"
+                android:id="@+id/spOccupation"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/change_member_padding"
-                android:hint="Highest Education Level"
+                android:hint="Occupation"
+                android:textColor="#666666"
+                android:textColorHint="#bfbfbf"
+                android:typeface="sans" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="10dp"
+                android:background="@color/light_grey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llLeadership"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                style="@style/CustomFontTextViewStyle.ClientList.Light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:text="Any leadership role in the community?"
+                android:textColor="@color/black"
+                android:textSize="@dimen/change_member_list_main" />
+
+            <Spinner
+                android:id="@+id/spLeadership"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/change_member_padding"
+                android:hint="Leadership"
+                android:textColor="#666666"
+                android:textColorHint="#bfbfbf"
+                android:typeface="sans" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="10dp"
+                android:background="@color/light_grey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llOtherRole"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                style="@style/CustomFontTextViewStyle.ClientList.Light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:text="Mention other role in the community"
+                android:textColor="@color/black"
+                android:textSize="@dimen/change_member_list_main" />
+
+
+            <EditText
+                android:id="@+id/etOtherRole"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/login_view_component_height"
+                android:layout_margin="@dimen/change_member_padding"
+                android:layout_weight="8"
+                android:background="@drawable/rounded_corner_edit_text"
+                android:cursorVisible="true"
+                android:ems="10"
+                android:hint="Other Leadership Role"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:lines="1"
+                android:paddingLeft="10dp"
+                android:textColor="#666666"
+                android:textColorHint="#bfbfbf"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/login_edit_text_textSize"
+                android:typeface="sans" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="10dp"
+                android:background="@color/light_grey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llCareGiver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                style="@style/CustomFontTextViewStyle.ClientList.Light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:text="Is the person care giver?"
+                android:textColor="@color/black"
+                android:textSize="@dimen/change_member_list_main" />
+
+            <Spinner
+                android:id="@+id/spCareGiver"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/change_member_padding"
+                android:hint="Care giver"
                 android:textColor="#666666"
                 android:textColorHint="#bfbfbf"
                 android:typeface="sans" />

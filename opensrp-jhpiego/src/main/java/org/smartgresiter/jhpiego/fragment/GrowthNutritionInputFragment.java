@@ -49,7 +49,7 @@ public class GrowthNutritionInputFragment extends DialogFragment implements Radi
     }
 
     private TextView textViewTitle;
-    private Button buttonSave;
+    private Button buttonSave, buttonCancel;
     private String type, title;
     private LinearLayout layoutExclusiveFeeding, layoutVitaminBar;
     private TextView textViewVitamin;
@@ -90,6 +90,7 @@ public class GrowthNutritionInputFragment extends DialogFragment implements Radi
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         textViewTitle = view.findViewById(R.id.textview_vaccine_title);
         buttonSave = view.findViewById(R.id.save_btn);
+        buttonCancel = view.findViewById(R.id.cancel);
         layoutExclusiveFeeding = view.findViewById(R.id.exclusive_feeding_bar);
         layoutVitaminBar = view.findViewById(R.id.vitamin_a_bar);
         textViewVitamin = view.findViewById(R.id.textview_vitamin);
@@ -97,6 +98,7 @@ public class GrowthNutritionInputFragment extends DialogFragment implements Radi
         DatePickerUtils.themeDatePicker(datePicker, new char[]{'d', 'm', 'y'});
         (view.findViewById(R.id.close)).setOnClickListener(this);
         buttonSave.setOnClickListener(this);
+        buttonCancel.setOnClickListener(this);
         ((RadioGroup) view.findViewById(R.id.radio_group_exclusive)).setOnCheckedChangeListener(this);
         parseBundleAndSetData();
 
@@ -121,7 +123,18 @@ public class GrowthNutritionInputFragment extends DialogFragment implements Radi
         textViewTitle.setText(title);
         if (type.equalsIgnoreCase(GROWTH_TYPE.EXCLUSIVE.getValue())) {
             visibleExclusiveBar();
-        } else {
+        } else if (type.equalsIgnoreCase(GROWTH_TYPE.DEWORMING.getValue())) {
+            textViewVitamin.setText(getString(R.string.placeholder, "When was deworming done?"));
+            buttonCancel.setText(getString(R.string.placeholder, "Deworming not Done"));
+//            buttonCancel.setVisibility(View.VISIBLE);
+            visibleVitaminBar();
+        } else if (type.equalsIgnoreCase(GROWTH_TYPE.VITAMIN.getValue())) {
+            textViewVitamin.setText(getString(R.string.placeholder, "When was Vitamin A done?"));
+            buttonCancel.setText(getString(R.string.placeholder, "Vitamin A not Done"));
+//            buttonCancel.setVisibility(View.VISIBLE);
+            visibleVitaminBar();
+        }
+        else {
             textViewVitamin.setText(getString(R.string.vitamin_given, title));
             visibleVitaminBar();
         }
@@ -251,7 +264,7 @@ public class GrowthNutritionInputFragment extends DialogFragment implements Radi
         @Override
         protected ServiceWrapper doInBackground(ServiceWrapper... params) {
 
-            //ArrayList<ServiceWrapper> list = new ArrayList<>();
+//            ArrayList<ServiceWrapper> list = new ArrayList<>();
             ServiceWrapper serviceWrapper = null;
 
             for (ServiceWrapper tag : params) {
