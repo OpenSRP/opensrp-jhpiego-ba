@@ -61,9 +61,9 @@ public class ChildHomeVisitFragment extends DialogFragment implements View.OnCli
     public boolean allVaccineStateFullfilled = false;
     private TextView submit;
     private HomeVisitImmunizationView homeVisitImmunizationView;
-    private LinearLayout layoutBirthCertGroup, layoutIllnessGroup;
+    private LinearLayout layoutBirthCertGroup, layoutIllnessGroup, layoutCounsellingGroup, layoutReferGroup;
     private ChildHomeVisitContract.Presenter presenter;
-    private CircleImageView circleImageViewBirthStatus, circleImageViewIllnessStatus;
+    private CircleImageView circleImageViewBirthStatus, circleImageViewIllnessStatus, circleImageViewVitaminA, circleImageViewDeworming, circleImageViewConselling, circleImageViewRefer;
 
 
     public void setContext(Context context) {
@@ -92,13 +92,19 @@ public class ChildHomeVisitFragment extends DialogFragment implements View.OnCli
         nameHeader = (TextView) view.findViewById(R.id.textview_name_header);
         view.findViewById(R.id.close).setOnClickListener(this);
         submit = (TextView) view.findViewById(R.id.textview_submit);
-        circleImageViewBirthStatus = view.findViewById(R.id.birth_status_circle);
-        circleImageViewIllnessStatus = view.findViewById(R.id.obs_illness_status_circle);
-        layoutBirthCertGroup = view.findViewById(R.id.birth_cert_group);
-        layoutIllnessGroup = view.findViewById(R.id.obs_illness_prevention_group);
+        circleImageViewConselling = view.findViewById(R.id.counselling_status_circle);
+        circleImageViewRefer = view.findViewById(R.id.refer_to_facilty_status_circle);
+        layoutCounsellingGroup = view.findViewById(R.id.counselling_group);
+        layoutReferGroup = view.findViewById(R.id.refer_to_facility_group);
+//        circleImageViewBirthStatus = view.findViewById(R.id.birth_status_circle);
+//        circleImageViewIllnessStatus = view.findViewById(R.id.obs_illness_status_circle);
+//        layoutBirthCertGroup = view.findViewById(R.id.birth_cert_group);
+//        layoutIllnessGroup = view.findViewById(R.id.obs_illness_prevention_group);
         view.findViewById(R.id.textview_submit).setOnClickListener(this);
-        layoutBirthCertGroup.setOnClickListener(this);
-        layoutIllnessGroup.setOnClickListener(this);
+        layoutCounsellingGroup.setOnClickListener(this);
+        layoutReferGroup.setOnClickListener(this);
+//        layoutBirthCertGroup.setOnClickListener(this);
+//        layoutIllnessGroup.setOnClickListener(this);
         homeVisitGrowthAndNutritionLayout = view.findViewById(R.id.growth_and_nutrition_group);
         homeVisitImmunizationView = (HomeVisitImmunizationView) view.findViewById(R.id.home_visit_immunization_view);
         homeVisitImmunizationView.setActivity(getActivity());
@@ -153,13 +159,21 @@ public class ChildHomeVisitFragment extends DialogFragment implements View.OnCli
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.birth_cert_group:
+//            case R.id.vitamin_a_group:
+//                Toast.makeText(context, "Vitamin A", Toast.LENGTH_SHORT).show();
+//                break;
+//
+//            case R.id.deworming_group:
+//                Toast.makeText(context, "Deworming", Toast.LENGTH_SHORT).show();
+//                break;
 
-                presenter.startBirthCertForm();
-                break;
-            case R.id.obs_illness_prevention_group:
-                presenter.startObsIllnessCertForm();
-                break;
+//            case R.id.birth_cert_group:
+
+//                presenter.startBirthCertForm();
+//                break;
+//            case R.id.obs_illness_prevention_group:
+//                presenter.startObsIllnessCertForm();
+//                break;
             case R.id.textview_submit:
                 if (checkAllGiven()) {
                     ChildUtils.updateClientStatusAsEvent(childClient.entityId(), Constants.EventType.CHILD_HOME_VISIT, ChildDBConstants.KEY.LAST_HOME_VISIT, System.currentTimeMillis() + "", Constants.TABLE_NAME.CHILD);
@@ -180,8 +194,13 @@ public class ChildHomeVisitFragment extends DialogFragment implements View.OnCli
                 ((BaseFamilyProfileActivity) context).startFormActivity(Constants.JSON_FORM.FAMILY_MEMBER_REGISTER, null, null);
                 break;
 
-            // case R.id.refer_to_facility_group:
-                // Toast.makeText(context, "This should open the referal form", Toast.LENGTH_SHORT).show();
+            case R.id.counselling_group:
+                presenter.startCounsellingForm();
+                break;
+
+             case R.id.refer_to_facility_group:
+                 presenter.startReferralForm();
+                 break;
         }
     }
 

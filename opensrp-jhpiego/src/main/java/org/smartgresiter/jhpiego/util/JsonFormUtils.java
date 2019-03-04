@@ -11,6 +11,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.lang3.tuple.Triple;
+import org.joda.time.LocalDate;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -98,6 +99,38 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
         JSONObject mindate = getFieldJSONObject(field, "date_of_illness");
         //if(mindate!=null){
         mindate.put("min_date", "today-" + dateOfBirthString + "y");
+        //}
+        return form;
+
+    }
+
+    public static JSONObject getHomeVisit1Month5YearsFormAsJson(JSONObject form, String baseEntityId, String currentLocationId) throws Exception {
+
+        if (form == null) {
+            return null;
+        }
+        form.getJSONObject(METADATA).put(ENCOUNTER_LOCATION, currentLocationId);
+        form.put(ENTITY_ID, baseEntityId);
+        JSONArray field = fields(form);
+        JSONObject val = getFieldJSONObject(field, "counselling_1m5yrs");
+        //if(mindate!=null){
+        val.put("value", LocalDate.now());
+        //}
+        return form;
+
+    }
+
+    public static JSONObject getHomeVisitLessThanOneMonthFormAsJson(JSONObject form, String baseEntityId, String currentLocationId) throws Exception {
+
+        if (form == null) {
+            return null;
+        }
+        form.getJSONObject(METADATA).put(ENCOUNTER_LOCATION, currentLocationId);
+        form.put(ENTITY_ID, baseEntityId);
+        JSONArray field = fields(form);
+        JSONObject val = getFieldJSONObject(field, "visit_date_1m");
+        //if(mindate!=null){
+        val.put("value", LocalDate.now());
         //}
         return form;
 

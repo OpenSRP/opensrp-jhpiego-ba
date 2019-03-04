@@ -2,8 +2,15 @@ package org.smartgresiter.jhpiego.presenter;
 
 import android.util.Log;
 
+import com.vijay.jsonwizard.rules.RulesEngineDateUtil;
+
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.joda.time.format.DateTimeFormat;
 import org.json.JSONObject;
 import org.smartgresiter.jhpiego.contract.ChildHomeVisitContract;
+import org.smartgresiter.jhpiego.helper.RulesEngineHelper;
 import org.smartgresiter.jhpiego.interactor.ChildHomeVisitInteractor;
 import org.smartgresiter.jhpiego.model.ChildRegisterModel;
 import org.smartgresiter.jhpiego.util.Constants;
@@ -35,6 +42,20 @@ public class ChildHomeVisitPresenter implements ChildHomeVisitContract.Presenter
     }
 
     @Override
+    public void startReferralForm() {
+        try {
+            JSONObject form = getFormUtils().getFormJson(Constants.JSON_FORM.CHILD_REFERRAL_FORM);
+//            String dobString = org.smartregister.family.util.Utils.getDuration(org.smartregister.family.util.Utils.getValue
+//                    (childClient.getColumnmaps(), DBConstants.KEY.DOB, false));
+//
+//            JSONObject revForm = JsonFormUtils.getBirthCertFormAsJson(form, childClient.getCaseId(), "", dobString);
+            getView().startFormActivity(form);
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
     public void startBirthCertForm() {
         try {
             JSONObject form = getFormUtils().getFormJson(Constants.JSON_FORM.BIRTH_CERTIFICATION);
@@ -44,9 +65,34 @@ public class ChildHomeVisitPresenter implements ChildHomeVisitContract.Presenter
             JSONObject revForm = JsonFormUtils.getBirthCertFormAsJson(form, childClient.getCaseId(), "", dobString);
             getView().startFormActivity(revForm);
         } catch (Exception e) {
-
+            Log.e("BIRTH CERT FORM", e.getMessage());
         }
 
+    }
+
+    @Override
+    public void startCounsellingForm() {
+        try {
+            //TODO check if the child is either less than a month's old or btn 1month and 5years and act accordingly
+            String  dobString = org.smartregister.family.util.Utils.getDob(childClient.age());
+//            Period diff = new Period(DateTimeFormat.forPattern("dd-MM-yy").parseLocalDate(dobString), LocalDate.now());
+//            RulesEngineDateUtil rulesEngineDateUtil = new RulesEngineDateUtil();
+//            Log.e("DOBSTRING", "DOBSTRING" + dobString + "Date NOW" + LocalDate.now() + "diff1 -" + rulesEngineDateUtil.getDifferenceDays(dobString, LocalDate.now().toString()) +  "diff2 -" + rulesEngineDateUtil.getDifferenceDays(LocalDate.now().toString()));
+
+            int diff = Days.daysBetween(DateTimeFormat.forPattern("dd-MM-yy").parseLocalDate(dobString), LocalDate.now()).getDays();
+            if(diff < Days.days(31).getDays()) {
+                JSONObject form = getFormUtils().getFormJson(Constants.JSON_FORM.HOME_VISIT_LESS_THAN_1_MONTH);
+                JSONObject revForm = JsonFormUtils.getHomeVisitLessThanOneMonthFormAsJson(form, childClient.getCaseId(),"");
+                getView().startFormActivity(revForm);
+            } else if(diff >= Days.days(31).getDays() && diff <= Days.days(1825).getDays()) {
+                Log.e("NOW", String.valueOf(diff));
+                JSONObject form = getFormUtils().getFormJson(Constants.JSON_FORM.HOME_VISIT_1MONTH_5YEARS);
+                JSONObject revForm = JsonFormUtils.getHomeVisit1Month5YearsFormAsJson(form, childClient.getCaseId(), "");
+                getView().startFormActivity(revForm);
+            }
+        } catch (Exception e) {
+            Log.e("COUNSELLING FORM", e.getMessage());
+        }
     }
 
     @Override
@@ -60,7 +106,7 @@ public class ChildHomeVisitPresenter implements ChildHomeVisitContract.Presenter
             JSONObject revForm = JsonFormUtils.getOnsIllnessFormAsJson(form, childClient.getCaseId(), "", dobString);
             getView().startFormActivity(revForm);
         } catch (Exception e) {
-
+            Log.e("OBS ILLNESS", e.getMessage());
         }
 
     }

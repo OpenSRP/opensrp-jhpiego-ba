@@ -29,6 +29,8 @@ public class Constants {
 
     public static class JSON_FORM {
         public static final String BIRTH_CERTIFICATION = "birth_certification";
+        public static final String HOME_VISIT_1MONTH_5YEARS = "home_visit_1month_5years";
+        public static final String HOME_VISIT_LESS_THAN_1_MONTH = "home_visit_less_than_1month";
         public static final String OBS_ILLNESS = "observation_illness";
         public static final String FAMILY_REGISTER = "family_register";
         public static final String FAMILY_MEMBER_REGISTER = "family_member_register";
@@ -37,6 +39,7 @@ public class Constants {
         public static final String FAMILY_DETAILS_REMOVE_MEMBER = "family_details_remove_member";
         public static final String FAMILY_DETAILS_REMOVE_CHILD = "family_details_remove_child";
         public static final String FAMILY_DETAILS_REMOVE_FAMILY = "family_details_remove_family";
+        public static final String CHILD_REFERRAL_FORM = "child_referral_form";
     }
 
     public static class RELATIONSHIP {

@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.smartgresiter.jhpiego.R;
 import org.smartgresiter.jhpiego.contract.HomeVisitGrowthNutritionContract;
@@ -14,7 +15,9 @@ import org.smartgresiter.jhpiego.fragment.ChildHomeVisitFragment;
 import org.smartgresiter.jhpiego.fragment.GrowthNutritionInputFragment;
 import org.smartgresiter.jhpiego.presenter.HomeVisitGrowthNutritionPresenter;
 import org.smartgresiter.jhpiego.util.ChildUtils;
+import org.smartgresiter.jhpiego.util.Constants;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.family.activity.BaseFamilyProfileActivity;
 import org.smartregister.immunization.domain.ServiceWrapper;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -62,6 +65,8 @@ public class HomeVisitGrowthAndNutrition extends LinearLayout implements View.On
         layoutMnpBar.setOnClickListener(this);
         layoutVitaminBar.setOnClickListener(this);
         layoutDewormingBar.setOnClickListener(this);
+//        layoutCounsellingBar.setOnClickListener(this);
+//        layoutReferToFacilityBar.setOnClickListener(this);
 //        imageViewExclusiveStatus.setOnClickListener(this);
 //        imageViewVitaminStatus.setOnClickListener(this);
 //        imageViewDewormingStatus.setOnClickListener(this);
@@ -78,18 +83,6 @@ public class HomeVisitGrowthAndNutrition extends LinearLayout implements View.On
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.exclusive_feeding_status_circle:
-//                ServiceWrapper ExServiceWrapper=((HomeVisitGrowthNutritionPresenter)presenter).getServiceWrapperExclusive();
-//                notVisitSetState(GrowthNutritionInputFragment.GROWTH_TYPE.EXCLUSIVE.getValue(),ExServiceWrapper);
-//                break;
-//            case R.id.vitamin_a_status_circle:
-//                ServiceWrapper vitaminServiceWrapper=((HomeVisitGrowthNutritionPresenter)presenter).getServiceWrapperVitamin();
-//                notVisitSetState(GrowthNutritionInputFragment.GROWTH_TYPE.VITAMIN.getValue(),vitaminServiceWrapper);
-//                break;
-//            case R.id.deworming_status_circle:
-//                ServiceWrapper deServiceWrapper=((HomeVisitGrowthNutritionPresenter)presenter).getServiceWrapperDeworming();
-//                notVisitSetState(GrowthNutritionInputFragment.GROWTH_TYPE.DEWORMING.getValue(),deServiceWrapper);
-//                break;
             case R.id.exclusive_feeding_bar:
                 if (!presenter.isSelected(GrowthNutritionInputFragment.GROWTH_TYPE.EXCLUSIVE.getValue())) {
                     ServiceWrapper serviceWrapper = ((HomeVisitGrowthNutritionPresenter) presenter).getServiceWrapperExclusive();

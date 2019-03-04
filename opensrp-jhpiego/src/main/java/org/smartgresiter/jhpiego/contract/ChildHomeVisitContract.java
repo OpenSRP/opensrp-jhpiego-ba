@@ -16,7 +16,11 @@ public interface ChildHomeVisitContract {
     interface Presenter {
         ChildHomeVisitContract.View getView();
 
+        void startReferralForm();
+
         void startBirthCertForm();
+
+        void startCounsellingForm();
 
         void startObsIllnessCertForm();
 

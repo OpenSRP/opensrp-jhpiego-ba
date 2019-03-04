@@ -94,13 +94,14 @@
             </org.smartgresiter.jhpiego.custom_view.HomeVisitGrowthAndNutrition>
 
 
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/light_grey" />
 
             <LinearLayout
-                android:id="@+id/birth_cert_group"
+                android:id="@+id/counselling_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -108,7 +109,7 @@
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/birth_status_circle"
+                    android:id="@+id/counselling_status_circle"
                     android:layout_width="@dimen/immunization_status_circle_size"
                     android:layout_height="@dimen/immunization_status_circle_size"
                     android:layout_gravity="center_vertical"
@@ -125,13 +126,13 @@
                     android:orientation="vertical">
 
                     <org.smartregister.view.customcontrols.CustomFontTextView
-                        android:id="@+id/textview_birth_certification"
+                        android:id="@+id/textview_counselling_name"
                         style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="@string/birth_certification"
+                        android:text="@string/conselling"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textColor="@android:color/black" />
 
@@ -139,13 +140,14 @@
 
             </LinearLayout>
 
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/light_grey" />
 
             <LinearLayout
-                android:id="@+id/obs_illness_prevention_group"
+                android:id="@+id/refer_to_facility_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -153,7 +155,7 @@
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/obs_illness_status_circle"
+                    android:id="@+id/refer_to_facilty_status_circle"
                     android:layout_width="@dimen/immunization_status_circle_size"
                     android:layout_height="@dimen/immunization_status_circle_size"
                     android:layout_gravity="center_vertical"
@@ -170,13 +172,13 @@
                     android:orientation="vertical">
 
                     <org.smartregister.view.customcontrols.CustomFontTextView
-                        android:id="@+id/textview_obser_illness"
+                        android:id="@+id/textview_refer_to_facility"
                         style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="@string/observations_illness_episodes"
+                        android:text="@string/refer_to_facility"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textColor="@android:color/black" />
 
