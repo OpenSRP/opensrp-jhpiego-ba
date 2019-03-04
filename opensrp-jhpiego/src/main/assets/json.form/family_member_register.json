@@ -55,7 +55,7 @@
     "title": "Add Family Member",
     "fields": [
       {
-        "key": "image",
+        "key": "photo",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
         "openmrs_entity_id": "",
@@ -660,9 +660,10 @@
           "err": "Please specify the phone number"
         },
         "relevance": {
-          "step1:primary_caregiver": {
-            "type": "string",
-            "ex": "equalTo(., \"Yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family-member-relevance.yml"
+            }
           }
         }
       },
@@ -682,9 +683,10 @@
           "err": "Number must be 10 digits and must start with 0."
         },
         "relevance": {
-          "step1:primary_caregiver": {
-            "type": "string",
-            "ex": "equalTo(., \"Yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "family-member-relevance.yml"
+            }
           }
         }
       },

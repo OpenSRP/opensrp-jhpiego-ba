@@ -11,6 +11,7 @@ import org.smartregister.family.fragment.BaseFamilyProfileDueFragment;
 import org.smartregister.family.util.Constants;
 import org.smartregister.family.util.Utils;
 
+import java.util.HashMap;
 import java.util.Set;
 
 public class FamilyProfileDueFragment extends BaseFamilyProfileDueFragment {
@@ -39,4 +40,8 @@ public class FamilyProfileDueFragment extends BaseFamilyProfileDueFragment {
         this.clientsView.setAdapter(this.clientAdapter);
     }
 
+    @Override
+    public void setAdvancedSearchFormData(HashMap<String, String> hashMap) {
+
+    }
 }
