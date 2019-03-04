@@ -178,7 +178,7 @@
                 android:paddingBottom="@dimen/five_dp"
                 android:text="Powered by"
                 android:textAlignment="center"
-                android:textColor="#A6ffffff" />
+                android:textColor="#999999" />
 
             <ImageView
                 android:id="@+id/opensrp_logo_image_view"

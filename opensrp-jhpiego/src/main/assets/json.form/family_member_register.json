@@ -81,20 +81,6 @@
         }
       },
       {
-        "key": "",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person_identifier",
-        "openmrs_entity_id": "opensrp_id",
-        "type": "barcode",
-        "barcode_type": "qrcode",
-        "hint": "ID",
-        "scanButtonText": "Scan QR Code",
-        "v_numeric": {
-          "value": "true",
-          "err": "Please enter a valid ID"
-        }
-      },
-      {
         "key": "surname",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
@@ -243,10 +229,6 @@
           "value": "true",
           "err": "Number must begin with 0 and must be a total of 10 digits in length"
         },
-        "v_min": {
-          "value": "5",
-          "err": "Age must be equal or greater than 5"
-        },
         "v_max": {
           "value": "120",
           "err": "Age must be equal or less than 120"
@@ -286,6 +268,7 @@
         "openmrs_entity_id": "",
         "type": "edit_text",
         "hint": "Less than 1 month",
+        "hidden": "true",
         "value": "less1month",
         "calculation": {
           "rules-engine": {
@@ -302,6 +285,7 @@
         "openmrs_entity_id": "",
         "type": "edit_text",
         "hint": "1 month to 1 year",
+        "hidden": "true",
         "value": "less1month",
         "calculation": {
           "rules-engine": {
@@ -319,6 +303,7 @@
         "type": "edit_text",
         "hint": "1 year to 5 years",
         "value": "1yr_5yrs",
+        "hidden": "true",
         "calculation": {
           "rules-engine": {
             "ex-rules": {
@@ -335,6 +320,7 @@
         "type": "edit_text",
         "hint": "Women Reproductive Age",
         "value": "wra",
+        "hidden": "true",
         "calculation": {
           "rules-engine": {
             "ex-rules": {
@@ -351,6 +337,7 @@
         "type": "edit_text",
         "hint": "Men Reproductive Age",
         "value": "mra",
+        "hidden": "true",
         "calculation": {
           "rules-engine": {
             "ex-rules": {
@@ -366,10 +353,6 @@
         "openmrs_entity_id": "",
         "type": "spinner",
         "hint": "Has the woman delivered in the last 1 year?",
-        "v_required": {
-          "value": true,
-          "err": "Please specify the phone number"
-        },
         "values": [
           "Yes",
           "No"
@@ -484,8 +467,8 @@
       {
         "key": "insurance_provider",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "person",
-        "openmrs_entity_id": "gender",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
         "type": "spinner",
         "hint": "Health insurance provider",
         "values": [
@@ -630,10 +613,6 @@
           "Grey",
           "Red"
         ],
-        "v_required": {
-          "value": true,
-          "err": "Please select nutrition status"
-        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -740,10 +719,6 @@
               "rules-file": "family-member-relevance.yml"
             }
           }
-        },
-        "v_required": {
-          "value": "true",
-          "err": "Please select one"
         }
       },
       {
@@ -762,10 +737,6 @@
           "Other",
           "None"
         ],
-        "v_required": {
-          "value": true,
-          "err": "Please select one"
-        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {

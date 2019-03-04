@@ -76,7 +76,7 @@ public class Constants {
         public static final String ANC = "ANC";
         public static final String LD = "L&D";
         public static final String PNC = "PNC";
-        public static final String CHILDREN = "CH";
+        public static final String CHILDREN = "Child Clients";
         public static final String FAMILY_PLANNING = "FP";
         public static final String ANC_CLIENTS = "ANC Clients";
         public static final String CHILD_CLIENTS = "Child Clients";
