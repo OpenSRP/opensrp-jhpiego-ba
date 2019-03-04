@@ -112,7 +112,7 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
         form.getJSONObject(METADATA).put(ENCOUNTER_LOCATION, currentLocationId);
         form.put(ENTITY_ID, baseEntityId);
         JSONArray field = fields(form);
-        JSONObject val = getFieldJSONObject(field, "visit_date_1m5yrs");
+        JSONObject val = getFieldJSONObject(field, "counselling_1m5yrs");
         //if(mindate!=null){
         val.put("value", LocalDate.now());
         //}

@@ -80,12 +80,12 @@ public class ChildHomeVisitPresenter implements ChildHomeVisitContract.Presenter
 //            Log.e("DOBSTRING", "DOBSTRING" + dobString + "Date NOW" + LocalDate.now() + "diff1 -" + rulesEngineDateUtil.getDifferenceDays(dobString, LocalDate.now().toString()) +  "diff2 -" + rulesEngineDateUtil.getDifferenceDays(LocalDate.now().toString()));
 
             int diff = Days.daysBetween(DateTimeFormat.forPattern("dd-MM-yy").parseLocalDate(dobString), LocalDate.now()).getDays();
-            Log.e("DOB-DIFF", String.valueOf(diff));
             if(diff < Days.days(31).getDays()) {
                 JSONObject form = getFormUtils().getFormJson(Constants.JSON_FORM.HOME_VISIT_LESS_THAN_1_MONTH);
                 JSONObject revForm = JsonFormUtils.getHomeVisitLessThanOneMonthFormAsJson(form, childClient.getCaseId(),"");
                 getView().startFormActivity(revForm);
             } else if(diff >= Days.days(31).getDays() && diff <= Days.days(1825).getDays()) {
+                Log.e("NOW", String.valueOf(diff));
                 JSONObject form = getFormUtils().getFormJson(Constants.JSON_FORM.HOME_VISIT_1MONTH_5YEARS);
                 JSONObject revForm = JsonFormUtils.getHomeVisit1Month5YearsFormAsJson(form, childClient.getCaseId(), "");
                 getView().startFormActivity(revForm);

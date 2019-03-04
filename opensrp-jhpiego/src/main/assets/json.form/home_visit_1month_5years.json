@@ -50,44 +50,99 @@
     "title": "Counselling",
     "fields": [
       {
-        "key": "visit_date_1m5yrs",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "",
-        "openmrs_data_type": "text",
-        "type": "edit_text",
-        "hint": "Visit Date",
-        "hidden": "true"
-      },
-      {
         "key": "counselling_1m5yrs",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "openmrs_data_type": "select one",
-        "type": "spinner",
+        "type": "check_box",
+        "label": "Counselling provided *",
+        "label_text_size": "18sp",
         "hint": "Counselling provided *",
-        "v_required": {
-          "value": "true",
-          "err": "Please enter description"
-        },
-        "values": [
-          "3. Maternal nutrition during breastfeeding",
-          "5. HIV/AIDS general information",
-          "6. PMTCT for the mother",
-          "7. Malaria prevention",
-          "15. Follow-up for the HIV-exposed infant",
-          "16. Breastfeeding",
-          "16. Breastfeeding",
-          "20. Complementary feeding",
-          "21. Growth and development",
-          "22. Immunisation",
-          "23. Newborn danger signs",
-          "24. Infection prevention and control",
-          "25. Prevention of accidents",
-          "26. Gender issues"
+        "exclusive": ["none"],
+        "options": [
+          {
+            "key": "None",
+            "text": "3. Maternal nutrition during breastfeeding",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "5. HIV/AIDS general information",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "6. PMTCT for the mother",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "7. Malaria prevention",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "15. Follow-up for the HIV-exposed infant",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "16. Breastfeeding",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "20. Complementary feeding",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "21. Growth and development",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "22. Immunisation",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "23. Newborn danger signs",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "24. Infection prevention and control",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "25. Prevention of accidents",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "26. Gender issues",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+
         ]
       },
+
       {
         "key": "breastfeed_1m5yrs",
         "openmrs_entity_parent": "",

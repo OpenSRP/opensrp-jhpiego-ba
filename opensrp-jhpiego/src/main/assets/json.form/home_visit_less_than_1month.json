@@ -50,52 +50,102 @@
     "title": "Counselling",
     "fields": [
       {
-        "key": "visit_time_1m",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "",
-        "openmrs_data_type": "text",
-        "type": "edit_text",
-        "hint": "should be calculated",
-        "hidden": "true"
-      },
-      {
-        "key": "visit_date_1m",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "",
-        "openmrs_data_type": "text",
-        "type": "edit_text",
-        "hint": "visit date",
-        "hidden": "true"
-      },
-      {
         "key": "advice_1m",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "openmrs_data_type": "select one",
-        "type": "spinner",
+        "type": "check_box",
+        "label": "Counselling provided *",
+        "label_text_size": "18sp",
         "hint": "Counselling provided *",
-        "v_required": {
-          "value": "true",
-          "err": "Please enter description"
-        },
-        "values": [
-          "3. Maternal nutrition during breastfeeding",
-          "5. HIV/AIDS general information",
-          "6. PMTCT for the mother",
-          "7. Malaria prevention",
-          "11. Immediate newborn care",
-          "12. Care of a premature baby",
-          "13. Care of a newborn",
-          "14. Newborn danger signs",
-          "15. Follow-up for the HIV-exposed infant",
-          "16. Breastfeeding",
-          "17. LAM as a natural FP method, which includes exclusive breastfeeding six months after delivery",
-          "19. Birth registration",
-          "22. Immunisation",
-          "26. Gender issues"
+        "exclusive": ["none"],
+        "options": [
+          {
+            "key": "None",
+            "text": "3.Maternal nutrition during breastfeeding",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "5. HIV/AIDS general information",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "6. PMTCT for the mother",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "7. Malaria prevention",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "11. Immediate newborn care",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "12. Care of a premature baby",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "13. Care of a newborn",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "14. Newborn danger signs",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "15. Follow-up for the HIV-exposed infant",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "16. Breastfeeding",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "17. LAM as a natural FP method, which includes exclusive breastfeeding six months after delivery",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "19. Birth registration",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "22. Immunisation",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "None",
+            "text": "26. Gender issues",
+            "value": false,
+            "openmrs_choice_id": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+
         ]
       },
       {
